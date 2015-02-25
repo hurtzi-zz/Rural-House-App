@@ -42,7 +42,6 @@ public class DB4oManager {
 			db.close();
 			System.out.println("DataBase closed");
 		}
-	//oiooooooioioiooio
 	@SuppressWarnings("deprecation")
 	public static void openDatabase(String mode){
 		ConfigXML c=ConfigXML.getInstance();
