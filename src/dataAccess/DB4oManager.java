@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.Vector;
 
-
+//hjkjljk
 import businessLogic.FacadeImplementation;
 
 import com.db4o.*;
@@ -56,16 +56,16 @@ public class DB4oManager {
 			new File(db4oFileName).delete();
 			db=Db4o.openFile(Db4o.newConfiguration(), db4oFileName);
 			db.ext().configure().updateDepth(5);
-			 Owner iñigo = new Owner("Iñigo", "Sanz", "iñig00","1234",65252525,"00000000");
+			 Owner iÃ±igo = new Owner("IÃ±igo", "Sanz", "iÃ±ig00","1234",65252525,"00000000");
 			 Owner itziar = new Owner("ici", "jaltuna", "icic00","99999",65252525,"0987654");
 			 Owner urtzi = new Owner("ur", "diaz", "utrr00","5555",65252525,"1rrrrrr");
 			 
-			 iñigo.addRuralHouse(1, "Ezkioko etxea","Ezkio");
-			 iñigo.addRuralHouse(2, "Eskiatzeko etxea","Jaca");
+			 iÃ±igo.addRuralHouse(1, "Ezkioko etxea","Ezkio");
+			 iÃ±igo.addRuralHouse(2, "Eskiatzeko etxea","Jaca");
 			 itziar.addRuralHouse(3, "dsgf", "Eibar");
 			 itziar.addRuralHouse(4, "dsgf", "Eibar");
-			 iñigo.setBankAccount("12345677");
-			 db.store(iñigo);
+			 iÃ±igo.setBankAccount("12345677");
+			 db.store(iÃ±igo);
 			 db.store(itziar);
 			 db.store(urtzi);
 			 
