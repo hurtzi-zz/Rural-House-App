@@ -103,7 +103,8 @@ public class Login extends JPanel {
 							searchResult.setText("Ez da existitzen erabiltzailea");
 						}else if(j!=null){ 	
 							searchResult.setText("erabiltzailea DB-an gordeta dago");
-//Falta da logina odndo dijoala konprobatzea...............................
+							
+//Falta da logina odndo dihoala konprobatzea...............................
 							
 							//JFrame a= new StartWindow();
 							//StartWindow.setLogin(j);

@@ -22,12 +22,13 @@ public class Launcher {
 		
 		//MainWindow a=new MainWindow();
 		//a.setVisible(true);
+		
 		Login a=new Login();
 		a.setVisible(true);
 		
 		ConfigXML c=ConfigXML.getInstance();
 
-
+/*
 		try {
 			
 			ApplicationFacadeInterface appFacadeInterface;
@@ -83,7 +84,7 @@ public class Launcher {
 			System.out.println("Error in StartWindow: "+e.toString());
 		}
 		//a.pack();
-
+*/
 
 	}
 

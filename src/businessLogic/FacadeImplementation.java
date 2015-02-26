@@ -6,7 +6,8 @@ import java.util.Date;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import dataAccess.DB4oManager;
+
+import dataAccess.DataAccessCommon;
 import dataAccess.DataAccessInterface;
 import domain.Booking;
 import domain.Offer;
@@ -117,7 +118,7 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 	public Owner verifyLoginOwner(String login, String pass) throws RemoteException {
 		// TODO Auto-generated method stub
 		
-		return  DB4oManager.getInstance().verifyLoginOwner(login,pass);
+		return  DataAccessCommon.getInstance().verifyLoginOwner(login,pass);
 		 
 		 
 	}

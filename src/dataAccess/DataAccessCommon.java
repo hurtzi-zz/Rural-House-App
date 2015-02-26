@@ -22,6 +22,16 @@ public class DataAccessCommon implements DataAccessInterface {
 
 	protected static DB4oManagerAux theDB4oManagerAux;
 	ConfigXML c;
+	
+	private static DataAccessCommon theDataAccessCommon =new DataAccessCommon();
+
+	
+	
+	public static DataAccessCommon getInstance()  {
+		
+		return theDataAccessCommon;
+	}
+
 
 	public DataAccessCommon() {
 		theDB4oManagerAux = new DB4oManagerAux(0, 0);
