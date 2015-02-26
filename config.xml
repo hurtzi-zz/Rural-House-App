@@ -7,7 +7,7 @@
   </businessLogic>
   <database local="true">
 	<databaseNode>localhost</databaseNode>
-	<db4oFilename>D:\Proyectos\Java\Proiekt\RouralHouse\casas.db4o</db4oFilename>
+	<db4oFilename>C:\Users\Urtzi\git\RemoteRuralHouse\casas.db4o</db4oFilename>
 	<dataBaseOpenMode>open</dataBaseOpenMode>
 	<activationDepth>5</activationDepth>
 	<updateDepth>5</updateDepth>

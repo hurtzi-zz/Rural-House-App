@@ -20,10 +20,11 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 		
-		MainWindow a=new MainWindow();
-		a.setVisible(true);
-		//Login a=new Login();
+		//MainWindow a=new MainWindow();
 		//a.setVisible(true);
+		Login a=new Login();
+		a.setVisible(true);
+		
 		ConfigXML c=ConfigXML.getInstance();
 
 
