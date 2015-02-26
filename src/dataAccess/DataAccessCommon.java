@@ -63,6 +63,58 @@ public class DataAccessCommon implements DataAccessInterface {
 
 		db.commit();
 	}
+	
+	public  static ObjectContainer getContainer(){
+		  return db;
+	    }
+	
+	public Owner verifyLoginOwner(String log, String pass){
+		Owner galdera = new Owner(null, null,log,pass,null,null, null);
+		
+			try {							
+				ObjectContainer db=DataAccessCommon.getContainer();
+				 ObjectSet result = db.queryByExample(galdera);
+				 System.out.println(result.size());
+				 if(result.hasNext())
+				 {  
+					 System.out.println((Owner)result.next());
+					 return(Owner)result.next();
+					
+					
+				 }else{
+					 System.out.println("ez dago erabiltzailea");
+					 return null;
+				 }
+				 
+			} catch (Exception exc) {
+				exc.printStackTrace();
+				return null;
+			}
+		}
+	
+	
+	public Owner verifyLoginName(String log){
+		Owner galdera = new Owner(null,null,log,null,null,null, null);
+			try {							
+				ObjectContainer db=DataAccessCommon.getContainer();
+				 ObjectSet result = db.queryByExample(galdera);
+				 System.out.println(result.size());
+				 if(result.hasNext())
+				 {  
+					 System.out.println((Owner)result.next());
+					 return(Owner)result.next();
+					
+					
+				 }else{
+					 System.out.println("ez dago erabiltzailea");
+					 return null;
+				 }
+				 
+			} catch (Exception exc) {
+				exc.printStackTrace();
+				return null;
+			}
+		}
 
 	public Offer createOffer(RuralHouse ruralHouse, Date firstDay,
 			Date lastDay, float price) {
