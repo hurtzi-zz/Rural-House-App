@@ -18,7 +18,7 @@ import domain.Owner;
 import exceptions.OfferCanNotBeBooked;
 
 public class DB4oManager {
-	
+	//?¿?¿?¿?
 	private static final String Owner = null;
 	private static DB4oManager DB4oManager=new DB4oManager();
 	private static ObjectContainer  db;
@@ -42,6 +42,7 @@ public class DB4oManager {
 			db.close();
 			System.out.println("DataBase closed");
 		}
+		
 	@SuppressWarnings("deprecation")
 	public static void openDatabase(String mode){
 		ConfigXML c=ConfigXML.getInstance();
