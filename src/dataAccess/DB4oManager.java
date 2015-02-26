@@ -18,11 +18,10 @@ import domain.Owner;
 import exceptions.OfferCanNotBeBooked;
 
 public class DB4oManager {
-	//?¿?¿?¿?
 	private static final String Owner = null;
 	private static DB4oManager DB4oManager=new DB4oManager();
 	private static ObjectContainer  db;
-	
+	//apaaaaaaaaaa
 	private DB4oManager() {
 		 
 		ConfigXML c=ConfigXML.getInstance();
