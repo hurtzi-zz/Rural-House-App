@@ -20,12 +20,16 @@ import javax.swing.JPasswordField;
 
 import java.awt.Color;
 import java.rmi.RemoteException;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Login extends JPanel {
 	private JTextField textFieldLogin;
 	private JPasswordField passwordField;
 	private JButton Enter = null;
 	private JLabel searchResult = null;
+	
+	private ApplicationFacadeInterface facade=StartWindow.facadeInterface; 
 
 	/**
 	 * Create the panel.
@@ -37,7 +41,54 @@ public class Login extends JPanel {
 		setToolTipText("sdfsdf");
 		setLayout(null);
 		
+		
 		JButton btnEnter = new JButton("ENTER");
+		btnEnter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String user =textFieldLogin.getText();
+				String pass=passwordField.getText();
+				
+				System.out.println("user: "+user);
+				System.out.println("pass: "+pass);
+				try {
+					
+					//ApplicationFacadeInterface facade = MainWindow.getBusinessLogic();
+					Owner j=facade.verifyLoginOwner(user,pass);
+					
+					System.out.println("xxxxxx");
+					if(j==null){
+						searchResult.setText("Ez da existitzen erabiltzailea");
+					}else if(j!=null){ 	
+						searchResult.setText("erabiltzailea DB-an gordeta dago");
+						
+//Falta da logina odndo dihoala konprobatzea...............................
+						
+						//JFrame a= new StartWindow();
+						//StartWindow.setLogin(j);
+						
+						//proba1
+						
+						//a.setVisible(true);
+						if(j.getIsOwner()==false){
+//							JPanel loged =new Loged (j.getName(),j);
+//							loged.setVisible(true);
+//							Initial.setLoginPanel(loged,false);
+						}else{
+//							JPanel loged =new Loged (j.getName(),j);
+//							loged.setVisible(true);
+//							Initial.setLoginPanel(loged,true);
+						}
+
+					}else{
+						JOptionPane.showMessageDialog(null, "Log error", "alert", JOptionPane.CANCEL_OPTION); 	
+					}
+					
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnEnter.setBounds(29, 211, 95, 36);
 		add(btnEnter);
 		
@@ -90,51 +141,7 @@ public class Login extends JPanel {
 //		this.passwordField = passwordField;
 //	}
 
-	private JButton getJButton() {
-		if (Enter == null) {
-			Enter = new JButton();
-			Enter.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					try {
-						
-						ApplicationFacadeInterface facade = MainWindow.getBusinessLogic();
-						Owner j=facade.verifyLoginOwner(textFieldLogin.getText(),passwordField.getText());
-						if(j==null){
-							searchResult.setText("Ez da existitzen erabiltzailea");
-						}else if(j!=null){ 	
-							searchResult.setText("erabiltzailea DB-an gordeta dago");
-							
-//Falta da logina odndo dihoala konprobatzea...............................
-							
-							//JFrame a= new StartWindow();
-							//StartWindow.setLogin(j);
-							
-							//proba1
-							
-							//a.setVisible(true);
-							if(j.getIsOwner()==false){
-//								JPanel loged =new Loged (j.getName(),j);
-//								loged.setVisible(true);
-//								Initial.setLoginPanel(loged,false);
-							}else{
-//								JPanel loged =new Loged (j.getName(),j);
-//								loged.setVisible(true);
-//								Initial.setLoginPanel(loged,true);
-							}
 
-						}else{
-							JOptionPane.showMessageDialog(null, "Log error", "alert", JOptionPane.CANCEL_OPTION); 	
-						}
-						
-					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
-			});
-		}
-		return Enter;
-	}
 	
 	
 }

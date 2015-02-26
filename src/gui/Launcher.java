@@ -23,7 +23,7 @@ public class Launcher {
 		//MainWindow a=new MainWindow();
 		//a.setVisible(true);
 		
-		Login a=new Login();
+		StartWindow a=new StartWindow();
 		a.setVisible(true);
 		
 		ConfigXML c=ConfigXML.getInstance();
