@@ -119,7 +119,8 @@ public class Login extends JPanel {
 		JButton btnRegister = new JButton("Sign in");
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				searchResult.setText("asdfsadfsadsadfgsadgsdagsad");
+				JFrame a= new Register();
+				a.setVisible(true);
 			}
 		});
 		btnRegister.setBounds(111, 154, 89, 23);

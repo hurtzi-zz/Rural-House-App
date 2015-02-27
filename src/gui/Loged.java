@@ -55,8 +55,8 @@ public class Loged extends JPanel {
 		JButton btnOut = new JButton("Log Out");
 		btnOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				StartWindow.removeMenu();
-				StartWindow.logOut():
+//				StartWindow.removeMenu();
+//				StartWindow.logOut();
 				}
 		});
 		btnOut.setBounds(87, 121, 75, 25);

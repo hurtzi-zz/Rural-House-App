@@ -128,10 +128,11 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 		return  DataAccessCommon.getInstance().verifyLoginName(login);	
 	}
 	
-    public  createOwner(String Izena, String Abizena, String email, String pasahitza, Integer telefonoa, Integer bank, boolean isClient) throws RemoteException{
-		return  DataAccessCommon.getInstance().createOwner(Izena, Abizena, email, pasahitza, telefonoa, bank, boolean isClient);	
+	public Owner createOwner(String Izena, String Abizena, String login,String pasahitza , boolean isOwner, Integer telefonoa, String bank, Vector<RuralHouse> ruralHouse) throws RemoteException{
+		return  DataAccessCommon.getInstance().createOwner(Izena, Abizena, login, pasahitza, isOwner, telefonoa, bank, ruralHouse);
+				
 	}
-    public  createClient(String Izena, String Abizena, String email, String pasahitza, boolean isClient)throws RemoteException{
-		return  DataAccessCommon.getInstance().createClient(login.....);	
+    public Client createClient(String Izena, String Abizena, String login, String pasahitza, boolean isClient)throws RemoteException{
+		return  DataAccessCommon.getInstance().createClient(Izena, Abizena,login , pasahitza, true);	
 	}
 }

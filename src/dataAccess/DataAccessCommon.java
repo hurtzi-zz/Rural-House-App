@@ -92,17 +92,20 @@ public class DataAccessCommon implements DataAccessInterface {
 		db.commit();
 	}
 	
-//	public void storeClintDB(,,,,) {
-//		Client aaa = new Client("Iñigo", "Sanz", "aaa", "aaa", false);
-//		db.store(urtzi);
-//		db.commit();
-//	}
-//	
-//	public void storeClintDB(,,,,) {
-//		Client aaa = new Client("Iñigo", "Sanz", "aaa", "aaa", false);
-//		db.store(urtzi);
-//		db.commit();
-//	}
+	public Client createClient(String name, String surname, String login, String password, boolean isClient){
+		System.out.println("client sortzen");
+		Client c = new Client(name, surname, login, password, isClient);
+		db.store(c);
+		db.commit();
+		return c;
+	}
+	
+	public Owner createOwner(String name, String abizena, String login, String password,Boolean isOwner, Integer tlfn, String bankAccount,Vector<RuralHouse> ruralHouses){
+		Owner o = new Owner(name, abizena, login, password, isOwner, tlfn, bankAccount, ruralHouses);
+		db.store(o);
+		db.commit();
+		return o;
+	}
 	
 	public  static ObjectContainer getContainer(){
 		  return db;

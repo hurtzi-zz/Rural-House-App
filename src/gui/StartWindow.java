@@ -79,76 +79,7 @@ public class StartWindow extends JFrame {
 	
 	}
 	
-	public static void setLoginPanel(JPanel log,boolean Owner){
 
-		if(!Owner){
-		//init window ez bada ez client ezta owner
-			 //menuButon = new InitWindow();
-			 //menuButon.setBounds(17, 267, 173, 400);
-			 //contentPane.add(menuButon);
-		}else{
-			menuButon = new ErabiltzailePanela();
-			menuButon.setBounds(17, 267, 173, 400);
-			contentPane.add(menuButon);
-		}
-		contentPane.remove(loginPanel);
-		loged=log;
-		log.setVisible(true);
-		log.setBounds(10, 71, 180, 170);		
-		log.setBackground(Color.LIGHT_GRAY);		
-		contentPane.add(log);
-		
-		log.updateUI();		
-		contentPane.repaint();
-		
-		
-		
-		
-	}
-	
-	
-	
-	
-	
-	
-public static void removeMenu(){
-		
-	
-			
-		
-		contentPane.remove(menu);
-		
-		menu.updateUI();		
-		contentPane.repaint();
-		
-		
-		
-		
-	}
-	
-	public static void logOut(){
-		 //JPanel menu = new StartWindow();
-		
-		 contentPane.remove(menuButon);
-		 Loged.logeOut();
-		 contentPane.remove(loged);
-		 loginPanel = new login();
-		 loginPanel.setBounds(10, 71, 180, 170);
-		contentPane.add(loginPanel);
-		
-		menuButon = new window();
-		 
-		menuButon.setBounds(17, 267, 173, 400);
-			 contentPane.add(menuButon);
-		
-		
-		loginPanel.updateUI();		
-		contentPane.repaint();
-		
-		
-		
-		
-	}
 
 	
 }
