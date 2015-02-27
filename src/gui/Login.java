@@ -1,5 +1,6 @@
 package gui;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -117,7 +118,8 @@ public class Login extends JPanel {
 		JButton btnRegister = new JButton("Sign in");
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				StartWindow.menu(new Registroa());
+				JFrame a = new Registroa();
+				a.setVisible(true);
 			}
 		});
 		btnRegister.setBounds(180, 218, 89, 23);

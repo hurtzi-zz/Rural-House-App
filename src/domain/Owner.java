@@ -12,19 +12,20 @@ public class Owner extends Client implements Serializable  {
 //	private String abizena = "";
 //	private String login="";
 //	private String password="";
-	private Boolean isOwner=true;
+//	private Boolean isOwner=true;
 	private Integer tlfn = null;
 	private String bankAccount = "";
-	private Vector<RuralHouse> ruralHouses;
+	private Vector<RuralHouse> ruralHouses=new Vector<RuralHouse>();
 
 
 	
 	//jabea
-	public Owner(String name, String abizena, String login, String password,Boolean isOwner, Integer tlfn, String bankAccount){
+	public Owner(String name, String abizena, String login, String password,Boolean isOwner, Integer tlfn, String bankAccount,Vector<RuralHouse> ruralHouses){
 		super(name,abizena,login,password,isOwner);
 		this.bankAccount=bankAccount;
 		this.tlfn=tlfn;
-		ruralHouses=new Vector<RuralHouse>();
+		this.ruralHouses=ruralHouses;
+		
 		
 	}
 	/**

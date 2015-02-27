@@ -54,11 +54,11 @@ public class DataAccessCommon implements DataAccessInterface {
 	public void initializeDB() {
 
 		Owner iñigo = new Owner("Iñigo", "Sanz", "iñig00", "1234",true, 65252525,
-				"00000000");
+				"00000000",new Vector<RuralHouse>());
 		Owner itziar = new Owner("ici", "jaltuna", "icic00", "99999",true, 65252525,
-				null);
+				null,new Vector<RuralHouse>());
 		Owner urtzi = new Owner("ur", "diaz", "utrr00", "5555",true, 65252525,
-				"1rrrrrr");
+				"1rrrrrr",new Vector<RuralHouse>());
 
 		iñigo.addRuralHouse(1, "Ezkioko etxea", "Ezkio");
 		iñigo.addRuralHouse(2, "Etxetxikia", "Iruña");
@@ -80,8 +80,8 @@ public class DataAccessCommon implements DataAccessInterface {
 		  return db;
 	    }
 	
-	public Owner verifyLoginOwner(String log, String pass){
-		Owner galdera = new Owner(null, null,log,pass,null,null, null);
+	public static Owner verifyLoginOwner(String log, String pass){
+		Owner galdera = new Owner(null, null,log,pass,null,null, null,null);
 			try {							
 				ObjectContainer db=DataAccessCommon.getContainer();
 				 ObjectSet result = db.queryByExample(galdera);
@@ -105,7 +105,7 @@ public class DataAccessCommon implements DataAccessInterface {
 	
 	
 	public Owner verifyLoginName(String log){
-		Owner galdera = new Owner(null,null,log,null,null,null, null);
+		Owner galdera = new Owner(null,null,log,null,null,null, null,null);
 			try {							
 				ObjectContainer db=DataAccessCommon.getContainer();
 				 ObjectSet result = db.queryByExample(galdera);
@@ -205,7 +205,7 @@ public class DataAccessCommon implements DataAccessInterface {
 		// if (c.isDatabaseLocal()==false) openObjectContainer();
 
 		try {
-			Owner proto = new Owner(null, null, null, null,null, null, null);
+			Owner proto = new Owner(null, null, null, null,null, null, null,null);
 			ObjectSet<Owner> result = db.queryByExample(proto);
 			Vector<Owner> owners = new Vector<Owner>();
 			while (result.hasNext())

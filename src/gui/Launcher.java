@@ -29,7 +29,7 @@ public class Launcher {
 		ConfigXML c=ConfigXML.getInstance();
 
 
-		/*
+		
 		try {
 			
 			ApplicationFacadeInterface appFacadeInterface;
@@ -60,32 +60,32 @@ public class Launcher {
 				appFacadeInterface=(ApplicationFacadeInterface) Naming.lookup("rmi://"+ businessLogicNode + ":" + portNumber + serviceName);
 			} 
 			MainWindow.setBussinessLogic(appFacadeInterface);
-
+			
 		} catch (java.rmi.ConnectException e) {
-			a.lblNewLabel.setText("No business logic: Run BusinessLogicServer first!!");
-			a.lblNewLabel.setForeground(Color.RED);
+	//		a.lblNewLabel.setText("No business logic: Run BusinessLogicServer first!!");
+	//		a.lblNewLabel.setForeground(Color.RED);
 			System.out.println("Error in StartWindow: "+e.toString());
 		} catch (java.rmi.NotBoundException e) {
-			a.lblNewLabel.setText("No business logic: Maybe problems running BusinessLogicServer");
-			a.lblNewLabel.setForeground(Color.RED);
+	//		a.lblNewLabel.setText("No business logic: Maybe problems running BusinessLogicServer");
+	//		a.lblNewLabel.setForeground(Color.RED);
 			System.out.println("Error in StartWindow: "+e.toString());
 		} catch (com.db4o.ext.DatabaseFileLockedException e) {
-			a.lblNewLabel.setText("Database locked: Do not run BusinessLogicServer or BusinessLogicServer!!");
-			a.lblNewLabel.setForeground(Color.RED);		
+	//		a.lblNewLabel.setText("Database locked: Do not run BusinessLogicServer or BusinessLogicServer!!");
+	//		a.lblNewLabel.setForeground(Color.RED);		
 			System.out.println("Error in StartWindow: "+e.toString());
 		} catch (DB4oManagerCreationException e) {
-			a.lblNewLabel.setText("No database: Run DB4oManagerServer first!!");
-			a.lblNewLabel.setForeground(Color.RED);		
+		//	a.lblNewLabel.setText("No database: Run DB4oManagerServer first!!");
+		//	a.lblNewLabel.setForeground(Color.RED);		
 			System.out.println("Error in StartWindow: "+e.toString());
 
 			
 		}catch (Exception e) {
-			a.lblNewLabel.setText("Error: "+e.toString());
-			a.lblNewLabel.setForeground(Color.RED);		
+		///	a.lblNewLabel.setText("Error: "+e.toString());
+		//	a.lblNewLabel.setForeground(Color.RED);		
 			System.out.println("Error in StartWindow: "+e.toString());
 		}
 		//a.pack();
-*/
+
 
 	}
 

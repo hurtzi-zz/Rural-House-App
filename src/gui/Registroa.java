@@ -9,7 +9,7 @@ import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
-JPanel
+
 public class Registroa extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
@@ -21,7 +21,6 @@ public class Registroa extends JFrame {
 	 */
 	public Registroa() {
 		setTitle("Register");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		JLabel lblName = new JLabel("Name:");
@@ -41,8 +40,8 @@ public class Registroa extends JFrame {
 		getContentPane().add(lblPassword);
 		
 		JLabel lblErregistratu = new JLabel("Erregistratu");
-		lblErregistratu.setFont(new Font("Tunga", Font.BOLD, 24));
 		lblErregistratu.setBounds(60, 41, 145, 43);
+		lblErregistratu.setFont(new Font("Tunga", Font.BOLD, 24));
 		getContentPane().add(lblErregistratu);
 		
 		textField = new JTextField();
@@ -61,11 +60,11 @@ public class Registroa extends JFrame {
 		textField_2.setColumns(10);
 		
 		JButton btnErregistratu = new JButton("Sign in");
+		btnErregistratu.setBounds(180, 251, 109, 23);
 		btnErregistratu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnErregistratu.setBounds(180, 251, 109, 23);
 		getContentPane().add(btnErregistratu);
 		
 		passwordField = new JPasswordField();

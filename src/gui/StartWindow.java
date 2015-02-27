@@ -58,7 +58,12 @@ public class StartWindow extends JFrame {
 	}
 	
 	public static ApplicationFacadeInterface getBusinessLogic(){
+		System.out.println("sdfsdf");
 		return facadeInterface;
+	}
+	
+	public static void setBussinessLogic (ApplicationFacadeInterface afi){
+		facadeInterface=afi;
 	}
 	
 }
