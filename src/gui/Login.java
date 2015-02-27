@@ -24,6 +24,9 @@ import java.awt.Color;
 import java.rmi.RemoteException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JSeparator;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class Login extends JPanel {
 	private JTextField textFieldLogin;
@@ -44,7 +47,7 @@ public class Login extends JPanel {
 		
 		JLabel searchResult = new JLabel("");
 		searchResult.setForeground(Color.BLACK);
-		searchResult.setBounds(54, 175, 215, 25);
+		searchResult.setBounds(41, 128, 152, 14);
 		add(searchResult);
 		
 		JButton btnEnter = new JButton("ENTER");
@@ -88,29 +91,29 @@ public class Login extends JPanel {
 				}
 			}
 		});
-		btnEnter.setBounds(29, 211, 95, 36);
+		btnEnter.setBounds(26, 153, 75, 25);
 		add(btnEnter);
 		
 		JLabel lblLogin = new JLabel("Login:");
-		lblLogin.setBounds(36, 96, 64, 14);
+		lblLogin.setBounds(10, 72, 64, 14);
 		add(lblLogin);
 		
 		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(36, 141, 64, 14);
+		lblPassword.setBounds(10, 100, 64, 14);
 		add(lblPassword);
 		
 		textFieldLogin = new JTextField();
-		textFieldLogin.setBounds(135, 90, 131, 20);
+		textFieldLogin.setBounds(84, 69, 131, 20);
 		add(textFieldLogin);
 		textFieldLogin.setColumns(10);
 		
 		JLabel lblLogIn = DefaultComponentFactory.getInstance().createTitle("LOG  IN");
-		lblLogIn.setFont(new Font("Viner Hand ITC", Font.PLAIN, 25));
-		lblLogIn.setBounds(107, 21, 88, 47);
+		lblLogIn.setFont(new Font("Tw Cen MT", Font.PLAIN, 18));
+		lblLogIn.setBounds(87, 11, 70, 36);
 		add(lblLogIn);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(135, 135, 131, 20);
+		passwordField.setBounds(84, 97, 131, 20);
 		add(passwordField);
 		
 		JButton btnRegister = new JButton("Sign in");
@@ -119,7 +122,7 @@ public class Login extends JPanel {
 				searchResult.setText("asdfsadfsadsadfgsadgsdagsad");
 			}
 		});
-		btnRegister.setBounds(180, 218, 89, 23);
+		btnRegister.setBounds(111, 154, 89, 23);
 		add(btnRegister);
 		
 		
@@ -137,12 +140,4 @@ public class Login extends JPanel {
 	public JPasswordField getPasswordField() {
 		return passwordField;
 	}
-
-//	public void setPasswordField(JPasswordField passwordField) {
-//		this.passwordField = passwordField;
-//	}
-
-
-	
-	
 }
