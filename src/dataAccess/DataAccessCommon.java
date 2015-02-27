@@ -70,6 +70,8 @@ public class DataAccessCommon implements DataAccessInterface {
 		db.store(iñigo);
 		db.store(itziar);
 		db.store(urtzi);
+		
+		System.out.print("initializeDBwerwerwerwerwerwer");
 
 		db.commit();
 	}

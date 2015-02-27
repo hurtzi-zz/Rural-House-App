@@ -56,6 +56,7 @@ public class Login extends JPanel {
 					Owner j=facade.verifyLoginOwner(user,pass);
 					
 					System.out.println("xxxxxx");
+					
 					if(j==null){
 						searchResult.setText("Ez da existitzen erabiltzailea");
 					}else if(j!=null){ 	

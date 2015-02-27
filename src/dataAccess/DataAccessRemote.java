@@ -19,7 +19,6 @@ public class DataAccessRemote extends DataAccessCommon {
 			configurationCS.common().objectClass(Owner.class).cascadeOnDelete(true);
 			db = Db4oClientServer.openClient(configurationCS,c.getDatabaseNode(), 
 				 c.getDatabasePort(),c.getUser(),c.getPassword());
-			
 			if (c.getDataBaseOpenMode().equals("initialize"))
 			{	initializeDB();
 				System.out.println("DataBase initialized");
