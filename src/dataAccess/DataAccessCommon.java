@@ -8,6 +8,7 @@ import com.db4o.ObjectSet;
 
 import configuration.ConfigXML;
 import domain.Booking;
+import domain.Client;
 import domain.Offer;
 import domain.Owner;
 import domain.RuralHouse;
@@ -52,7 +53,8 @@ public class DataAccessCommon implements DataAccessInterface {
 	}
 
 	public void initializeDB() {
-
+		Client aaa = new Client("Iñigo", "Sanz", "aaa", "aaa", false);
+		
 		Owner iñigo = new Owner("Iñigo", "Sanz", "iñig00", "1234",true, 65252525,
 				"00000000",new Vector<RuralHouse>());
 		Owner itziar = new Owner("ici", "jaltuna", "icic00", "99999",true, 65252525,
@@ -66,7 +68,8 @@ public class DataAccessCommon implements DataAccessInterface {
 		itziar.addRuralHouse(4, "Gaztetxea", "Renteria");
 
 		iñigo.setBankAccount("12345677");
-
+		
+		db.store(aaa);
 		db.store(iñigo);
 		db.store(itziar);
 		db.store(urtzi);

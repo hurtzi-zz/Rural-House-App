@@ -59,7 +59,7 @@ public class Launcher {
 				
 				appFacadeInterface=(ApplicationFacadeInterface) Naming.lookup("rmi://"+ businessLogicNode + ":" + portNumber + serviceName);
 			} 
-			MainWindow.setBussinessLogic(appFacadeInterface);
+			StartWindow.setBussinessLogic(appFacadeInterface);
 			
 		} catch (java.rmi.ConnectException e) {
 	//		a.lblNewLabel.setText("No business logic: Run BusinessLogicServer first!!");

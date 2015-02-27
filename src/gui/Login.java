@@ -41,6 +41,10 @@ public class Login extends JPanel {
 		setToolTipText("Login");
 		setLayout(null);
 		
+		JLabel searchResult = new JLabel("");
+		searchResult.setForeground(Color.BLACK);
+		searchResult.setBounds(54, 175, 215, 25);
+		add(searchResult);
 		
 		JButton btnEnter = new JButton("ENTER");
 		btnEnter.addActionListener(new ActionListener() {
@@ -51,34 +55,27 @@ public class Login extends JPanel {
 				System.out.println("user: "+user);
 				System.out.println("pass: "+pass);
 				try {
-					
-					//ApplicationFacadeInterface facade = MainWindow.getBusinessLogic();
-					Owner j=facade.verifyLoginOwner(user,pass);
+					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
+					Owner j=facades.verifyLoginOwner(user,pass);
 					
 					System.out.println("xxxxxx");
 					
 					if(j==null){
+						searchResult.setForeground(Color.RED);
 						searchResult.setText("Ez da existitzen erabiltzailea");
 					}else if(j!=null){ 	
+						searchResult.setForeground(Color.GREEN);
 						searchResult.setText("erabiltzailea DB-an gordeta dago");
 						
-//Falta da logina odndo dihoala konprobatzea...............................
-						
-						//JFrame a= new StartWindow();
-						//StartWindow.setLogin(j);
-						
-						//proba1
-						
-						//a.setVisible(true);
-						if(j.getIsOwner()==false){
+						//if(j.getIsOwner()==false){
 //							JPanel loged =new Loged (j.getName(),j);
 //							loged.setVisible(true);
 //							Initial.setLoginPanel(loged,false);
-						}else{
+						//}else{
 //							JPanel loged =new Loged (j.getName(),j);
 //							loged.setVisible(true);
 //							Initial.setLoginPanel(loged,true);
-						}
+					//	}
 
 					}else{
 						JOptionPane.showMessageDialog(null, "Log error", "alert", JOptionPane.CANCEL_OPTION); 	
@@ -118,17 +115,13 @@ public class Login extends JPanel {
 		JButton btnRegister = new JButton("Sign in");
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFrame a = new Registroa();
-				a.setVisible(true);
+				searchResult.setText("asdfsadfsadsadfgsadgsdagsad");
 			}
 		});
 		btnRegister.setBounds(180, 218, 89, 23);
 		add(btnRegister);
 		
-		JLabel searchResult = new JLabel("");
-		searchResult.setForeground(Color.RED);
-		searchResult.setBounds(43, 175, 215, 25);
-		add(searchResult);
+		
 
 	}
 	

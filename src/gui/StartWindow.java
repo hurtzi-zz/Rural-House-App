@@ -7,9 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import configuration.ConfigXML;
 import businessLogic.ApplicationFacadeInterface;
 
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class StartWindow extends JFrame {
 
@@ -19,27 +22,45 @@ public class StartWindow extends JFrame {
 
 	public static ApplicationFacadeInterface facadeInterface;
 	
-
+	public static ApplicationFacadeInterface getBusinessLogic(){
+		System.out.println("sdfsdf");
+		return facadeInterface;
+	}
+	
+	public static void setBussinessLogic (ApplicationFacadeInterface afi){
+		facadeInterface=afi;
+	}
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StartWindow frame = new StartWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
 	 */
 	public StartWindow() {
+		super();
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				ApplicationFacadeInterface facade=StartWindow.getBusinessLogic();
+				try {
+					if (ConfigXML.getInstance().isBusinessLogicLocal()) facade.close();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					System.out.println("Error: "+e1.toString()+" , probably problems with Business Logic or Database");
+				}
+				System.exit(1);
+			}
+		});
+		initialize();
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+		
+
+	
+	
+	private void initialize() {
 		setTitle("RuralHouse");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 756, 422);
@@ -54,16 +75,8 @@ public class StartWindow extends JFrame {
 		LoginPanel.setBounds(25, 34, 329, 276);
 		contentPane.add(LoginPanel);
 	
-		
 	}
 	
-	public static ApplicationFacadeInterface getBusinessLogic(){
-		System.out.println("sdfsdf");
-		return facadeInterface;
-	}
-	
-	public static void setBussinessLogic (ApplicationFacadeInterface afi){
-		facadeInterface=afi;
-	}
+
 	
 }
