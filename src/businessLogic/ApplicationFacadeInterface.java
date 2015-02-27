@@ -68,7 +68,7 @@ public interface ApplicationFacadeInterface extends Remote {
 //    
     public Client verifyLogin(String a, String b) throws RemoteException;
 //	
-//	public boolean verifycreateOwner(String a) throws RemoteException;
+	public boolean verifyLoginName(String a) throws RemoteException;
 //	
 
 	

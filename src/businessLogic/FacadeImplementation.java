@@ -124,8 +124,7 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 	
 	
 	public boolean verifyLoginName(String login) throws RemoteException{
-		return false;
-		//return DB4oManager.getInstance().verifyregistre(login);
+		return  DataAccessCommon.getInstance().verifyLoginName(login);	
 	}
 	
 

@@ -127,26 +127,25 @@ public class DataAccessCommon implements DataAccessInterface {
 		}
 	
 	
-	public Owner verifyLoginName(String log){
-		Owner galdera = new Owner(null,null,log,null,null,null, null,null);
+	public Boolean verifyLoginName(String log){
+		Client galdera = new Client(null,null,log,null,null);
 			try {							
 				ObjectContainer db=DataAccessCommon.getContainer();
 				 ObjectSet result = db.queryByExample(galdera);
 				 System.out.println(result.size());
 				 if(result.hasNext())
 				 {  
-					 System.out.println((Owner)result.next());
-					 return(Owner)result.next();
+					 Client c =(Client)result.next();
+					 return true;
 					
 					
 				 }else{
-					 System.out.println("ez dago erabiltzailea");
-					 return null;
+					 return false;
 				 }
 				 
 			} catch (Exception exc) {
 				exc.printStackTrace();
-				return null;
+				return false;
 			}
 		}
 
