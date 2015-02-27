@@ -9,6 +9,7 @@ import java.util.Vector;
 
 
 
+
 import dataAccess.DataAccessCommon;
 import dataAccess.DataAccessInterface;
 import domain.Booking;
@@ -117,7 +118,7 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 
 	}
 	
-	//urtzi
+
 	public Client verifyLogin(String login, String pass) throws RemoteException {
 		return  DataAccessCommon.getInstance().verifyLogin(login,pass);		 
 	}
@@ -127,6 +128,10 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 		return  DataAccessCommon.getInstance().verifyLoginName(login);	
 	}
 	
-
-
+    public  createOwner(String Izena, String Abizena, String email, String pasahitza, Integer telefonoa, Integer bank, boolean isClient) throws RemoteException{
+		return  DataAccessCommon.getInstance().createOwner(Izena, Abizena, email, pasahitza, telefonoa, bank, boolean isClient);	
+	}
+    public  createClient(String Izena, String Abizena, String email, String pasahitza, boolean isClient)throws RemoteException{
+		return  DataAccessCommon.getInstance().createClient(login.....);	
+	}
 }

@@ -57,7 +57,7 @@ public class Login extends JPanel {
 				System.out.println("pass: "+pass);
 				try {
 					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
-					Client j=facades.verifyLogin(user,pass);							
+					Client j=facades.verifyLogin(user,pass);
 					if(j==null){
 						searchResult.setForeground(Color.RED);
 						searchResult.setText("Ez da existitzen erabiltzailea");

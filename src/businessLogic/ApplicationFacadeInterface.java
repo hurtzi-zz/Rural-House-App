@@ -63,9 +63,11 @@ public interface ApplicationFacadeInterface extends Remote {
     public void setDataAccess(DataAccessInterface dai) throws RemoteException;
     
     
-    //urtzi	   
-//    public boolean createOwner(String Izena, String Abizena, String email, String pasahitza, Integer telefonoa, Integer bank, boolean isClient) throws RemoteException;
-//    
+  	   
+    public  createOwner(String Izena, String Abizena, String email, String pasahitza, Integer telefonoa, Integer bank, boolean isClient) throws RemoteException;
+    
+    public  createClient(String Izena, String Abizena, String email, String pasahitza, boolean isClient) throws RemoteException;
+
     public Client verifyLogin(String a, String b) throws RemoteException;
 //	
 	public boolean verifyLoginName(String a) throws RemoteException;

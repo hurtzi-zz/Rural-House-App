@@ -2,13 +2,22 @@ package gui;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
+import java.awt.Color;
 import java.awt.Font;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.rmi.RemoteException;
+
 import javax.swing.JFrame;
+
+import businessLogic.ApplicationFacadeInterface;
 
 public class Registroa extends JFrame {
 	private JTextField textField;
@@ -61,8 +70,26 @@ public class Registroa extends JFrame {
 		
 		JButton btnErregistratu = new JButton("Sign in");
 		btnErregistratu.setBounds(180, 251, 109, 23);
-		btnErregistratu.addActionListener(new ActionListener() {
+		btnEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String user =textFieldLogin.getText();
+				System.out.println("user: "+user);
+				try {
+					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
+					Boolean b=facades.verifyLoginName(user);
+					if(b){
+						searchResult.setText("existitzen erabiltzailea");
+					}else if(!b){
+						searchResult.setText("Ez da existitzen erabiltzailea");
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Log error", "alert", JOptionPane.CANCEL_OPTION); 	
+					}
+					
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		getContentPane().add(btnErregistratu);
