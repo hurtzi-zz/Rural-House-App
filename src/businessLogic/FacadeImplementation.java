@@ -10,6 +10,11 @@ import java.util.Vector;
 
 
 
+
+
+
+
+
 import dataAccess.DataAccessCommon;
 import dataAccess.DataAccessInterface;
 import domain.Booking;
@@ -128,11 +133,21 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 		return  DataAccessCommon.getInstance().verifyLoginName(login);	
 	}
 	
-	public Owner createOwner(String Izena, String Abizena, String login,String pasahitza , boolean isOwner, Integer telefonoa, String bank, Vector<RuralHouse> ruralHouse) throws RemoteException{
-		return  DataAccessCommon.getInstance().createOwner(Izena, Abizena, login, pasahitza, isOwner, telefonoa, bank, ruralHouse);
-				
-	}
-    public Client createClient(String Izena, String Abizena, String login, String pasahitza, boolean isClient)throws RemoteException{
+	public Client createClient(String Izena, String Abizena, String login, String pasahitza, boolean isOwner)throws RemoteException{
 		return  DataAccessCommon.getInstance().createClient(Izena, Abizena,login , pasahitza, true);	
 	}
+	
+	public Owner createOwner(String Izena, String Abizena, String login,String pasahitza , boolean isOwner, Integer telefonoa, String bank) throws RemoteException{
+		return  DataAccessCommon.getInstance().createOwner(Izena, Abizena, login, pasahitza, isOwner, telefonoa, bank);
+				
+	}
+
+
+
+    
+
+
+
+
+
 }

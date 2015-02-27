@@ -82,6 +82,7 @@ public class DataAccessCommon implements DataAccessInterface {
 		db.store(aaa);
 		db.store(aaa2);
 		db.store(aaa3);
+		
 		db.store(iñigo);
 		db.store(itziar);
 		db.store(urtzi);
@@ -92,18 +93,21 @@ public class DataAccessCommon implements DataAccessInterface {
 		db.commit();
 	}
 	
-	public Client createClient(String name, String surname, String login, String password, boolean isClient){
-		System.out.println("client sortzen");
-		Client c = new Client(name, surname, login, password, isClient);
+	public Client createClient(String name, String surname, String login, String password, boolean isOwner){
+		Client c = new Client(name, surname, login, password, false);
 		db.store(c);
 		db.commit();
 		return c;
 	}
 	
-	public Owner createOwner(String name, String abizena, String login, String password,Boolean isOwner, Integer tlfn, String bankAccount,Vector<RuralHouse> ruralHouses){
-		Owner o = new Owner(name, abizena, login, password, isOwner, tlfn, bankAccount, ruralHouses);
+	public Owner createOwner(String name, String abizena, String login, String password,boolean isOwner, Integer tlfn, String bankAccount){
+		Owner o = new Owner(name, abizena, login, password, true, tlfn, bankAccount, null);
+		 System.out.println("abizena: "+o.getAbizena());
+
 		db.store(o);
 		db.commit();
+		//db.close();
+		
 		return o;
 	}
 	
