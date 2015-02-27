@@ -8,10 +8,10 @@ import java.util.Vector;
 
 @SuppressWarnings("serial")
 public class Owner extends Client implements Serializable  {
-	private String name="";
-	private String abizena = "";
-	private String login="";
-	private String password="";
+//	private String name="";
+//	private String abizena = "";
+//	private String login="";
+//	private String password="";
 	private Boolean isOwner=true;
 	private Integer tlfn = null;
 	private String bankAccount = "";
@@ -89,8 +89,6 @@ public class Owner extends Client implements Serializable  {
 	 return rh;
 	 
 	}
-	public String toString(){
-		return name;
-	}
+
 	
 }

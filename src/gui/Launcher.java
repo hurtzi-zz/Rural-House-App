@@ -20,15 +20,16 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 		
-		//MainWindow a=new MainWindow();
-		//a.setVisible(true);
+//		MainWindow a=new MainWindow();
+//		a.setVisible(true);
 		
 		StartWindow a=new StartWindow();
 		a.setVisible(true);
 		
 		ConfigXML c=ConfigXML.getInstance();
 
-/*
+
+		/*
 		try {
 			
 			ApplicationFacadeInterface appFacadeInterface;

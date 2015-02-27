@@ -37,8 +37,7 @@ public class Login extends JPanel {
 	 //web
 	 
 	public Login() {
-		setToolTipText("");
-		setToolTipText("sdfsdf");
+		setToolTipText("Login");
 		setLayout(null);
 		
 		

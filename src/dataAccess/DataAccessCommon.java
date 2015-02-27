@@ -82,7 +82,6 @@ public class DataAccessCommon implements DataAccessInterface {
 	
 	public Owner verifyLoginOwner(String log, String pass){
 		Owner galdera = new Owner(null, null,log,pass,null,null, null);
-		
 			try {							
 				ObjectContainer db=DataAccessCommon.getContainer();
 				 ObjectSet result = db.queryByExample(galdera);
