@@ -8,9 +8,11 @@ import java.util.Vector;
 
 
 
+
 import dataAccess.DataAccessCommon;
 import dataAccess.DataAccessInterface;
 import domain.Booking;
+import domain.Client;
 import domain.Offer;
 import domain.Owner;
 import domain.RuralHouse;
@@ -116,12 +118,8 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 	}
 	
 	//urtzi
-	public Owner verifyLoginOwner(String login, String pass) throws RemoteException {
-		// TODO Auto-generated method stub
-		System.out.println("11111xxx");
-		return  DataAccessCommon.getInstance().verifyLoginOwner(login,pass);
-		 
-		 
+	public Client verifyLogin(String login, String pass) throws RemoteException {
+		return  DataAccessCommon.getInstance().verifyLogin(login,pass);		 
 	}
 	
 	

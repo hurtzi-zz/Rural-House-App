@@ -53,7 +53,11 @@ public class DataAccessCommon implements DataAccessInterface {
 	}
 
 	public void initializeDB() {
-		Client aaa = new Client("Iñigo", "Sanz", "aaa", "aaa", false);
+		Client aaa = new Client("clie", "cli", "aaa", "aaa", false);
+		
+		Client aaa2 = new Client("clie2", "cli", "aaa2", "aaa", false);
+		
+		Client aaa3 = new Client("clie3", "cli", "aaa3", "aaa", false);
 		
 		Owner iñigo = new Owner("Iñigo", "Sanz", "iñig00", "1234",true, 65252525,
 				"00000000",new Vector<RuralHouse>());
@@ -61,45 +65,61 @@ public class DataAccessCommon implements DataAccessInterface {
 				null,new Vector<RuralHouse>());
 		Owner urtzi = new Owner("ur", "diaz", "utrr00", "5555",true, 65252525,
 				"1rrrrrr",new Vector<RuralHouse>());
+		
+		
+		Owner sss = new Owner("sss", "sss", "sss", "sss",true, 65252525,
+				"1rrrrrr",new Vector<RuralHouse>());
 
 		iñigo.addRuralHouse(1, "Ezkioko etxea", "Ezkio");
 		iñigo.addRuralHouse(2, "Etxetxikia", "Iruña");
 		itziar.addRuralHouse(3, "Udaletxea", "Bilbo");
 		itziar.addRuralHouse(4, "Gaztetxea", "Renteria");
+		
+		sss.addRuralHouse(4, "Gaztetxea", "Renteria");
 
 		iñigo.setBankAccount("12345677");
 		
 		db.store(aaa);
+		db.store(aaa2);
+		db.store(aaa3);
 		db.store(iñigo);
 		db.store(itziar);
 		db.store(urtzi);
 		
-		System.out.print("initializeDBwerwerwerwerwerwer");
+		db.store(sss);
+		
 
 		db.commit();
 	}
+	
+//	public void storeClintDB(,,,,) {
+//		Client aaa = new Client("Iñigo", "Sanz", "aaa", "aaa", false);
+//		db.store(urtzi);
+//		db.commit();
+//	}
+//	
+//	public void storeClintDB(,,,,) {
+//		Client aaa = new Client("Iñigo", "Sanz", "aaa", "aaa", false);
+//		db.store(urtzi);
+//		db.commit();
+//	}
 	
 	public  static ObjectContainer getContainer(){
 		  return db;
 	    }
 	
-	public static Owner verifyLoginOwner(String log, String pass){
-		Owner galdera = new Owner(null, null,log,pass,null,null, null,null);
+	public static Client verifyLogin(String log, String pass){
+		Client galdera = new Client(null, null,log,pass,null);
 			try {							
 				ObjectContainer db=DataAccessCommon.getContainer();
 				 ObjectSet result = db.queryByExample(galdera);
-				 System.out.println(result.size());
 				 if(result.hasNext())
 				 {  
-					 System.out.println((Owner)result.next());
-					 return(Owner)result.next();
-					
-					
+					 Client c=(Client)result.next();
+					 return(c);
 				 }else{
-					 System.out.println("ez dago erabiltzailea");
 					 return null;
 				 }
-				 
 			} catch (Exception exc) {
 				exc.printStackTrace();
 				return null;

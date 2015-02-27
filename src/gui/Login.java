@@ -12,6 +12,7 @@ import businessLogic.ApplicationFacadeInterface;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
+import domain.Client;
 import domain.Owner;
 
 import java.awt.Font;
@@ -56,26 +57,26 @@ public class Login extends JPanel {
 				System.out.println("pass: "+pass);
 				try {
 					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
-					Owner j=facades.verifyLoginOwner(user,pass);
-					
-					System.out.println("xxxxxx");
-					
+					Client j=facades.verifyLogin(user,pass);							
 					if(j==null){
 						searchResult.setForeground(Color.RED);
 						searchResult.setText("Ez da existitzen erabiltzailea");
 					}else if(j!=null){ 	
+						System.out.println("j izena: "+j.getName());
 						searchResult.setForeground(Color.GREEN);
 						searchResult.setText("erabiltzailea DB-an gordeta dago");
 						
-						//if(j.getIsOwner()==false){
+						if(j.getIsOwner()==false){
+							searchResult.setText("client");
 //							JPanel loged =new Loged (j.getName(),j);
 //							loged.setVisible(true);
 //							Initial.setLoginPanel(loged,false);
-						//}else{
+						}else{
+							searchResult.setText("owner");
 //							JPanel loged =new Loged (j.getName(),j);
 //							loged.setVisible(true);
 //							Initial.setLoginPanel(loged,true);
-					//	}
+						}
 
 					}else{
 						JOptionPane.showMessageDialog(null, "Log error", "alert", JOptionPane.CANCEL_OPTION); 	

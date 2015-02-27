@@ -6,6 +6,7 @@ import java.util.Date;
 
 import dataAccess.DataAccessInterface;
 import domain.Booking;
+import domain.Client;
 import domain.Offer;
 import domain.Owner;
 import domain.RuralHouse;
@@ -65,7 +66,7 @@ public interface ApplicationFacadeInterface extends Remote {
     //urtzi	   
 //    public boolean createOwner(String Izena, String Abizena, String email, String pasahitza, Integer telefonoa, Integer bank, boolean isClient) throws RemoteException;
 //    
-    public Owner verifyLoginOwner(String a, String b) throws RemoteException;
+    public Client verifyLogin(String a, String b) throws RemoteException;
 //	
 //	public boolean verifycreateOwner(String a) throws RemoteException;
 //	
