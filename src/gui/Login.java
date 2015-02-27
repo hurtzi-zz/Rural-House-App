@@ -115,6 +115,11 @@ public class Login extends JPanel {
 		add(passwordField);
 		
 		JButton btnRegister = new JButton("Sign in");
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				StartWindow.menu(new Registroa());
+			}
+		});
 		btnRegister.setBounds(180, 218, 89, 23);
 		add(btnRegister);
 		
