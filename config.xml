@@ -8,7 +8,7 @@
   <database local="true">
 	<databaseNode>localhost</databaseNode>
 	<db4oFilename>C:\Users\Urtzi\git\RemoteRuralHouse\casas.db4o</db4oFilename>
-	<dataBaseOpenMode>initialize</dataBaseOpenMode>
+	<dataBaseOpenMode>open</dataBaseOpenMode>
 	<activationDepth>5</activationDepth>
 	<updateDepth>5</updateDepth>
 	<databasePort>8100</databasePort>
