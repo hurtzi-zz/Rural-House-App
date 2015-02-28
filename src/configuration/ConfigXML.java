@@ -119,7 +119,7 @@ public class ConfigXML {
 				
 			  password=getTagValue("password", config);
 
-			  System.out.print("Read from config.xml: ");
+			  System.out.print("Read from config.xml-->");
 			  System.out.print("\t businessLogicLocal="+businessLogicLocal);
 			  System.out.print("\t databaseLocal="+databaseLocal);
 			  System.out.println("\t dataBaseOpenMode="+dataBaseOpenMode); 

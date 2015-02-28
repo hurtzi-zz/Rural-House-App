@@ -118,22 +118,16 @@ public class Register extends JFrame {
 				if (!name.equals("") && !surname.equals("") && !user.equals("")
 						&& !pass.equals("")) {
 					try {
-						ApplicationFacadeInterface facades = StartWindow
-								.getBusinessLogic();
+						ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
 						Boolean nick = facades.verifyLoginName(user);
 						if (nick) {
 							CCuadrado.setForeground(Color.RED);
 							CCuadrado.setText("useuseuseeeeeee");
 						} else {
-							Client j = facades.verifyLogin(user, pass);
-							if (j == null) {
-								facades.createClient(name, surname, user, pass,
-										true);
+							Boolean era = facades.createClient(name, surname, user, pass,true);
+							if (era) {
 								CCuadrado.setForeground(Color.BLUE);
 								CCuadrado.setText("Erabiltzailea eratu da!");
-								// searchResult.setForeground(Color.RED);
-								// searchResult.setText("Ez da existitzen erabiltzailea");
-								// searchResult.setText("Ez da existitzen erabiltzailea");
 							} else {
 								CCuadrado.setForeground(Color.RED);
 								CCuadrado.setText("Error, try again");
@@ -168,17 +162,25 @@ public class Register extends JFrame {
 						&& !pass.equals("") && !phone.equals("")
 						&& !bank.equals("")) {
 					try {
-						ApplicationFacadeInterface facades = StartWindow
-								.getBusinessLogic();
-						Client j = facades.verifyLogin(user, pass);
+						ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
+						Boolean nick = facades.verifyLoginName(user);
+						if (nick) {
+							//badago db-an
+							CCuadrado.setForeground(Color.RED);
+							CCuadrado.setText("useuseuseeeeeee");
+						}else {
+							//db-ez dago
+							boolean era =facades.createOwner(phone, bank, name, surname, user, pass);
+							if (era) {
+								OCuadrado.setForeground(Color.BLUE);
+								OCuadrado.setText("Jabea eratu da!");
+							} else {
+								CCuadrado.setForeground(Color.RED);
+								CCuadrado.setText("Error, try again");
 
-						if (j == null) {
-							facades.createOwner(phone, bank, name, surname, user, pass);
-							OCuadrado.setForeground(Color.BLUE);
-							OCuadrado.setText("Jabea eratu da!");
-						} else {
-							OCuadrado.setForeground(Color.RED);
-							OCuadrado.setText("Jabea sortuta zegoen.");
+							}
+						
+
 
 						}
 					} catch (RemoteException e1) {

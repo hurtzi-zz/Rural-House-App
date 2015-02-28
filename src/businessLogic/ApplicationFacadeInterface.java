@@ -71,6 +71,6 @@ public interface ApplicationFacadeInterface extends Remote {
 
     public boolean createOwner( Integer telefonoa, String bank,String Izena, String Abizena,String login, String pasahitza) throws RemoteException;
     
-    public Client  createClient(String Izena, String Abizena, String login, String pasahitza, boolean isOwner) throws RemoteException;
+    public boolean  createClient(String Izena, String Abizena, String login, String pasahitza, boolean isOwner) throws RemoteException;
 	
 }

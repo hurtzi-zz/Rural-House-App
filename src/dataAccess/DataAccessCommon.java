@@ -53,47 +53,45 @@ public class DataAccessCommon implements DataAccessInterface {
 	}
 
 	public void initializeDB() {
-		Client aaa = new Client("clie", "cli", "aaa", "aaa", false);
 		
-		Client aaa2 = new Client("clie2", "cli", "aaa2", "aaa", false);
+		Client cl0 = new Client("clientName", "clientSurname", "nickName", "pass", false);
 		
-		Client aaa3 = new Client("clie3", "cli", "aaa3", "aaa", false);
+		Client cl1 = new Client("clie", "cli", "aaa", "aaa", false);
 		
-		Owner iñigo = new Owner( 65252525,"00000000",new Vector<RuralHouse>(),"Iñigo", "Sanz", "iñig00", "1234",true);
-		
-		Owner itziar = new Owner(65252525,null,new Vector<RuralHouse>(),"ici", "jaltuna", "icic00", "99999",true);
-		
-		Owner urtzi = new Owner( 65252525,"1rrrrrr",new Vector<RuralHouse>(),"ur", "diaz", "utrr00", "5555",true);
-		
-		Owner sss = new Owner( 65252525,"1rrrrrr",new Vector<RuralHouse>(),"sss", "sss", "sss", "sss",true);
+		Owner ow0 = new Owner(666666666,"bankCount0000",new Vector<RuralHouse>(),"OwnerName", "OwnerSurname", "nickName", "pass",true);
 
-		iñigo.addRuralHouse(1, "Ezkioko etxea", "Ezkio");
-		iñigo.addRuralHouse(2, "Etxetxikia", "Iruña");
-		itziar.addRuralHouse(3, "Udaletxea", "Bilbo");
-		itziar.addRuralHouse(4, "Gaztetxea", "Renteria");
+		Owner ow1 = new Owner(123456789,"12340000",new Vector<RuralHouse>(),"Iñigo", "Sanz", "isanz00", "1234",true);
 		
-		sss.addRuralHouse(4, "Gaztetxea", "Renteria");
+		Owner ow2 = new Owner(987654321,null,new Vector<RuralHouse>(),"Itziar", "Altuna", "jaltuna", "000",true);
+		
+		Owner ow3 = new Owner(652729490,"1rrrrrr",new Vector<RuralHouse>(),"Urtzi", "Diaz", "urtzi00", "asd",true);
+		
 
-		iñigo.setBankAccount("12345677");
+		ow1.addRuralHouse(1, "Ezkioko etxea", "Ezkio");
+		ow1.addRuralHouse(2, "Etxetxikia", "Iruña");
+		ow1.addRuralHouse(3, "Udaletxea", "Bilbo");
+		ow2.addRuralHouse(1, "Gaztetxea", "Renteria");
+		ow2.addRuralHouse(2, "Gaztetxea", "Donosti");
+		ow3.addRuralHouse(2, "SomoEtxe", "Gasteiz");
+
+		ow1.setBankAccount("1234berri");
 		
-		db.store(aaa);
-		db.store(aaa2);
-		db.store(aaa3);
+		db.store(cl0);
+		db.store(cl1);
 		
-		db.store(iñigo);
-		db.store(itziar);
-		db.store(urtzi);
-		
-		db.store(sss);
+		db.store(ow0);
+		db.store(ow1);
+		db.store(ow2);
+		db.store(ow3);
 		
 		db.commit();
 	}
 	
-	public Client createClient(String name, String surname, String login, String password, boolean isOwner){
+	public boolean createClient(String name, String surname, String login, String password, boolean isOwner){
 		Client c = new Client(name, surname, login, password, false);
 		db.store(c);
 		db.commit();
-		return c;
+		return true;
 	}
 	
 	public boolean createOwner( Integer tlfn, String bankAccount,String name, String abizena, String login, String password){
