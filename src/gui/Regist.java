@@ -52,14 +52,14 @@ public class Regist extends JFrame implements ActionListener {
 	 */
 
 	public Regist() {
-		setBounds(100, 100, 388, 459);
+		setBounds(100, 100, 388, 519);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		panelPrinci = new JPanel();
-		panelPrinci.setBounds(41, 81, 281, 330);
+		panelPrinci.setBounds(10, 81, 352, 388);
 		contentPane.add(panelPrinci);
 		panelPrinci.setLayout(null);
 
@@ -101,27 +101,27 @@ public class Regist extends JFrame implements ActionListener {
 		JPanel panelOwner = new RegisterOwner();
 		// TODO Auto-generated method stub
 		if (ae.getActionCommand().compareTo("User") == 0) {
-			System.out.println("Owner:" + own + " user:" + cli);
-			own = false;
-			cli = true;
-			// panelOwner.setVisible(own);
 			panelPrinci.removeAll();
-			panelClient.setBounds(31, 71, 271, 320);
-			contentPane.add(panelOwner);
-			panelClient.setVisible(cli);
+			panelClient.setBounds(41, 81, 281, 320);
+			contentPane.add(panelClient);
+			JPanel petiqueta = new JPanel();
+			petiqueta.add(panelPrinci);
+			contentPane.add(petiqueta, BorderLayout.SOUTH);
 			contentPane.updateUI();
+			contentPane.repaint();
+			repaint();
 		}
 		if (ae.getActionCommand().compareTo("Owner") == 0) {
-			System.out.println("Owner:" + own + " user:" + cli);
-			own = true;
-			cli = false;
-			// panelClient.setVisible(cli);
 			panelPrinci.removeAll();
-
 			panelOwner.setBounds(41, 81, 281, 320);
 			contentPane.add(panelOwner);
-			panelClient.setVisible(own);
+			JPanel petiqueta = new JPanel();
+			petiqueta.add(panelPrinci);
+			contentPane.add(petiqueta, BorderLayout.SOUTH);
 			contentPane.updateUI();
+			contentPane.repaint();
+			repaint();
+;
 		}
 	}
 
