@@ -6,43 +6,59 @@ import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectSet;
 import com.db4o.config.EmbeddedConfiguration;
 
+import configuration.ConfigXML;
+
 import java.io.*;
 
 public class DataAccessLocal extends DataAccessCommon {
 	private static EmbeddedConfiguration configuration;
 
-	public DataAccessLocal(){
+	public DataAccessLocal() {
 		super();
-
-		System.out.print("0000000xml: "+c.getDataBaseOpenMode());
-		if ((c.getDataBaseOpenMode().equals("initialize")))
-			System.out.print("22");
-
-			new File(c.getDb4oFilename()).delete();
-
-		
-		configuration = Db4oEmbedded.newConfiguration();
-		configuration.common().activationDepth(c.getActivationDepth());
-		configuration.common().updateDepth(c.getUpdateDepth());
-		db=Db4oEmbedded.openFile(configuration, c.getDb4oFilename());
-		System.out.println("DataBase opened");
-		
-		if (c.getDataBaseOpenMode().equals("initialize"))
-		{			
-			initializeDB();
-			System.out.println("DataBase initialized");
+		ConfigXML c = ConfigXML.getInstance();
+		String dataBaseOpenMode = c.getDataBaseOpenMode();
+		if (!dbExits()) {
+			configuration = Db4oEmbedded.newConfiguration();
+			db = Db4oEmbedded.openFile(configuration, c.getDb4oFilename());
+			db.ext().configure().updateDepth(5);
+			DataAccessCommon.getInstance().initializeDB();
+			System.out.println("DataBase Initialized");
+		} else {
+			if ((c.getDataBaseOpenMode().equals("initialize")))new File(c.getDb4oFilename()).delete();
+			DataAccessLocal.openDatabase(dataBaseOpenMode);
 		}
-		else // c.getDataBaseOpenMode().equals("open")
-			System.out.print("22");
-			{		
 
-				ObjectSet<DB4oManagerAux> res =db.queryByExample(DB4oManagerAux.class);
-				ListIterator<DB4oManagerAux> listIter = res.listIterator();
-				if (listIter.hasNext()) theDB4oManagerAux =  res.next();         	
-            }
-		
-		
-		
+	}
+
+	public static void openDatabase(String mode) {
+		ConfigXML c = ConfigXML.getInstance();
+		String db4oFileName = c.getDb4oFilename();
+		if (mode.compareTo("open") == 0) {
+			db = Db4oEmbedded.openFile(configuration, db4oFileName);
+			db.ext().configure().updateDepth(5);
+			System.out.println("DataBase Opened");
+
+		} else if (mode.compareTo("initialize") == 0) {
+			configuration = Db4oEmbedded.newConfiguration();
+			db = Db4oEmbedded.openFile(configuration, db4oFileName);
+			db.ext().configure().updateDepth(5);
+			DataAccessCommon.getInstance().initializeDB();
+			System.out.println("DataBase Initialized");
+		}
+	}
+	
+
+	public boolean dbExits() {
+		ConfigXML c = ConfigXML.getInstance();
+		String db4oFileName = c.getDb4oFilename();
+		File fichero = new File(db4oFileName);
+		if (fichero.exists()) {
+			System.out.println("El fichero " + db4oFileName + " existe");
+			return true;
+		} else {
+			System.out.println("Sortzen... " + db4oFileName);
+			return false;
+		}
 	}
 
 }

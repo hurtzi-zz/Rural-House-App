@@ -5,6 +5,10 @@ import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
 
 
+
+
+
+
 import javax.swing.UIManager;
 
 import configuration.ConfigXML;
@@ -64,18 +68,22 @@ public class Launcher {
 		} catch (java.rmi.ConnectException e) {
 	//		a.lblNewLabel.setText("No business logic: Run BusinessLogicServer first!!");
 	//		a.lblNewLabel.setForeground(Color.RED);
+			System.out.println("11");
 			System.out.println("Error in StartWindow: "+e.toString());
 		} catch (java.rmi.NotBoundException e) {
 	//		a.lblNewLabel.setText("No business logic: Maybe problems running BusinessLogicServer");
 	//		a.lblNewLabel.setForeground(Color.RED);
+			System.out.println("12");
 			System.out.println("Error in StartWindow: "+e.toString());
 		} catch (com.db4o.ext.DatabaseFileLockedException e) {
 	//		a.lblNewLabel.setText("Database locked: Do not run BusinessLogicServer or BusinessLogicServer!!");
 	//		a.lblNewLabel.setForeground(Color.RED);		
+			System.out.println("13");
 			System.out.println("Error in StartWindow: "+e.toString());
 		} catch (DB4oManagerCreationException e) {
 		//	a.lblNewLabel.setText("No database: Run DB4oManagerServer first!!");
 		//	a.lblNewLabel.setForeground(Color.RED);		
+			System.out.println("14");
 			System.out.println("Error in StartWindow: "+e.toString());
 
 			
@@ -84,7 +92,6 @@ public class Launcher {
 		//	a.lblNewLabel.setForeground(Color.RED);		
 			System.out.println("Error in StartWindow: "+e.toString());
 		}
-		//a.pack();
 
 
 	}
