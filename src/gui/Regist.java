@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Window;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,7 +24,7 @@ import javax.swing.JTextPane;
 public class Regist extends JFrame {
 
 	private JPanel contentPane;
-	
+
 	private final ButtonGroup GroupRegister = new ButtonGroup();
 
 	/**
@@ -51,17 +52,17 @@ public class Regist extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JPanel panelPrinci = new JPanel();
 		panelPrinci.setBounds(10, 115, 352, 392);
 		contentPane.add(panelPrinci);
 		panelPrinci.setLayout(null);
-		
-		//////
-//		JPanel panelSub = new JPanel();
-//		panelSub.setBounds(10, 11, 332, 370);
-//		panelPrinci.add(panelSub);
-		////
+
+		// ////
+		// JPanel panelSub = new JPanel();
+		// panelSub.setBounds(10, 11, 332, 370);
+		// panelPrinci.add(panelSub);
+		// //
 
 		JPanel registerMetod = new JPanel();
 		registerMetod.setBounds(31, 11, 302, 59);
@@ -76,13 +77,17 @@ public class Regist extends JFrame {
 				panelPrinci.removeAll();
 				panelPrinci.updateUI();
 				panelPrinci.repaint();
-				
+				contentPane.updateUI();
+				contentPane.repaint();;
 				JPanel panelClient = new ClientRegister();
+				// panelClient.setVisible(true);
 				panelClient.setBounds(31, 115, 302, 348);
 				contentPane.add(panelClient);
+				panelPrinci.updateUI();
+				panelPrinci.repaint();
 				contentPane.updateUI();
 				contentPane.repaint();
-				contentPane.setVisible(true);
+
 			}
 		});
 		GroupRegister.add(optUser);
@@ -95,13 +100,17 @@ public class Regist extends JFrame {
 				panelPrinci.removeAll();
 				panelPrinci.updateUI();
 				panelPrinci.repaint();
-				panelPrinci.setVisible(false);
-				JPanel panelOwner = new OwnerRegister();
-				panelOwner.setBounds(31, 115, 302, 348);
-				contentPane.add(panelOwner);
 				contentPane.updateUI();
 				contentPane.repaint();
-				
+				JPanel panelOwner = new OwnerRegister();
+				// panelOwner.setVisible(true);
+				panelOwner.setBounds(31, 115, 302, 348);
+				contentPane.add(panelOwner);
+				panelPrinci.updateUI();
+				panelPrinci.repaint();
+				contentPane.updateUI();
+				contentPane.repaint();
+
 			}
 		});
 		GroupRegister.add(optOwner);
@@ -133,6 +142,7 @@ public class Regist extends JFrame {
 
 		//
 
-
 	}
+	
+	
 }
