@@ -59,16 +59,13 @@ public class DataAccessCommon implements DataAccessInterface {
 		
 		Client aaa3 = new Client("clie3", "cli", "aaa3", "aaa", false);
 		
-		Owner iñigo = new Owner("Iñigo", "Sanz", "iñig00", "1234",true, 65252525,
-				"00000000",new Vector<RuralHouse>());
-		Owner itziar = new Owner("ici", "jaltuna", "icic00", "99999",true, 65252525,
-				null,new Vector<RuralHouse>());
-		Owner urtzi = new Owner("ur", "diaz", "utrr00", "5555",true, 65252525,
-				"1rrrrrr",new Vector<RuralHouse>());
+		Owner iñigo = new Owner( 65252525,"00000000",new Vector<RuralHouse>(),"Iñigo", "Sanz", "iñig00", "1234",true);
 		
+		Owner itziar = new Owner(65252525,null,new Vector<RuralHouse>(),"ici", "jaltuna", "icic00", "99999",true);
 		
-		Owner sss = new Owner("sss", "sss", "sss", "sss",true, 65252525,
-				"1rrrrrr",new Vector<RuralHouse>());
+		Owner urtzi = new Owner( 65252525,"1rrrrrr",new Vector<RuralHouse>(),"ur", "diaz", "utrr00", "5555",true);
+		
+		Owner sss = new Owner( 65252525,"1rrrrrr",new Vector<RuralHouse>(),"sss", "sss", "sss", "sss",true);
 
 		iñigo.addRuralHouse(1, "Ezkioko etxea", "Ezkio");
 		iñigo.addRuralHouse(2, "Etxetxikia", "Iruña");
@@ -89,7 +86,6 @@ public class DataAccessCommon implements DataAccessInterface {
 		
 		db.store(sss);
 		
-
 		db.commit();
 	}
 	
@@ -100,15 +96,12 @@ public class DataAccessCommon implements DataAccessInterface {
 		return c;
 	}
 	
-	public Owner createOwner(String name, String abizena, String login, String password,boolean isOwner, Integer tlfn, String bankAccount){
-		Owner o = new Owner(name, abizena, login, password, true, tlfn, bankAccount, null);
+	public boolean createOwner( Integer tlfn, String bankAccount,String name, String abizena, String login, String password){
+		Owner o = new Owner(tlfn,bankAccount,null,name, abizena, login, password, true);
 		 System.out.println("abizena: "+o.getAbizena());
-
 		db.store(o);
 		db.commit();
-		//db.close();
-		
-		return o;
+		return true;
 	}
 	
 	public  static ObjectContainer getContainer(){

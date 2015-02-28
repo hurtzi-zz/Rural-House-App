@@ -20,13 +20,11 @@ public class Owner extends Client implements Serializable  {
 
 	
 	//jabea
-	public Owner(String name, String abizena, String login, String password,Boolean isOwner, Integer tlfn, String bankAccount,Vector<RuralHouse> ruralHouses){
+	public Owner(Integer tlfn, String bankAccount,Vector<RuralHouse> ruralHouses,String name, String abizena, String login, String password,Boolean isOwner){
 		super(name,abizena,login,password,isOwner);
 		this.bankAccount=bankAccount;
 		this.tlfn=tlfn;
 		this.ruralHouses=ruralHouses;
-		
-		
 	}
 	/**
 	 * This method returns the name

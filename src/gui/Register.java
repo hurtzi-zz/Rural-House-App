@@ -173,8 +173,7 @@ public class Register extends JFrame {
 						Client j = facades.verifyLogin(user, pass);
 
 						if (j == null) {
-							facades.createOwner(name, surname, user, pass,
-									true, phone, bank);
+							facades.createOwner(phone, bank, name, surname, user, pass);
 							OCuadrado.setForeground(Color.BLUE);
 							OCuadrado.setText("Jabea eratu da!");
 						} else {
