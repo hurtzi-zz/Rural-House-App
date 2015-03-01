@@ -114,7 +114,10 @@ public class DataAccessCommon implements DataAccessInterface {
 		db.commit();
 		return true;
 	}
+    
 
+	
+	
 	public Boolean saveRuralHouse(Integer ze, String hi, String de) {
 		
 		Owner berria = AddRuralHouse.owner;
@@ -332,9 +335,9 @@ public class DataAccessCommon implements DataAccessInterface {
 	}
 
 	public void close() {
-		System.out.print("itxi baino lehen=");
-		Owner berria = AddRuralHouse.owner;
-		inprimatuEtxeakOwner(berria);
+//		System.out.print("itxi baino lehen=");
+//		Owner berria = AddRuralHouse.owner;
+//		inprimatuEtxeakOwner(berria);
 		db.close();
 		System.out.println("DataBase closed");
 	}
