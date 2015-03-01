@@ -50,7 +50,7 @@ public class Loged extends JPanel {
 		this.client=c;
 		if (client.getIsOwner()==true){
 			try {
-				owner=facade.getOwner(client);
+				setOwner(facade.getOwner(client));
 			} catch (Exception ex){
 				ex.printStackTrace();
 			}
@@ -75,7 +75,7 @@ public class Loged extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				try {
-					StartWindow.setAddRuralHousePanel(owner);
+					StartWindow.setAddRuralHousePanel(getOwner());
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
@@ -93,5 +93,13 @@ public class Loged extends JPanel {
 		
 		
 
+	}
+
+	public static Owner getOwner() {
+		return owner;
+	}
+
+	public static void setOwner(Owner owner) {
+		Loged.owner = owner;
 	}
 }

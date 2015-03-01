@@ -10,8 +10,6 @@ import domain.Client;
 import domain.Offer;
 import domain.Owner;
 import domain.RuralHouse;
-
-
 import exceptions.OfferCanNotBeBooked; 
 
 
@@ -80,5 +78,8 @@ public interface ApplicationFacadeInterface extends Remote {
      */
     public Owner getOwner(Client c) throws RemoteException;
 	
-    public void updateOwner(Owner del, Owner add) throws RemoteException;
+//    public void updateOwner(Owner del, Owner add) throws RemoteException;
+
+	public Boolean saveRuralHouse(Integer ze, String hi, String de)throws RemoteException;
+
 }

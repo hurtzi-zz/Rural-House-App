@@ -6,15 +6,6 @@ import java.util.Date;
 import java.sql.SQLException;
 import java.util.Vector;
 
-
-
-
-
-
-
-
-
-
 import dataAccess.DataAccessCommon;
 import dataAccess.DataAccessInterface;
 import domain.Booking;
@@ -146,12 +137,14 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 		return DataAccessCommon.getInstance().getOwner(c);
 	}
 
-	public void updateOwner(Owner del, Owner add) throws RemoteException{
-		DataAccessCommon.getInstance().updateOwner(del,add);
-	}
+//	public void updateOwner(Owner del, Owner add) throws RemoteException{
+//		DataAccessCommon.getInstance().updateOwner(del,add);
+//	}
 
 
-
+	public Boolean saveRuralHouse(Integer ze, String hi, String de)throws RemoteException{
+    	return DataAccessCommon.getInstance().saveRuralHouse(ze,hi,de);
+    }
     
 
 

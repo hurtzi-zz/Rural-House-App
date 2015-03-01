@@ -190,4 +190,9 @@ public class RuralHouse implements Serializable {
 		
 	}
 
+	public void imprimatu() {
+		String s =this.houseNumber+","+this.description+","+this.city;
+		System.out.println(s);
+	}
+
 }
