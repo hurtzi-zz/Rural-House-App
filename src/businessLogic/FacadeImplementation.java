@@ -141,6 +141,14 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 		return  DataAccessCommon.getInstance().createOwner( telefonoa, bank, Izena, Abizena, login, pasahitza);
 				
 	}
+	
+	public Owner getOwner(Client c) throws RemoteException{
+		return DataAccessCommon.getInstance().getOwner(c);
+	}
+
+	public void updateOwner(Owner del, Owner add) throws RemoteException{
+		DataAccessCommon.getInstance().updateOwner(del,add);
+	}
 
 
 

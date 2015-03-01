@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.border.EmptyBorder;
 
 public class Login extends JPanel {
 	private JTextField textFieldLogin;
@@ -45,7 +46,7 @@ public class Login extends JPanel {
 		setToolTipText("Login");
 		setLayout(null);
 		
-		JLabel searchResult = new JLabel("");
+		searchResult = new JLabel("");
 		searchResult.setForeground(Color.BLACK);
 		searchResult.setBounds(41, 128, 152, 14);
 		add(searchResult);
@@ -55,9 +56,6 @@ public class Login extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				String user =textFieldLogin.getText();
 				String pass=passwordField.getText();
-				
-				System.out.println("user: "+user);
-				System.out.println("pass: "+pass);
 				try {
 					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
 					Client j=facades.verifyLogin(user,pass);
@@ -70,15 +68,13 @@ public class Login extends JPanel {
 						searchResult.setText("erabiltzailea DB-an gordeta dago");
 						
 						if(j.getIsOwner()==false){
+							searchResult.setForeground(Color.GREEN);
 							searchResult.setText("client");
-//							JPanel loged =new Loged (j.getName(),j);
-//							loged.setVisible(true);
-//							Initial.setLoginPanel(loged,false);
+							StartWindow.setLogedPanel(j);
 						}else{
+							searchResult.setForeground(Color.GREEN);
 							searchResult.setText("owner");
-//							JPanel loged =new Loged (j.getName(),j);
-//							loged.setVisible(true);
-//							Initial.setLoginPanel(loged,true);
+							StartWindow.setLogedPanel(j);
 						}
 
 					}else{

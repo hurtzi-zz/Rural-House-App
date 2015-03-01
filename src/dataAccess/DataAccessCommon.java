@@ -1,5 +1,6 @@
 package dataAccess;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.Vector;
 
@@ -276,6 +277,24 @@ public class DataAccessCommon implements DataAccessInterface {
 
 	public String toString() {
 		return "bookingNumber=" + bookingNumber + " offerNumber=" + offerNumber;
+	}
+	
+	public void updateOwner(Owner del, Owner add) throws RemoteException{
+//		db.delete(del);
+		db.store(add);
+		db.commit();
+	}
+	
+	public Owner getOwner(Client c){
+		Owner galdera = new Owner(null, null, null, null, null, c.getLogin(), null, null);
+		try {
+			ObjectContainer db=DataAccessCommon.getContainer();
+			ObjectSet result = db.queryByExample(galdera);
+			return (Owner)result.next();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
 	}
 
 }

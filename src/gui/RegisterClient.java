@@ -27,6 +27,8 @@ public class RegisterClient extends JPanel {
 	private JTextField nick;
 	private JPasswordField pass1;
 	private JPasswordField pass2;
+	private JLabel result = null;
+
 
 	/**
 	 * Create the panel.
@@ -41,53 +43,53 @@ public class RegisterClient extends JPanel {
 		add(lblUser);
 
 		JLabel lblNewLabel = new JLabel("Name:");
-		lblNewLabel.setBounds(20, 43, 78, 14);
+		lblNewLabel.setBounds(20, 46, 78, 14);
 		add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("Surname:");
-		lblNewLabel_1.setBounds(20, 68, 78, 14);
+		lblNewLabel_1.setBounds(20, 71, 78, 14);
 		add(lblNewLabel_1);
 
 		JLabel lblNewLabel_2 = new JLabel("Nick");
-		lblNewLabel_2.setBounds(20, 93, 78, 14);
+		lblNewLabel_2.setBounds(20, 96, 78, 14);
 		add(lblNewLabel_2);
 
 		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(20, 118, 78, 14);
+		lblPassword.setBounds(20, 121, 78, 14);
 		add(lblPassword);
 
 		JLabel lblRepearPasswrd = new JLabel("Repeat pass:");
-		lblRepearPasswrd.setBounds(20, 143, 78, 14);
+		lblRepearPasswrd.setBounds(20, 146, 78, 14);
 		add(lblRepearPasswrd);
 
 		surname = new JTextField();
-		surname.setBounds(108, 65, 92, 20);
+		surname.setBounds(108, 68, 92, 20);
 		add(surname);
 		surname.setColumns(10);
 
 		name = new JTextField();
-		name.setBounds(108, 40, 92, 20);
+		name.setBounds(108, 43, 92, 20);
 		add(name);
 		name.setColumns(10);
 		name.setText("");
 
 		nick = new JTextField();
-		nick.setBounds(108, 90, 92, 20);
+		nick.setBounds(108, 93, 92, 20);
 		add(nick);
 		nick.setColumns(10);
 
 		pass1 = new JPasswordField();
-		pass1.setBounds(108, 115, 92, 20);
+		pass1.setBounds(108, 118, 92, 20);
 		add(pass1);
 		pass1.setColumns(10);
 
 		pass2 = new JPasswordField();
-		pass2.setBounds(108, 140, 92, 20);
+		pass2.setBounds(108, 143, 92, 20);
 		add(pass2);
 		pass2.setColumns(10);
 
-		JTextPane result = new JTextPane();
-		result.setBounds(10, 168, 179, 21);
+		result = new JLabel();
+		result.setBounds(20, 171, 179, 33);
 		add(result);
 
 		JButton register = new JButton("Register");
@@ -132,7 +134,7 @@ public class RegisterClient extends JPanel {
 				}
 			}
 		});
-		register.setBounds(58, 200, 92, 23);
+		register.setBounds(71, 215, 92, 23);
 		add(register);
 
 	}

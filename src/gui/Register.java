@@ -1,254 +1,110 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Window;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JList;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JSeparator;
+import javax.swing.border.TitledBorder;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JTextPane;
+import javax.swing.UIManager;
 
-import java.awt.Color;
-import java.rmi.RemoteException;
-
-import javax.swing.SwingConstants;
-
-import businessLogic.ApplicationFacadeInterface;
-import domain.Client;
-import javax.swing.JFormattedTextField;
-
-public class Register extends JFrame {
+public class Register extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JTextField textUName;
-	private JTextField textUSurname;
-	private JTextField textUUsername;
-	private JPasswordField passwordUField;
-	private JPasswordField passwordOField;
-	private JTextField textOName;
-	private JTextField textOSurname;
-	private JTextField textOUsername;
-	private JTextField textPhone;
-	private JTextField textBank;
-	private JLabel CCuadrado = null;
-	private JLabel OCuadrado = null;
+	private JPanel panelPrinci;
+	private Boolean cli = false;
+	private Boolean own = false;
+	private final ButtonGroup GroupRegister = new ButtonGroup();
+
+
 
 	/**
 	 * Create the frame.
 	 */
+
 	public Register() {
-		setTitle("Register");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 388, 519);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblSignIn = new JLabel("User");
-		lblSignIn.setBounds(64, 10, 106, 25);
-		lblSignIn.setFont(new Font("Tunga", Font.BOLD, 22));
-		contentPane.add(lblSignIn);
+		panelPrinci = new JPanel();
+		panelPrinci.setBounds(10, 81, 352, 388);
+		contentPane.add(panelPrinci);
+		panelPrinci.setLayout(null);
 
-		JLabel lblName = new JLabel("Name:");
-		lblName.setBounds(10, 46, 46, 14);
-		contentPane.add(lblName);
+		// ////
+		// JPanel panelSub = new JPanel();
+		// panelSub.setBounds(10, 11, 332, 370);
+		// panelPrinci.add(panelSub);
+		// //
 
-		JLabel lblName_1 = new JLabel("Name:");
-		lblName_1.setBounds(227, 48, 46, 14);
-		contentPane.add(lblName_1);
+		JPanel registerMetod = new JPanel();
+		registerMetod.setBounds(31, 11, 302, 59);
+		registerMetod.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Register as:",
+				TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
+		contentPane.add(registerMetod);
+		registerMetod.setLayout(null);
 
-		JLabel lblSurname = new JLabel("Surname:");
-		lblSurname.setBounds(10, 73, 46, 14);
-		contentPane.add(lblSurname);
+		JRadioButton optUser = new JRadioButton("User");
+		optUser.addActionListener(this);
+		GroupRegister.add(optUser);
+		optUser.setBounds(70, 20, 67, 23);
+		registerMetod.add(optUser);
 
-		JLabel lblSurname_1 = new JLabel("Surname:");
-		lblSurname_1.setBounds(227, 73, 46, 14);
-		contentPane.add(lblSurname_1);
-
-		JLabel lblNickname = new JLabel("Nickname:");
-		lblNickname.setBounds(10, 105, 71, 14);
-		contentPane.add(lblNickname);
-
-		JLabel lblNickname_1 = new JLabel("Nickname:");
-		lblNickname_1.setBounds(227, 105, 62, 14);
-		contentPane.add(lblNickname_1);
-
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(10, 128, 71, 14);
-		contentPane.add(lblPassword);
-
-		JLabel lblPassword_1 = new JLabel("Password:");
-		lblPassword_1.setBounds(227, 128, 62, 14);
-		contentPane.add(lblPassword_1);
-
-		JLabel lblPhone = new JLabel("Phone:");
-		lblPhone.setBounds(227, 153, 46, 14);
-		contentPane.add(lblPhone);
-
-		JLabel lblAcountNumber = new JLabel("Acount Number:");
-		lblAcountNumber.setBounds(227, 178, 73, 14);
-		contentPane.add(lblAcountNumber);
-
-		JLabel CCuadrado = new JLabel("");
-		CCuadrado.setBounds(10, 193, 174, 25);
-		contentPane.add(CCuadrado);
-
-		JLabel OCuadrado = new JLabel("");
-		OCuadrado.setBounds(208, 203, 191, 25);
-		contentPane.add(OCuadrado);
-
-		JButton btnUser = new JButton("USER");
-		btnUser.setBounds(47, 227, 89, 23);
-		btnUser.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String name = textUName.getText();
-				String surname = textUSurname.getText();
-				String user = textUUsername.getText();
-				String pass = passwordUField.getText();
-				if (!name.equals("") && !surname.equals("") && !user.equals("")
-						&& !pass.equals("")) {
-					try {
-						ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
-						Boolean nick = facades.verifyLoginName(user);
-						if (nick) {
-							CCuadrado.setForeground(Color.RED);
-							CCuadrado.setText("useuseuseeeeeee");
-						} else {
-							Boolean era = facades.createClient(name, surname, user, pass,true);
-							if (era) {
-								CCuadrado.setForeground(Color.BLUE);
-								CCuadrado.setText("Erabiltzailea eratu da!");
-							} else {
-								CCuadrado.setForeground(Color.RED);
-								CCuadrado.setText("Error, try again");
-
-							}
-						}
-					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
-				} else {
-					JOptionPane.showMessageDialog(null,
-							"Bete itzazu atal guztiak mesedez", "alert",
-							JOptionPane.CANCEL_OPTION);
-				}
-			}
-		});
-		contentPane.add(btnUser);
-
-		JButton btnOwner = new JButton("OWNER");
-		btnOwner.setBounds(268, 227, 89, 23);
-		btnOwner.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String name = textOName.getText();
-				String surname = textOSurname.getText();
-				String user = textOUsername.getText();
-				String pass = passwordOField.getText();
-				Integer phone = Integer.valueOf(textPhone.getText());
-				String bank = textBank.getText();
-				if (!name.equals("") && !surname.equals("") && !user.equals("")
-						&& !pass.equals("") && !phone.equals("")
-						&& !bank.equals("")) {
-					try {
-						ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
-						Boolean nick = facades.verifyLoginName(user);
-						if (nick) {
-							//badago db-an
-							CCuadrado.setForeground(Color.RED);
-							CCuadrado.setText("useuseuseeeeeee");
-						}else {
-							//db-ez dago
-							boolean era =facades.createOwner(phone, bank, name, surname, user, pass);
-							if (era) {
-								OCuadrado.setForeground(Color.BLUE);
-								OCuadrado.setText("Jabea eratu da!");
-							} else {
-								CCuadrado.setForeground(Color.RED);
-								CCuadrado.setText("Error, try again");
-
-							}
-						
-
-
-						}
-					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
-				} else {
-					JOptionPane.showMessageDialog(null,
-							"Bete itzazu atal guztiak mesedez", "alert",
-							JOptionPane.CANCEL_OPTION);
-				}
-			}
-		});
-		contentPane.add(btnOwner);
-
-		textUName = new JTextField();
-		textUName.setBounds(84, 43, 86, 20);
-		contentPane.add(textUName);
-		textUName.setColumns(10);
-
-		textUSurname = new JTextField();
-		textUSurname.setBounds(84, 70, 86, 20);
-		contentPane.add(textUSurname);
-		textUSurname.setColumns(10);
-
-		textUUsername = new JTextField();
-		textUUsername.setBounds(84, 102, 86, 20);
-		contentPane.add(textUUsername);
-		textUUsername.setColumns(10);
-
-		passwordUField = new JPasswordField();
-		passwordUField.setBounds(84, 128, 86, 20);
-		contentPane.add(passwordUField);
-
-		passwordOField = new JPasswordField();
-		passwordOField.setBounds(326, 125, 73, 20);
-		contentPane.add(passwordOField);
-
-		textOName = new JTextField();
-		textOName.setBounds(313, 45, 86, 20);
-		contentPane.add(textOName);
-		textOName.setColumns(10);
-
-		textOSurname = new JTextField();
-		textOSurname.setBounds(313, 70, 86, 20);
-		contentPane.add(textOSurname);
-		textOSurname.setColumns(10);
-
-		textOUsername = new JTextField();
-		textOUsername.setBounds(313, 102, 86, 20);
-		contentPane.add(textOUsername);
-		textOUsername.setColumns(10);
-
-		textPhone = new JTextField();
-		textPhone.setBounds(313, 153, 86, 20);
-		contentPane.add(textPhone);
-		textPhone.setColumns(10);
-
-		textBank = new JTextField();
-		textBank.setBounds(313, 175, 86, 20);
-		contentPane.add(textBank);
-		textBank.setColumns(10);
-
-		JLabel lblOwner = new JLabel("Owner");
-		lblOwner.setFont(new Font("Tunga", Font.BOLD, 22));
-		lblOwner.setBounds(284, 10, 106, 25);
-		contentPane.add(lblOwner);
+		JRadioButton optOwner = new JRadioButton("Owner");
+		optOwner.addActionListener(this);
+		GroupRegister.add(optOwner);
+		optOwner.setBounds(159, 20, 74, 23);
+		registerMetod.add(optOwner);
 
 	}
+
+	// contentPane.setVisible(false);
+	// contentPane.removeAll();
+
+	@Override
+	public void actionPerformed(ActionEvent ae) {
+		// TODO Auto-generated method stub
+		if (ae.getActionCommand().compareTo("User") == 0) {
+			panelPrinci.setVisible(false);
+			panelPrinci.removeAll();
+			JPanel panelClient = new RegisterClient();
+			panelClient.setBorder(new EmptyBorder(1, 1, 1, 1));
+			panelClient.setBackground(Color.WHITE);
+			panelClient.setBounds(45, 11, 250, 240);
+			panelPrinci.add(panelClient);
+			panelPrinci.setVisible(true);
+		}
+		if (ae.getActionCommand().compareTo("Owner") == 0) {
+			panelPrinci.setVisible(false);
+			panelPrinci.removeAll();
+			JPanel panelOwner = new RegisterOwner();
+			panelOwner.setBorder(new EmptyBorder(1, 1, 1, 1));
+			panelOwner.setBackground(Color.WHITE);
+			panelOwner.setBounds(45, 11, 250, 310);
+			panelPrinci.add(panelOwner);
+			panelPrinci.setVisible(true);
+
+		}
+	}
+
 }

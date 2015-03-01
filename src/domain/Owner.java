@@ -26,11 +26,14 @@ public class Owner extends Client implements Serializable  {
 		this.tlfn=tlfn;
 		this.ruralHouses=ruralHouses;
 	}
-	/**
-	 * This method returns the name
-	 * 
-	 * @return owner name
-	 */
+//	public Owner(String name, String abizena, String login, String password,Boolean isOwner, Integer tlfn, String bankAccount,Vector<RuralHouse> ruralHouses){
+//		super(name,abizena,login,password,isOwner);
+//		this.bankAccount=bankAccount;
+//		this.tlfn=tlfn;
+//		this.ruralHouses=ruralHouses;
+//		
+//		
+//	}
 
 	
 	
