@@ -48,7 +48,7 @@ public class Login extends JPanel {
 		
 		searchResult = new JLabel("");
 		searchResult.setForeground(Color.BLACK);
-		searchResult.setBounds(41, 128, 152, 14);
+		searchResult.setBounds(41, 106, 152, 14);
 		add(searchResult);
 		
 		JButton btnEnter = new JButton("ENTER");
@@ -71,9 +71,12 @@ public class Login extends JPanel {
 							searchResult.setForeground(Color.GREEN);
 							searchResult.setText("client");
 							StartWindow.setLogedPanel(j);
+							
 						}else{
 							searchResult.setForeground(Color.GREEN);
 							searchResult.setText("owner");
+							System.out.println();
+							
 							StartWindow.setLogedPanel(j);
 						}
 
@@ -87,29 +90,29 @@ public class Login extends JPanel {
 				}
 			}
 		});
-		btnEnter.setBounds(26, 153, 75, 25);
+		btnEnter.setBounds(26, 131, 75, 25);
 		add(btnEnter);
 		
 		JLabel lblLogin = new JLabel("Login:");
-		lblLogin.setBounds(10, 72, 64, 14);
+		lblLogin.setBounds(10, 50, 64, 14);
 		add(lblLogin);
 		
 		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(10, 100, 64, 14);
+		lblPassword.setBounds(10, 78, 64, 14);
 		add(lblPassword);
 		
 		textFieldLogin = new JTextField();
-		textFieldLogin.setBounds(84, 69, 131, 20);
+		textFieldLogin.setBounds(84, 47, 131, 20);
 		add(textFieldLogin);
 		textFieldLogin.setColumns(10);
 		
 		JLabel lblLogIn = DefaultComponentFactory.getInstance().createTitle("LOG  IN");
 		lblLogIn.setFont(new Font("Tw Cen MT", Font.PLAIN, 18));
-		lblLogIn.setBounds(87, 11, 70, 36);
+		lblLogIn.setBounds(79, 11, 70, 25);
 		add(lblLogIn);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(84, 97, 131, 20);
+		passwordField.setBounds(84, 75, 131, 20);
 		add(passwordField);
 		
 		JButton btnRegister = new JButton("Sign in");
@@ -119,7 +122,7 @@ public class Login extends JPanel {
 				a.setVisible(true);
 			}
 		});
-		btnRegister.setBounds(111, 154, 89, 23);
+		btnRegister.setBounds(111, 132, 89, 23);
 		add(btnRegister);
 		
 		

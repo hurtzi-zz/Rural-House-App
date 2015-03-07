@@ -10,17 +10,27 @@ import javax.swing.border.EmptyBorder;
 import configuration.ConfigXML;
 import domain.Client;
 import domain.Owner;
+import domain.RuralHouse;
 import businessLogic.ApplicationFacadeInterface;
 
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JLabel;
+
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+
+import java.awt.Font;
+import java.util.Vector;
+
 public class StartWindow extends JFrame {
 
 	private static JPanel contentPane;
 	
 	private static JPanel loginPanel;
+	
+	private static JPanel searchPanel;
 
 	public static ApplicationFacadeInterface facadeInterface;
 	
@@ -75,9 +85,54 @@ public class StartWindow extends JFrame {
 		JPanel LoginPanel = new Login();
 		LoginPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
 		LoginPanel.setBackground(Color.WHITE);
-		LoginPanel.setBounds(10, 11, 238, 189);
+		LoginPanel.setBounds(38, 32, 238, 170);
 		contentPane.add(LoginPanel);
+		
+//		JPanel SearchPanel = new JPanel();
+		JPanel SearchPanel = new SearchRuralHouse();
+		SearchPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
+		SearchPanel.setBounds(959, 32, 375, 119);
+		contentPane.add(SearchPanel);
+		
+		JLabel lblRuralHouses = DefaultComponentFactory.getInstance().createTitle("Rural Houses");
+		lblRuralHouses.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 96));
+		lblRuralHouses.setBounds(360, 11, 551, 140);
+		contentPane.add(lblRuralHouses);
+
 	}
+	
+	public static void ini(){
+		JPanel LoginPanel = new Login();
+		LoginPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
+		LoginPanel.setBackground(Color.WHITE);
+		LoginPanel.setBounds(38, 32, 238, 170);
+		contentPane.add(LoginPanel);
+		
+//		JPanel SearchPanel = new JPanel();
+		JPanel SearchPanel = new SearchRuralHouse();
+		SearchPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
+		SearchPanel.setBounds(959, 32, 375, 119);
+		contentPane.add(SearchPanel);
+		
+		JLabel lblRuralHouses = DefaultComponentFactory.getInstance().createTitle("Rural Houses");
+		lblRuralHouses.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 96));
+		lblRuralHouses.setBounds(360, 11, 551, 140);
+		contentPane.add(lblRuralHouses);
+
+	}
+	
+	public static void setFoundPanel(Vector<RuralHouse> bek){
+		
+		
+		contentPane.setVisible(false);
+		contentPane.removeAll();
+ini();
+		JPanel FoundPanel = new FoundRuralHouse(bek);
+		FoundPanel.setBounds(331, 148, 636, 546);
+		contentPane.add(FoundPanel);
+		contentPane.setVisible(true);
+	}
+	
 	
 	public static void setLogedPanel(Client c){
 		contentPane.setVisible(false);

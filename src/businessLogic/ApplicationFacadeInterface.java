@@ -1,6 +1,7 @@
 package businessLogic;
 
 import java.rmi.*;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.Date;
 
@@ -80,6 +81,12 @@ public interface ApplicationFacadeInterface extends Remote {
 	
 //    public void updateOwner(Owner del, Owner add) throws RemoteException;
 
-	public Boolean saveRuralHouse(Integer ze, String hi, String de)throws RemoteException;
+	public Boolean saveRuralHouse(Integer ze, String hi, String de, Owner o)throws RemoteException;
+	public Owner clientToOwner( Client t ) throws RemoteException, Exception ;
+	public Vector<RuralHouse> ownerBektoreaBueltatu(String login) throws RemoteException, Exception;
+	public Owner ownerBuelta(String login) throws RemoteException, Exception;
+	
+	//5.erab kasua
+	public Vector<RuralHouse> SarchByCity(String city) throws RemoteException, Exception;
 
 }

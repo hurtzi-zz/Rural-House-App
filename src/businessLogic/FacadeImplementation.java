@@ -2,6 +2,7 @@ package businessLogic;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Date;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -142,13 +143,28 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 //	}
 
 
-	public Boolean saveRuralHouse(Integer ze, String hi, String de)throws RemoteException{
-    	return DataAccessCommon.getInstance().saveRuralHouse(ze,hi,de);
+	public Boolean saveRuralHouse(Integer ze, String hi, String de, Owner o)throws RemoteException{
+    	return DataAccessCommon.getInstance().saveRuralHouse(ze,hi,de, o);
     }
     
 
+	public Owner clientToOwner( Client t ) throws RemoteException, Exception {
 
+		return DataAccessCommon.getInstance().clienToOwner(t);
+	}
 
+public Vector<RuralHouse> ownerBektoreaBueltatu(String login) throws RemoteException, Exception{
+	return DataAccessCommon.getInstance().bektoreaLortu(login);
+}
+
+public Owner ownerBuelta(String login) throws RemoteException, Exception{
+	return DataAccessCommon.getInstance().ownerBuelta(login);
+}
+
+//5.erab kasua
+public Vector<RuralHouse> SarchByCity(String city) throws RemoteException, Exception{
+return DataAccessCommon.getInstance().SarchByCity(city);
+	    }
 
 
 }

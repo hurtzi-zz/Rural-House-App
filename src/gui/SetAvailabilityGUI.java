@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JComboBox;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -12,6 +13,7 @@ import javax.swing.JButton;
 import businessLogic.ApplicationFacadeInterface;
 import domain.Owner;
 import domain.RuralHouse;
+
 import javax.swing.JLabel;
 
 

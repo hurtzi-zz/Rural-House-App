@@ -77,12 +77,12 @@ public class DataAccessCommon implements DataAccessInterface {
 		Owner ow3 = new Owner(652729490, "1rrrrrr", new Vector<RuralHouse>(),
 				"Urtzi", "Diaz", "urtzi00", "asd", true);
 
-		ow1.addRuralHouse(1, "Ezkioko etxea", "Ezkio");
-		ow1.addRuralHouse(2, "Etxetxikia", "Iruña");
+		ow1.addRuralHouse(1, "Ezkioko etxea", "vi");
+		ow1.addRuralHouse(2, "Etxetxikia", "vi");
 		ow1.addRuralHouse(3, "Udaletxea", "Bilbo");
 		ow2.addRuralHouse(1, "Gaztetxea", "Renteria");
 		ow2.addRuralHouse(2, "Gaztetxea", "Donosti");
-		ow3.addRuralHouse(2, "SomoEtxe", "Gasteiz");
+		ow3.addRuralHouse(65, "SomoEtxe", "vi");
 
 		ow1.setBankAccount("1234berri");
 
@@ -99,7 +99,7 @@ public class DataAccessCommon implements DataAccessInterface {
 
 	public boolean createClient(String name, String surname, String login,
 			String password, boolean isOwner) {
-		Client c = new Client(name, surname, login, password, false);
+		Client c = new Client(name, surname, login,password, false);
 		db.store(c);
 		db.commit();
 		return true;
@@ -118,18 +118,14 @@ public class DataAccessCommon implements DataAccessInterface {
 
 	
 	
-	public Boolean saveRuralHouse(Integer ze, String hi, String de) {
-		
-		Owner berria = AddRuralHouse.owner;
-		ImpgetAllRuralHouses(getAllRuralHouses());
-		inprimatuEtxeakOwner(berria);
-		System.out.println("ownwer gorde: " + berria + ": " + berria.getName()
-				+ " " + berria.getAbizena());
-		System.out.println("landetxea gorde: " + ze + " " + hi + " " + de);
-		berria.addRuralHouse(ze, hi, de);
-		db.store(berria);
-		ImpgetAllRuralHouses(getAllRuralHouses());
-		inprimatuEtxeakOwner(berria);
+	public Boolean saveRuralHouse(Integer ze, String hi, String de, Owner o) {
+		db.delete(o);
+		db.commit();
+		RuralHouse etxetxoa = new RuralHouse(ze, o, de, hi);
+		System.out.println(o.getRuralHouses().size());
+		o.addRuralHouse(etxetxoa);
+		System.out.println(o.getRuralHouses().size());
+		db.store(o.getRuralHouses());
 		db.commit();
 		return true;
 	}
@@ -358,10 +354,89 @@ public class DataAccessCommon implements DataAccessInterface {
 		try {
 			ObjectContainer db = DataAccessCommon.getContainer();
 			ObjectSet result = db.queryByExample(galdera);
-			return (Owner) result.next();
+			Owner bilaketa =  (Owner) result.get(0);
+			System.out.println(bilaketa.getName());
+			System.out.println(bilaketa.getRuralHouses());
+			return bilaketa;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return null;
+		}
+	}
+
+	public Owner clienToOwner(Client t) {
+		Owner galdera = new Owner(null, null, null, null, null, t.getLogin(),
+				null, null);
+		
+		try{
+			ObjectContainer db = DataAccessCommon.getContainer();
+			ObjectSet result = db.queryByExample(galdera);
+			Owner bilaketa =  (Owner) result.get(0);
+			System.out.println(bilaketa.getAbizena() + "lalala");
+			return bilaketa;
+		} catch(Exception e){
+			
+		}
+		return null;
+	}
+
+	public Vector<RuralHouse> bektoreaLortu(String login) {
+		try {
+			Owner proto = new Owner(null, null, null, null, null,null,null,null);
+			ObjectSet result = db.queryByExample(proto);
+			Vector<Owner> owners = new Vector<Owner>();
+			while (result.hasNext()){
+			Owner p = (Owner) result.next();
+				if(p.getLogin().equals(login)){
+					System.out.println("match");
+					System.out.println(p.getRuralHouses().size());
+					return p.getRuralHouses();
+				}
+
+			}
+			return null;
+		} finally {
+			// db.close();
+		}
+	}
+
+	public Owner ownerBuelta(String login) {
+		try {
+			Owner proto = new Owner(null, null, null, null, null,null,null,null);
+			ObjectSet result = db.queryByExample(proto);
+			Vector<Owner> owners = new Vector<Owner>();
+			while (result.hasNext()){
+			Owner p = (Owner) result.next();
+				if(p.getLogin().equals(login)){
+					System.out.println("bat egiten dute");
+					return p;
+				}
+
+			}
+			return null;
+		} finally {
+			// db.close();
+		}
+	}
+
+	public Vector<RuralHouse> SarchByCity(String city) {
+		try {
+			int i=0;
+			RuralHouse proto = new RuralHouse(0, null, null, city);
+			ObjectSet<RuralHouse> result = db.queryByExample(proto);
+			System.out.println(city+"--> "+proto.getCity());			
+			Vector<RuralHouse> ruralHouses = new Vector<RuralHouse>();
+			System.out.println(" while1 ");
+			while (result.hasNext()){
+				System.out.println(i+" : ");
+				ruralHouses.add(result.next());
+				i++;
+				}
+			
+			return ruralHouses;
+		} finally {
+			System.out.println(" close ");
+//			db.close();
 		}
 	}
 

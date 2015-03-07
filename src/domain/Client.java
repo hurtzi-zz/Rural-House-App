@@ -1,8 +1,9 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Client {
+public class Client implements Serializable {
 
 
 	private String name="";

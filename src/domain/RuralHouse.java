@@ -63,10 +63,14 @@ public class RuralHouse implements Serializable {
 		return city;
 	}
 	
+	
 	public void setCity(String city) {
 		this.city=city;
 	}
-
+	
+	public Vector<Offer> getOffers() {
+		return offers;
+	}
 	
 	public String toString() {
 		return this.houseNumber + ": " + this.city;

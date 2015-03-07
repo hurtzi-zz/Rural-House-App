@@ -1,6 +1,10 @@
 package domain;
 
+import gui.StartWindow;
+
 import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 
@@ -15,16 +19,17 @@ public class Owner extends Client implements Serializable  {
 //	private Boolean isOwner=true;
 	private Integer tlfn = null;
 	private String bankAccount = "";
-	private Vector<RuralHouse> ruralHouses=new Vector<RuralHouse>();
+	private Vector<RuralHouse> ruralHouses=new Vector();
 
 
 	
 	//jabea
-	public Owner(Integer tlfn, String bankAccount,Vector<RuralHouse> ruralHouses,String name, String abizena, String login, String password,Boolean isOwner){
-		super(name,abizena,login,password,isOwner);
+	public Owner(Integer tlfn, String bankAccount,Vector<RuralHouse> ruralHousesBektorea,String name, String abizena, String login, String password,Boolean isOwner){
+		super(name,abizena,login,password,true);
 		this.bankAccount=bankAccount;
 		this.tlfn=tlfn;
-		this.ruralHouses=ruralHouses;
+		
+		//this.ruralHouses=ruralHouses;
 	}
 	
 	
@@ -83,6 +88,11 @@ public class Owner extends Client implements Serializable  {
 	 
 	}
 	
+	public void addRuralHouse(RuralHouse rh){
+		System.out.println("gehitzeko etxea: "+rh);
+		System.out.println(this.getName() + " da");
+		this.ruralHouses.add(rh);
+	}
 
 	
 }

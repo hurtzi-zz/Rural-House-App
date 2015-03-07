@@ -103,9 +103,8 @@ public class ConfigXML {
 			  
 			  
 			  //Two possible values: "open" or "initialize"
-			  dataBaseOpenMode= getTagValue("dataBaseOpenMode", config);
-
-	
+			 // dataBaseOpenMode= getTagValue("dataBaseOpenMode", config);
+			  dataBaseOpenMode = "open";
 			  databaseNode = getTagValue("databaseNode", config);
 
 			  activationDepth=Integer.parseInt(getTagValue("activationDepth", config));
