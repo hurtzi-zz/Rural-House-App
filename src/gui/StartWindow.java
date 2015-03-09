@@ -34,6 +34,8 @@ public class StartWindow extends JFrame {
 
 	public static ApplicationFacadeInterface facadeInterface;
 	
+	public static int ind;
+	
 	public static ApplicationFacadeInterface getBusinessLogic(){
 		return facadeInterface;
 	}
@@ -121,13 +123,11 @@ public class StartWindow extends JFrame {
 
 	}
 	
-	public static void setFoundPanel(Vector<RuralHouse> bek){
-		
-		
+	public static void setFoundPanel(Vector<RuralHouse> bek,int ind){
 		contentPane.setVisible(false);
 		contentPane.removeAll();
-ini();
-		JPanel FoundPanel = new FoundRuralHouse(bek);
+		ini();
+		JPanel FoundPanel = new FoundRuralHouse(bek,ind);
 		FoundPanel.setBounds(331, 148, 636, 546);
 		contentPane.add(FoundPanel);
 		contentPane.setVisible(true);

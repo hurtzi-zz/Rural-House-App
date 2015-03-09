@@ -65,7 +65,7 @@ public class SearchRuralHouse extends JPanel {
 							RuralHouse rh = (RuralHouse) it.next();
 							System.out.println(rh.getHouseNumber()+" "+rh.getCity()+" "+rh.getDescription());
 						}
-						StartWindow.setFoundPanel(h);
+						StartWindow.setFoundPanel(h,0);
 					}
 				} catch (RemoteException e1) {
 					e1.printStackTrace();

@@ -27,8 +27,8 @@ public class FoundPanel extends JPanel {
 		JLabel searchOwnerN = new JLabel("");
 		searchOwnerN.setBounds(10, 81, 108, 14);
 		add(searchOwnerN);
-		searchOwnerN.setText(h.get(0).getOwner().getName() + " "
-				+ h.get(0).getOwner().getName());
+		searchOwnerN.setText(h.get(ind).getOwner().getName() + " "
+				+ h.get(ind).getOwner().getAbizena());
 
 		JLabel lblOwner = new JLabel("Owner:");
 		lblOwner.setBounds(10, 66, 46, 14);
@@ -37,7 +37,7 @@ public class FoundPanel extends JPanel {
 		JLabel searchZbkia = new JLabel("");
 		searchZbkia.setBounds(10, 27, 46, 14);
 		add(searchZbkia);
-		searchZbkia.setText(Integer.toString(h.get(0).getHouseNumber()));
+		searchZbkia.setText(Integer.toString(h.get(ind).getHouseNumber()));
 
 		JLabel label = new JLabel("Landetxe zbkia:");
 		label.setBounds(10, 11, 93, 14);
@@ -51,7 +51,7 @@ public class FoundPanel extends JPanel {
 		searchDescription.setBounds(141, 27, 280, 81);
 		add(searchDescription);
 		searchDescription.setBackground(Color.WHITE);
-		searchDescription.setText(h.get(0).getDescription());
+		searchDescription.setText(h.get(ind).getDescription());
 
 		JButton btnSartu = new JButton("Go");
 		btnSartu.setBounds(453, 46, 55, 55);
@@ -64,7 +64,7 @@ public class FoundPanel extends JPanel {
 		JLabel searchOfert = new JLabel("");
 		searchOfert.setBounds(496, 11, 36, 14);
 		add(searchOfert);
-		searchOfert.setText(Integer.toString(h.get(0).getOffers().size()));
+		searchOfert.setText(Integer.toString(h.get(ind).getOffers().size()));
 
 	}
 	

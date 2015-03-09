@@ -77,12 +77,19 @@ public class DataAccessCommon implements DataAccessInterface {
 		Owner ow3 = new Owner(652729490, "1rrrrrr", new Vector<RuralHouse>(),
 				"Urtzi", "Diaz", "urtzi00", "asd", true);
 
-		ow1.addRuralHouse(1, "Ezkioko etxea", "vi");
-		ow1.addRuralHouse(2, "Etxetxikia", "vi");
-		ow1.addRuralHouse(3, "Udaletxea", "Bilbo");
-		ow2.addRuralHouse(1, "Gaztetxea", "Renteria");
-		ow2.addRuralHouse(2, "Gaztetxea", "Donosti");
-		ow3.addRuralHouse(65, "SomoEtxe", "vi");
+		ow1.addRuralHouse(1, "Ezkioko etxea", "aa");
+		ow1.addRuralHouse(2, "Etxetxikia", "aa");
+		ow1.addRuralHouse(3, "Udaletxea", "aa");
+		ow2.addRuralHouse(4, "Gaztetxea", "aa");
+		ow2.addRuralHouse(5, "Gaztetxea", "aa");
+		ow2.addRuralHouse(6, "aaaaaaaaaaaaa a a a a a a aaaaaaaaaa aaaaaaa aaaaaa aa a aaaa a a aaaaaaaa", "aa");
+		ow3.addRuralHouse(7, "SomoEtxe", "aa");
+		
+		ow2.addRuralHouse(1, "Gaztetxea", "ss");
+		ow2.addRuralHouse(2, "Gaztetxea", "ss");
+		
+		ow2.addRuralHouse(1, "Gaztetxea", "dd");
+		
 
 		ow1.setBankAccount("1234berri");
 
