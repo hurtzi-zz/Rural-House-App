@@ -104,13 +104,41 @@ public class StartWindow extends JFrame {
 	}
 	
 	public static void ini(){
+
+		
 		JPanel LoginPanel = new Login();
 		LoginPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
 		LoginPanel.setBackground(Color.WHITE);
 		LoginPanel.setBounds(38, 32, 238, 170);
 		contentPane.add(LoginPanel);
 		
-//		JPanel SearchPanel = new JPanel();
+		JPanel SearchPanel = new SearchRuralHouse();
+		SearchPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
+		SearchPanel.setBounds(959, 32, 375, 119);
+		contentPane.add(SearchPanel);
+		
+		JLabel lblRuralHouses = DefaultComponentFactory.getInstance().createTitle("Rural Houses");
+		lblRuralHouses.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 96));
+		lblRuralHouses.setBounds(360, 11, 551, 140);
+		contentPane.add(lblRuralHouses);		
+		
+
+		
+
+	}
+	
+	//funciona mal.....
+	public static void ini2(){
+		contentPane.setVisible(false);
+		contentPane.removeAll();
+		
+		JPanel LoginPanel = new Login();
+		LoginPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
+		LoginPanel.setBackground(Color.WHITE);
+		LoginPanel.setBounds(38, 32, 238, 170);
+		contentPane.add(LoginPanel);
+		
+	
 		JPanel SearchPanel = new SearchRuralHouse();
 		SearchPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
 		SearchPanel.setBounds(959, 32, 375, 119);
@@ -121,7 +149,11 @@ public class StartWindow extends JFrame {
 		lblRuralHouses.setBounds(360, 11, 551, 140);
 		contentPane.add(lblRuralHouses);
 
+		
+
 	}
+	
+	
 	
 	public static void setFoundPanel(Vector<RuralHouse> bek,int ind){
 		contentPane.setVisible(false);
@@ -133,6 +165,31 @@ public class StartWindow extends JFrame {
 		contentPane.setVisible(true);
 	}
 	
+	public static void setFoundPanelClient(Client c, Vector<RuralHouse> bek,int ind){
+		contentPane.setVisible(false);
+		contentPane.removeAll();
+		
+		JPanel loged = new Loged(c);
+		loged.setBorder(new EmptyBorder(1, 1, 1, 1));
+		loged.setBackground(Color.WHITE);
+		loged.setBounds(25, 34, 230, 400);
+		contentPane.add(loged);
+		contentPane.setVisible(true);
+		
+		JPanel SearchPanel = new SearchRuralHouseClient(c);
+		SearchPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
+		SearchPanel.setBounds(959, 32, 375, 119);
+		contentPane.add(SearchPanel);
+		
+		JLabel lblRuralHouses = DefaultComponentFactory.getInstance().createTitle("Rural Houses");
+		lblRuralHouses.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 96));
+		lblRuralHouses.setBounds(360, 11, 551, 140);
+		contentPane.add(lblRuralHouses);		
+		JPanel FoundPanel = new FoundRuralHouseClient(c,bek,ind);
+		FoundPanel.setBounds(331, 148, 636, 546);
+		contentPane.add(FoundPanel);
+		contentPane.setVisible(true);
+	}
 	
 	public static void setLogedPanel(Client c){
 		contentPane.setVisible(false);
@@ -141,10 +198,23 @@ public class StartWindow extends JFrame {
 		JPanel loged = new Loged(c);
 		loged.setBorder(new EmptyBorder(1, 1, 1, 1));
 		loged.setBackground(Color.WHITE);
-		loged.setBounds(25, 34, 600, 276);
+		loged.setBounds(25, 34, 230, 400);
 		contentPane.add(loged);
 		contentPane.setVisible(true);
+			
+		JPanel SearchPanel = new SearchRuralHouseClient(c);
+		SearchPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
+		SearchPanel.setBounds(959, 32, 375, 119);
+		contentPane.add(SearchPanel);
+		
+		JLabel lblRuralHouses = DefaultComponentFactory.getInstance().createTitle("Rural Houses");
+		lblRuralHouses.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 96));
+		lblRuralHouses.setBounds(360, 11, 551, 140);
+		contentPane.add(lblRuralHouses);	
+
 	}
+	
+	
 	
 	public static void setLoginPanel(){
 		contentPane.setVisible(false);
@@ -165,7 +235,7 @@ public class StartWindow extends JFrame {
 		JPanel addRuralHouse = new AddRuralHouse(o);
 		addRuralHouse.setBorder(new EmptyBorder(1, 1, 1, 1));
 		addRuralHouse.setBackground(Color.WHITE);
-		addRuralHouse.setBounds(25, 34, 600, 276);
+		addRuralHouse.setBounds(25, 34, 329, 276);
 		contentPane.add(addRuralHouse);
 		contentPane.setVisible(true);
 	}

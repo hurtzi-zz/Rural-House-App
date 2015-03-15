@@ -64,10 +64,12 @@ public class Loged extends JPanel {
 		btnOut.setForeground(Color.RED);
 		btnOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				StartWindow.setLoginPanel();
+				System.out.println("clientt");
+				//2urtzi
+				StartWindow.ini2();
 				}
 		});
-		btnOut.setBounds(516, 11, 75, 25);
+		btnOut.setBounds(10, 34, 75, 25);
 		add(btnOut);
 		
 		JButton btnLandetxeaGehitu = new JButton("Landetxea gehitu");
@@ -81,16 +83,23 @@ public class Loged extends JPanel {
 				}
 			}
 		});
-		btnLandetxeaGehitu.setBounds(20, 80, 250, 50);
+		btnLandetxeaGehitu.setBounds(10, 226, 213, 50);
 		add(btnLandetxeaGehitu);
 		
 		JLabel lblNewLabel = new JLabel("Ongi etorri, " + client.getName());
 		lblNewLabel.setBounds(20, 11, 125, 25);
 		add(lblNewLabel);
+		
+		JButton btnFavorite = new JButton("Favorite List");
+		btnFavorite.setBounds(10, 282, 213, 50);
+		add(btnFavorite);
+		
 		if(client.getIsOwner()==false){
 			btnLandetxeaGehitu.setVisible(false);
 		}
-		
+		if(client.getIsOwner()==true){
+			btnFavorite.setVisible(false);
+		}
 		
 
 	}

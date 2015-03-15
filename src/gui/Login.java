@@ -76,7 +76,6 @@ public class Login extends JPanel {
 							searchResult.setForeground(Color.GREEN);
 							searchResult.setText("owner");
 							System.out.println();
-							
 							StartWindow.setLogedPanel(j);
 						}
 
