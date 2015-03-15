@@ -88,5 +88,7 @@ public interface ApplicationFacadeInterface extends Remote {
 	
 	//5.erab kasua
 	public Vector<RuralHouse> SarchByCity(String city) throws RemoteException, Exception;
+	//6.erab kasua
+	public Boolean updateClient(Client c) throws RemoteException;
 
 }

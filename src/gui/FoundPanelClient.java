@@ -8,6 +8,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
 import java.awt.Color;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.JRadioButton;
@@ -16,6 +17,8 @@ import domain.Client;
 import domain.RuralHouse;
 
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FoundPanelClient extends JPanel {
 
@@ -67,10 +70,38 @@ public class FoundPanelClient extends JPanel {
 		searchOfert.setBounds(496, 11, 36, 14);
 		add(searchOfert);
 		searchOfert.setText(Integer.toString(h.get(ind).getOffers().size()));
+
+		// JLabel lblFavDa = new JLabel("");
+		// lblFavDa.setBounds(431, 36, 76, 23);
+		// add(lblFavDa);
+		// lblFavDa.setText("Fav da");
+		
 		
 		JButton btnNewButton = new JButton("Favorite");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				c.addRuralFav(h.elementAt(ind));
+				btnNewButton.setEnabled(false);
+			}
+		});
 		btnNewButton.setBounds(431, 36, 76, 23);
 		add(btnNewButton);
+
+		
+
+		Vector<RuralHouse> vec = c.getRuralFav();
+		Iterator it = vec.iterator();
+		RuralHouse unekoa = h.elementAt(ind);
+		while (it.hasNext()) {
+			RuralHouse rh = (RuralHouse) it.next();
+			if (unekoa.equals(rh)) {	
+				btnNewButton.setEnabled(false);
+
+			}
+		}
+		
+		
+		
 
 	}
 }

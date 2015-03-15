@@ -11,16 +11,20 @@ public class Client implements Serializable {
 	private String login="";
 	private String password="";
 	private Boolean isOwner=false;
+	private Vector<RuralHouse> ruralFav = new Vector();
 	
 
 	//client
-	public Client(String name, String abizena, String login, String password,Boolean isOwner){
+	public Client(String name, String abizena, String login, String password,Boolean isOwner,Vector<RuralHouse> ruralFav){
 		this.name=name;
 		this.abizena=abizena;
 		this.login=login;
 		this.password=password;
 		this.isOwner=isOwner;
+//		this.ruralFav=ruralFav;
 	}
+
+
 
 
 	public String getName() {
@@ -71,7 +75,17 @@ public class Client implements Serializable {
 		this.isOwner = isOwner;
 	}
 	
+	//urtzi.......
+	public void setRuralFav(Vector<RuralHouse> ruralFav) {
+		this.ruralFav = ruralFav;
+	}
 	
+	public Vector<RuralHouse> getRuralFav() {
+		return ruralFav;
+	}
 	
+	public void addRuralFav(RuralHouse rh){
+		this.ruralFav.add(rh);
+	}
 
 }
