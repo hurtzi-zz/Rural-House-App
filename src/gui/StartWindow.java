@@ -127,29 +127,33 @@ public class StartWindow extends JFrame {
 
 	}
 	
-	//funciona mal.....
+
 	public static void ini2(){
 		contentPane.setVisible(false);
 		contentPane.removeAll();
 		
-		JPanel LoginPanel = new Login();
-		LoginPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
-		LoginPanel.setBackground(Color.WHITE);
-		LoginPanel.setBounds(38, 32, 238, 170);
-		contentPane.add(LoginPanel);
+		contentPane.updateUI();
 		
-	
+		
+		JPanel login = new Login();
+		login.setBorder(new EmptyBorder(1, 1, 1, 1));
+		login.setBackground(Color.WHITE);
+		login.setBounds(25, 34, 233, 171);
+		contentPane.add(login);
+		contentPane.setVisible(true);
+		
+		JLabel lblRuralHouses = DefaultComponentFactory.getInstance().createTitle("Rural Houses");
+		lblRuralHouses.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 96));
+		lblRuralHouses.setBounds(360, 11, 551, 140);
+		contentPane.add(lblRuralHouses);	
+		
 		JPanel SearchPanel = new SearchRuralHouse();
 		SearchPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
 		SearchPanel.setBounds(959, 32, 375, 119);
 		contentPane.add(SearchPanel);
 		
-		JLabel lblRuralHouses = DefaultComponentFactory.getInstance().createTitle("Rural Houses");
-		lblRuralHouses.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 96));
-		lblRuralHouses.setBounds(360, 11, 551, 140);
-		contentPane.add(lblRuralHouses);
-
 		
+		contentPane.updateUI();
 
 	}
 	

@@ -63,10 +63,10 @@ public class Loged extends JPanel {
 
 		setToolTipText("Login");
 		setLayout(null);
-
-		JButton btnOut = new JButton("Log Out");
-		btnOut.setForeground(Color.RED);
-		btnOut.addActionListener(new ActionListener() {
+		
+		
+		JButton buttonUpdate = new JButton("Update");
+		buttonUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// 2urtzi
 				if (client.getIsOwner() == false) {
@@ -77,20 +77,29 @@ public class Loged extends JPanel {
 							System.out.println("ondo update client");
 						} else {
 							System.out.println("gaizki update client");
-
 						}
 					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
 				}
+			}
+		});
+		buttonUpdate.setForeground(Color.BLUE);
+		buttonUpdate.setBounds(120, 47, 75, 25);
+		add(buttonUpdate);
+		
+		
+
+		JButton btnOut = new JButton("Log Out");
+		btnOut.setForeground(Color.RED);
+		btnOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				//gaizkii
-				//StartWindow.ini2();
+				StartWindow.ini2();
 
 			}
 		});
-		btnOut.setBounds(10, 34, 75, 25);
+		btnOut.setBounds(35, 47, 75, 25);
 		add(btnOut);
 
 		JButton btnLandetxeaGehitu = new JButton("Landetxea gehitu");
@@ -108,7 +117,7 @@ public class Loged extends JPanel {
 		add(btnLandetxeaGehitu);
 
 		JLabel lblNewLabel = new JLabel("Ongi etorri, " + client.getName());
-		lblNewLabel.setBounds(20, 11, 125, 25);
+		lblNewLabel.setBounds(20, 11, 175, 25);
 		add(lblNewLabel);
 
 		JButton btnFavorite = new JButton("Favorite List");
@@ -140,6 +149,8 @@ public class Loged extends JPanel {
 		});
 		btnFavorite.setBounds(10, 282, 213, 50);
 		add(btnFavorite);
+		
+		
 
 		if (client.getIsOwner() == false) {
 			btnLandetxeaGehitu.setVisible(false);

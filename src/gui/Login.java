@@ -48,7 +48,7 @@ public class Login extends JPanel {
 		
 		searchResult = new JLabel("");
 		searchResult.setForeground(Color.BLACK);
-		searchResult.setBounds(41, 106, 152, 14);
+		searchResult.setBounds(41, 102, 152, 18);
 		add(searchResult);
 		
 		JButton btnEnter = new JButton("ENTER");
@@ -66,30 +66,26 @@ public class Login extends JPanel {
 						System.out.println("j izena: "+j.getName());
 						searchResult.setForeground(Color.GREEN);
 						searchResult.setText("erabiltzailea DB-an gordeta dago");
-						
 						if(j.getIsOwner()==false){
 							searchResult.setForeground(Color.GREEN);
 							searchResult.setText("client");
 							StartWindow.setLogedPanel(j);
-							
 						}else{
 							searchResult.setForeground(Color.GREEN);
 							searchResult.setText("owner");
 							System.out.println();
 							StartWindow.setLogedPanel(j);
 						}
-
 					}else{
 						JOptionPane.showMessageDialog(null, "Log error", "alert", JOptionPane.CANCEL_OPTION); 	
 					}
-					
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		btnEnter.setBounds(26, 131, 75, 25);
+		btnEnter.setBounds(122, 124, 93, 36);
 		add(btnEnter);
 		
 		JLabel lblLogin = new JLabel("Login:");
@@ -121,11 +117,8 @@ public class Login extends JPanel {
 				a.setVisible(true);
 			}
 		});
-		btnRegister.setBounds(111, 132, 89, 23);
+		btnRegister.setBounds(23, 136, 89, 23);
 		add(btnRegister);
-		
-		
-
 	}
 	
 	public JTextField getTextFieldLogin() {
