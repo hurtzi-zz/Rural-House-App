@@ -144,6 +144,8 @@ public class Loged extends JPanel {
 								+ " ");
 					}
 				}
+				JFrame a= new ListFav(c,0);
+				a.setVisible(true);
 
 			}
 		});

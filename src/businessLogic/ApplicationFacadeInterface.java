@@ -66,17 +66,11 @@ public interface ApplicationFacadeInterface extends Remote {
     public Client verifyLogin(String a, String b) throws RemoteException;
 //
 	public boolean verifyLoginName(String a) throws RemoteException;
-	
 
     public boolean createOwner( Integer telefonoa, String bank,String Izena, String Abizena,String login, String pasahitza) throws RemoteException;
     
     public boolean  createClient(String Izena, String Abizena, String login, String pasahitza, boolean isOwner) throws RemoteException;
 	
-    /**
-     * Bezero bat emanda jabe klasea itzuliko du, datu guztiak izateko
-     * @param c
-     * @return The (Owner)client + it's owner info
-     */
     public Owner getOwner(Client c) throws RemoteException;
 	
 //    public void updateOwner(Owner del, Owner add) throws RemoteException;
