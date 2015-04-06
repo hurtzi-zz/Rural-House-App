@@ -82,6 +82,7 @@ public class Loged extends JPanel {
 						e.printStackTrace();
 					}
 				}
+				buttonUpdate.setEnabled(false);
 			}
 		});
 		buttonUpdate.setForeground(Color.BLUE);

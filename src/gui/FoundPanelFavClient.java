@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class FoundPanelFavClient extends JPanel {
+	private JLabel lblHiria;
 
 	/**
 	 * Create the panel.
@@ -40,13 +41,13 @@ public class FoundPanelFavClient extends JPanel {
 		add(lblOwner);
 
 		JLabel searchZbkia = new JLabel("");
-		searchZbkia.setBounds(10, 27, 46, 14);
+		searchZbkia.setBounds(69, 11, 36, 14);
 		add(searchZbkia);
 		searchZbkia.setText(Integer.toString(h.get(ind).getHouseNumber()));
 
-		JLabel label = new JLabel("Landetxe zbkia:");
-		label.setBounds(10, 11, 93, 14);
-		add(label);
+		JLabel lblLandZbkia = new JLabel("Land zbkia:");
+		lblLandZbkia.setBounds(10, 11, 54, 14);
+		add(lblLandZbkia);
 
 		JLabel lblDescription = new JLabel("Description:");
 		lblDescription.setBounds(131, 11, 85, 14);
@@ -78,14 +79,23 @@ public class FoundPanelFavClient extends JPanel {
 		
 		
 		JButton btnNewButton = new JButton("Favorite");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				c.addRuralFav(h.elementAt(ind));
-				btnNewButton.setEnabled(false);
-			}
-		});
+//		btnNewButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				c.addRuralFav(h.elementAt(ind));
+//				btnNewButton.setEnabled(false);
+//			}
+//		});
 		btnNewButton.setBounds(418, 36, 90, 23);
 		add(btnNewButton);
+		
+		lblHiria = new JLabel("Hiria:");
+		lblHiria.setBounds(10, 34, 46, 14);
+		add(lblHiria);
+		
+		JLabel searchHiria = new JLabel("");
+		searchHiria.setBounds(10, 48, 108, 14);
+		add(searchHiria);
+		searchHiria.setText(h.get(ind).getCity());		
 		
 		
 		Vector<RuralHouse> vec = c.getRuralFav();

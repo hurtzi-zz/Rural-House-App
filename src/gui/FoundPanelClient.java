@@ -8,11 +8,13 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
 import java.awt.Color;
+import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.JRadioButton;
 
+import businessLogic.ApplicationFacadeInterface;
 import domain.Client;
 import domain.RuralHouse;
 
@@ -81,6 +83,18 @@ public class FoundPanelClient extends JPanel {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				c.addRuralFav(h.elementAt(ind));
+//					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
+//						Boolean j=false;
+//						try {
+//							j = facades.updateClient(c);
+//						} catch (RemoteException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}if (j) {
+//							System.out.println("ondo update client");
+//						} else {
+//							System.out.println("gaizki update client");
+//						}
 				btnNewButton.setEnabled(false);
 			}
 		});
@@ -92,11 +106,16 @@ public class FoundPanelClient extends JPanel {
 		Vector<RuralHouse> vec = c.getRuralFav();
 		Iterator it = vec.iterator();
 		RuralHouse unekoa = h.elementAt(ind);
+		Integer num=unekoa.getHouseNumber();
+		String city=unekoa.getCity();
 		while (it.hasNext()) {
 			RuralHouse rh = (RuralHouse) it.next();
-			if (unekoa.equals(rh)) {	
-				btnNewButton.setEnabled(false);
-
+			if (unekoa.equals(rh)) {
+				if(rh.getHouseNumber()==num){
+					if(rh.getCity().equals(city)){
+						btnNewButton.setEnabled(false);
+					}				
+				}
 			}
 		}
 		

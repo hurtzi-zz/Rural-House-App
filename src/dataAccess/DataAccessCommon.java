@@ -62,34 +62,40 @@ public class DataAccessCommon implements DataAccessInterface {
 		Client cl0 = new Client("clientName", "clientSurname", "nickName",
 				"pass", false, new Vector<RuralHouse>());
 
-		Client cl1 = new Client("clie", "cli", "aaa", "aaa", false, new Vector<RuralHouse>());
+		Client cl1 = new Client("clie", "cli", "aaa", "aaa", false,
+				new Vector<RuralHouse>());
 
 		Owner ow0 = new Owner(666666666, "bankCount0000",
 				new Vector<RuralHouse>(), "OwnerName", "OwnerSurname",
 				"nickName", "pass", true, new Vector<RuralHouse>());
 
 		Owner ow1 = new Owner(123456789, "12340000", new Vector<RuralHouse>(),
-				"Iñigo", "Sanz", "isanz00", "1234", true, new Vector<RuralHouse>());
+				"Iñigo", "Sanz", "isanz00", "1234", true,
+				new Vector<RuralHouse>());
 
 		Owner ow2 = new Owner(987654321, null, new Vector<RuralHouse>(),
-				"Itziar", "Altuna", "jaltuna", "000", true, new Vector<RuralHouse>());
+				"Itziar", "Altuna", "jaltuna", "000", true,
+				new Vector<RuralHouse>());
 
 		Owner ow3 = new Owner(652729490, "1rrrrrr", new Vector<RuralHouse>(),
-				"Urtzi", "Diaz", "urtzi00", "asd", true, new Vector<RuralHouse>());
+				"Urtzi", "Diaz", "urtzi00", "asd", true,
+				new Vector<RuralHouse>());
 
-		ow1.addRuralHouse(1, "Ezkioko etxea", "aa");
-		ow1.addRuralHouse(2, "Etxetxikia", "aa");
-		ow1.addRuralHouse(3, "Udaletxea", "aa");
-		ow2.addRuralHouse(4, "Gaztetxea", "aa");
-		ow2.addRuralHouse(5, "Gaztetxea", "aa");
-		ow2.addRuralHouse(6, "aaaaaaaaaaaaa a a a a a a aaaaaaaaaa aaaaaaa aaaaaa aa a aaaa a a aaaaaaaa", "aa");
-		ow3.addRuralHouse(7, "SomoEtxe", "aa");
-		
-		ow2.addRuralHouse(1, "Gaztetxea", "ss");
-		ow2.addRuralHouse(2, "Gaztetxea", "ss");
-		
-		ow2.addRuralHouse(1, "Gaztetxea", "dd");
-		
+		ow2.addRuralHouse(1, "deskri des de de desd es dede sdes des des des",
+				"vito");
+		ow3.addRuralHouse(2, "SomoEtxe", "vito");
+		ow1.addRuralHouse(3, "Etxetxikia", "vito");
+		ow1.addRuralHouse(4, "Udaletxea", "vito");
+		ow1.addRuralHouse(1, "Ezkioko etxea", "Sanse");
+		ow2.addRuralHouse(5, "Gaztetxea", "vito");
+		ow2.addRuralHouse(3, "Gaztetxea", "donos");
+		ow2.addRuralHouse(2, "Gaztetxea", "donos");
+		ow2.addRuralHouse(1, "Gaztetxea", "donos");
+
+		ow2.addRuralHouse(5, "Gaztetxea", "a");
+		ow2.addRuralHouse(3, "Gaztetxea", "a");
+		ow2.addRuralHouse(2, "Gaztetxea", "a");
+		ow2.addRuralHouse(1, "Gaztetxea", "a");
 
 		ow1.setBankAccount("1234berri");
 
@@ -106,7 +112,8 @@ public class DataAccessCommon implements DataAccessInterface {
 
 	public boolean createClient(String name, String surname, String login,
 			String password, boolean isOwner) {
-		Client c = new Client(name, surname, login,password, false, new Vector<RuralHouse>());
+		Client c = new Client(name, surname, login, password, false,
+				new Vector<RuralHouse>());
 		db.store(c);
 		db.commit();
 		return true;
@@ -121,10 +128,7 @@ public class DataAccessCommon implements DataAccessInterface {
 		db.commit();
 		return true;
 	}
-    
 
-	
-	
 	public Boolean saveRuralHouse(Integer ze, String hi, String de, Owner o) {
 		db.delete(o);
 		db.commit();
@@ -153,7 +157,8 @@ public class DataAccessCommon implements DataAccessInterface {
 				i++;
 			}
 		}
-		System.out.println("-----------------------------------------------------------");
+		System.out
+				.println("-----------------------------------------------------------");
 	}
 
 	public static ObjectContainer getContainer() {
@@ -161,7 +166,7 @@ public class DataAccessCommon implements DataAccessInterface {
 	}
 
 	public static Client verifyLogin(String log, String pass) {
-		Client galdera = new Client(null, null, log, pass, null,null);
+		Client galdera = new Client(null, null, log, pass, null, null);
 		try {
 			ObjectContainer db = DataAccessCommon.getContainer();
 			ObjectSet result = db.queryByExample(galdera);
@@ -178,7 +183,7 @@ public class DataAccessCommon implements DataAccessInterface {
 	}
 
 	public Boolean verifyLoginName(String log) {
-		Client galdera = new Client(null, null, log, null, null,null);
+		Client galdera = new Client(null, null, log, null, null, null);
 		try {
 			ObjectContainer db = DataAccessCommon.getContainer();
 			ObjectSet result = db.queryByExample(galdera);
@@ -276,7 +281,7 @@ public class DataAccessCommon implements DataAccessInterface {
 
 		try {
 			Owner proto = new Owner(null, null, null, null, null, null, null,
-					null,null);
+					null, null);
 			ObjectSet<Owner> result = db.queryByExample(proto);
 			Vector<Owner> owners = new Vector<Owner>();
 			while (result.hasNext())
@@ -303,7 +308,7 @@ public class DataAccessCommon implements DataAccessInterface {
 			}
 		}
 	}
-	
+
 	public Vector<RuralHouse> getAllRuralHouses() {
 
 		// if (c.isDatabaseLocal()==false) openObjectContainer();
@@ -338,9 +343,9 @@ public class DataAccessCommon implements DataAccessInterface {
 	}
 
 	public void close() {
-//		System.out.print("itxi baino lehen=");
-//		Owner berria = AddRuralHouse.owner;
-//		inprimatuEtxeakOwner(berria);
+		// System.out.print("itxi baino lehen=");
+		// Owner berria = AddRuralHouse.owner;
+		// inprimatuEtxeakOwner(berria);
 		db.close();
 		System.out.println("DataBase closed");
 	}
@@ -357,11 +362,11 @@ public class DataAccessCommon implements DataAccessInterface {
 
 	public Owner getOwner(Client c) {
 		Owner galdera = new Owner(null, null, null, null, null, c.getLogin(),
-				null, null,null);
+				null, null, null);
 		try {
 			ObjectContainer db = DataAccessCommon.getContainer();
 			ObjectSet result = db.queryByExample(galdera);
-			Owner bilaketa =  (Owner) result.get(0);
+			Owner bilaketa = (Owner) result.get(0);
 			System.out.println(bilaketa.getName());
 			System.out.println(bilaketa.getRuralHouses());
 			return bilaketa;
@@ -373,28 +378,29 @@ public class DataAccessCommon implements DataAccessInterface {
 
 	public Owner clienToOwner(Client t) {
 		Owner galdera = new Owner(null, null, null, null, null, t.getLogin(),
-				null, null,null);
-		
-		try{
+				null, null, null);
+
+		try {
 			ObjectContainer db = DataAccessCommon.getContainer();
 			ObjectSet result = db.queryByExample(galdera);
-			Owner bilaketa =  (Owner) result.get(0);
+			Owner bilaketa = (Owner) result.get(0);
 			System.out.println(bilaketa.getAbizena() + "lalala");
 			return bilaketa;
-		} catch(Exception e){
-			
+		} catch (Exception e) {
+
 		}
 		return null;
 	}
 
 	public Vector<RuralHouse> bektoreaLortu(String login) {
 		try {
-			Owner proto = new Owner(null, null, null, null, null,null,null,null,null);
+			Owner proto = new Owner(null, null, null, null, null, null, null,
+					null, null);
 			ObjectSet result = db.queryByExample(proto);
 			Vector<Owner> owners = new Vector<Owner>();
-			while (result.hasNext()){
-			Owner p = (Owner) result.next();
-				if(p.getLogin().equals(login)){
+			while (result.hasNext()) {
+				Owner p = (Owner) result.next();
+				if (p.getLogin().equals(login)) {
 					System.out.println("match");
 					System.out.println(p.getRuralHouses().size());
 					return p.getRuralHouses();
@@ -409,12 +415,13 @@ public class DataAccessCommon implements DataAccessInterface {
 
 	public Owner ownerBuelta(String login) {
 		try {
-			Owner proto = new Owner(null, null, null, null, null,null,null,null,null);
+			Owner proto = new Owner(null, null, null, null, null, null, null,
+					null, null);
 			ObjectSet result = db.queryByExample(proto);
 			Vector<Owner> owners = new Vector<Owner>();
-			while (result.hasNext()){
-			Owner p = (Owner) result.next();
-				if(p.getLogin().equals(login)){
+			while (result.hasNext()) {
+				Owner p = (Owner) result.next();
+				if (p.getLogin().equals(login)) {
 					System.out.println("bat egiten dute");
 					return p;
 				}
@@ -428,52 +435,48 @@ public class DataAccessCommon implements DataAccessInterface {
 
 	public Vector<RuralHouse> SarchByCity(String city) {
 		try {
-			int i=0;
+			int i = 0;
 			RuralHouse proto = new RuralHouse(0, null, null, city);
 			ObjectSet<RuralHouse> result = db.queryByExample(proto);
-			System.out.println(city+"--> "+proto.getCity());			
+			System.out.println(city + "--> " + proto.getCity());
 			Vector<RuralHouse> ruralHouses = new Vector<RuralHouse>();
 			System.out.println(" while1 ");
-			while (result.hasNext()){
-				System.out.println(i+" : ");
+			while (result.hasNext()) {
+				System.out.println(i + " : ");
 				ruralHouses.add(result.next());
 				i++;
-				}
-			
+			}
+
 			return ruralHouses;
 		} finally {
 			System.out.println(" close ");
-//			db.close();
+			// db.close();
 		}
 	}
 
-	public Boolean updateClient(Client c) {
-		Client up =c;
-		db.delete(up);
-		db.commit();
-		
 
-		
-		Client berri = new Client(c.getName(),c.getAbizena(),c.getLogin(),c.getPassword(), c.getIsOwner(), new Vector<RuralHouse>());
-		
-		
-		System.out.println(" ");
-		Vector<RuralHouse> vecto = c.getRuralFav();
-		if (vecto.size() == 0) {
-		} else {
-			Iterator it = vecto.iterator();
-			while (it.hasNext()) {
-				RuralHouse rh = (RuralHouse) it.next();
-				berri.addRuralFav(rh);
+
+		public Boolean updateClient(Client c) {
+			Client up =c;
+			db.delete(up);
+			db.commit();
+			Client berri = new Client(c.getName(),c.getAbizena(),c.getLogin(),c.getPassword(), c.getIsOwner(), new Vector<RuralHouse>());		
+			System.out.println(" ");
+			Vector<RuralHouse> vecto = c.getRuralFav();
+			if (vecto.size() == 0) {
+			} else {
+				Iterator<RuralHouse> it = vecto.iterator();
+				while (it.hasNext()) {
+					RuralHouse rh = (RuralHouse) it.next();
+					System.out.println("cit: " + rh.getCity() + "number:"
+							+ rh.getHouseNumber());
+					berri.addRuralFav(rh);
+				}
 			}
+
+			db.store(berri);
+			db.commit();
+			return true;
 		}
-		
-		
 
-		db.store(berri);
-		
-		db.commit();
-		return true;
 	}
-
-}
