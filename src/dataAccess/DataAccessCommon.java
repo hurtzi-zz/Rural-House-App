@@ -11,6 +11,8 @@ import java.util.Vector;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.query.Constraint;
+import com.db4o.query.Query;
 
 import configuration.ConfigXML;
 import domain.Booking;
@@ -454,29 +456,64 @@ public class DataAccessCommon implements DataAccessInterface {
 		}
 	}
 
+	public static Boolean updateClient(Client c) {
+		Client galdera = new Client(null,null , c.getLogin(),  null, null, null);
 
-
-		public Boolean updateClient(Client c) {
-			Client up =c;
-			db.delete(up);
-			db.commit();
-			Client berri = new Client(c.getName(),c.getAbizena(),c.getLogin(),c.getPassword(), c.getIsOwner(), new Vector<RuralHouse>());		
-			System.out.println(" ");
-			Vector<RuralHouse> vecto = c.getRuralFav();
-			if (vecto.size() == 0) {
-			} else {
-				Iterator<RuralHouse> it = vecto.iterator();
-				while (it.hasNext()) {
-					RuralHouse rh = (RuralHouse) it.next();
-					System.out.println("cit: " + rh.getCity() + "number:"
-							+ rh.getHouseNumber());
-					berri.addRuralFav(rh);
-				}
+		Vector<RuralHouse> buelta0 = c.getRuralFav();
+		if (buelta0.size() == 0) {
+			System.out.println("BERRIA ez ditu favoritoak");
+		} else {
+			System.out.println("BERRIA favoritoak " + "(" + buelta0.size()
+					+ "): ");
+			Iterator<RuralHouse> irt = buelta0.iterator();
+			while (irt.hasNext()) {
+				irt.next().imprimatu();
 			}
-
-			db.store(berri);
-			db.commit();
-			return true;
 		}
-
+		try {
+			ObjectContainer db = DataAccessCommon.getContainer();
+			ObjectSet result = db.queryByExample(galdera);
+			if (result.hasNext()) {
+				Client b = (Client) result.next();
+				
+				
+				Vector<RuralHouse> buelta = b.getRuralFav();
+				if (buelta.size() == 0) {
+					System.out.println("ZAHARRA-0 ez ditu favoritoak");
+				} else {
+					System.out.println("ZAHARRA-0 favoritoak " + "("
+							+ buelta.size() + "): ");
+					Iterator<RuralHouse> irt = buelta.iterator();
+					while (irt.hasNext()) {
+						irt.next().imprimatu();
+					}
+				}
+				
+				b.setRuralFav(c.getRuralFav());
+				
+				Vector<RuralHouse> buelta2 = b.getRuralFav();
+				if (buelta.size() == 0) {
+					System.out.println("ZAHARRA-1 ez ditu favoritoak");
+				} else {
+					System.out.println("ZAHARRA-1 favoritoak " + "("
+							+ buelta2.size() + "): ");
+					Iterator<RuralHouse> irt = buelta2.iterator();
+					while (irt.hasNext()) {
+						irt.next().imprimatu();
+					}
+				}
+				db.delete(b);
+				db.store(b);
+				
+				db.commit();
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception exc) {
+			exc.printStackTrace();
+			return false;
+		}
 	}
+
+}
