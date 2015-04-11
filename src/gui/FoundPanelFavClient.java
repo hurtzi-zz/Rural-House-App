@@ -8,11 +8,13 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
 import java.awt.Color;
+import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.JRadioButton;
 
+import businessLogic.ApplicationFacadeInterface;
 import domain.Client;
 import domain.RuralHouse;
 
@@ -76,7 +78,7 @@ public class FoundPanelFavClient extends JPanel {
 		// lblFavDa.setBounds(431, 36, 76, 23);
 		// add(lblFavDa);
 		// lblFavDa.setText("Fav da");
-		
+
 		
 		JButton btnNewButton = new JButton("Favorite");
 //		btnNewButton.addActionListener(new ActionListener() {

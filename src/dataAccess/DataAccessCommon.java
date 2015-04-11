@@ -455,57 +455,33 @@ public class DataAccessCommon implements DataAccessInterface {
 			// db.close();
 		}
 	}
+	
 
-	public static Boolean updateClient(Client c) {
+
+	public  Boolean updateClient(Client c) {
 		Client galdera = new Client(null,null , c.getLogin(),  null, null, null);
 
-		Vector<RuralHouse> buelta0 = c.getRuralFav();
-		if (buelta0.size() == 0) {
-			System.out.println("BERRIA ez ditu favoritoak");
-		} else {
-			System.out.println("BERRIA favoritoak " + "(" + buelta0.size()
-					+ "): ");
-			Iterator<RuralHouse> irt = buelta0.iterator();
-			while (irt.hasNext()) {
-				irt.next().imprimatu();
-			}
-		}
 		try {
 			ObjectContainer db = DataAccessCommon.getContainer();
 			ObjectSet result = db.queryByExample(galdera);
-			if (result.hasNext()) {
-				Client b = (Client) result.next();
+			if(result.hasNext()){
 				
+				Client b = (Client) result.get(0);
 				
-				Vector<RuralHouse> buelta = b.getRuralFav();
-				if (buelta.size() == 0) {
-					System.out.println("ZAHARRA-0 ez ditu favoritoak");
-				} else {
-					System.out.println("ZAHARRA-0 favoritoak " + "("
-							+ buelta.size() + "): ");
-					Iterator<RuralHouse> irt = buelta.iterator();
-					while (irt.hasNext()) {
-						irt.next().imprimatu();
-					}
-				}
-				
-				b.setRuralFav(c.getRuralFav());
-				
-				Vector<RuralHouse> buelta2 = b.getRuralFav();
-				if (buelta.size() == 0) {
-					System.out.println("ZAHARRA-1 ez ditu favoritoak");
-				} else {
-					System.out.println("ZAHARRA-1 favoritoak " + "("
-							+ buelta2.size() + "): ");
-					Iterator<RuralHouse> irt = buelta2.iterator();
-					while (irt.hasNext()) {
-						irt.next().imprimatu();
-					}
-				}
 				db.delete(b);
-				db.store(b);
-				
 				db.commit();
+			
+				Client update = new Client(c.getName(),c.getAbizena(),c.getLogin(),c.getPassword(), c.getIsOwner(), new Vector<RuralHouse>());		
+				
+				int j = 0;
+				while(j<(c.getRuralFav().size())){
+					update.addRuralFav(c.getRuralFav().get(j));
+					j++;
+				}
+				
+				db.store(update);
+				db.commit();
+				
 				return true;
 			} else {
 				return false;
@@ -515,5 +491,6 @@ public class DataAccessCommon implements DataAccessInterface {
 			return false;
 		}
 	}
-
+	
+	
 }

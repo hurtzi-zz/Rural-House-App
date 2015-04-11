@@ -65,31 +65,6 @@ public class Loged extends JPanel {
 		setLayout(null);
 		
 		
-		JButton buttonUpdate = new JButton("Update");
-		buttonUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// 2urtzi
-				if (client.getIsOwner() == false) {
-					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
-					try {
-						Boolean j = facades.updateClient(c);
-						if (j) {
-							System.out.println("ondo update client");
-						} else {
-							System.out.println("gaizki update client");
-						}
-					} catch (RemoteException e) {
-						e.printStackTrace();
-					}
-				}
-				buttonUpdate.setEnabled(false);
-			}
-		});
-		buttonUpdate.setForeground(Color.BLUE);
-		buttonUpdate.setBounds(120, 47, 75, 25);
-		add(buttonUpdate);
-		
-		
 
 		JButton btnOut = new JButton("Log Out");
 		btnOut.setForeground(Color.RED);
@@ -100,7 +75,7 @@ public class Loged extends JPanel {
 
 			}
 		});
-		btnOut.setBounds(35, 47, 75, 25);
+		btnOut.setBounds(10, 47, 75, 25);
 		add(btnOut);
 
 		JButton btnLandetxeaGehitu = new JButton("Landetxea gehitu");
@@ -157,9 +132,6 @@ public class Loged extends JPanel {
 
 		if (client.getIsOwner() == false) {
 			btnLandetxeaGehitu.setVisible(false);
-		}
-		if (client.getIsOwner() == true) {
-			btnFavorite.setVisible(false);
 		}
 
 	}

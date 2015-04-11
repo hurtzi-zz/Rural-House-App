@@ -83,18 +83,22 @@ public class FoundPanelClient extends JPanel {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				c.addRuralFav(h.elementAt(ind));
-//					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
-//						Boolean j=false;
-//						try {
-//							j = facades.updateClient(c);
-//						} catch (RemoteException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}if (j) {
-//							System.out.println("ondo update client");
-//						} else {
-//							System.out.println("gaizki update client");
-//						}
+				
+				//...................
+					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
+						Boolean j=false;
+						try {
+							j = facades.updateClient(c);
+						} catch (RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}if (j) {
+							System.out.println("ondo update client");
+						} else {
+							System.out.println("gaizki update client");
+						}
+				//.................
+						
 				btnNewButton.setEnabled(false);
 			}
 		});
