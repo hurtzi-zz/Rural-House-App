@@ -63,6 +63,7 @@ public class Launcher {
 				
 				appFacadeInterface=(ApplicationFacadeInterface) Naming.lookup("rmi://"+ businessLogicNode + ":" + portNumber + serviceName);
 			} 
+			
 			StartWindow.setBussinessLogic(appFacadeInterface);
 			
 		} catch (java.rmi.ConnectException e) {

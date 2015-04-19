@@ -50,8 +50,8 @@ public class SearchRuralHouseClient extends JPanel {
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String city =textCity.getText();
-				Vector<RuralHouse> h= new Vector<RuralHouse>();
+				String city = textCity.getText();
+				Vector<RuralHouse> h = new Vector<RuralHouse>();
 				try {
 					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
 					h=facades.SarchByCity(city);

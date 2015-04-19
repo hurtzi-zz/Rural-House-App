@@ -111,7 +111,7 @@ public class RegisterClient extends JPanel {
 						Boolean nick = facades.verifyLoginName(user);
 						if (nick) {
 							result.setForeground(Color.RED);
-							result.setText("Erabili duzun nickname-a ez dago eskuragarri");
+							result.setText("Nickname hori ez dago eskuragarri");
 						} else {
 							Boolean era = facades.createClient(n, s, user,
 									pas1, true);

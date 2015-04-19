@@ -16,11 +16,14 @@ import javax.swing.JRadioButton;
 
 import businessLogic.ApplicationFacadeInterface;
 import domain.Client;
+import domain.Owner;
 import domain.RuralHouse;
 
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FoundPanelClient extends JPanel {
 
@@ -61,7 +64,7 @@ public class FoundPanelClient extends JPanel {
 		searchDescription.setText(h.get(ind).getDescription());
 
 		JButton btnSartu = new JButton("Go");
-		btnSartu.setBounds(461, 75, 46, 40);
+		btnSartu.setBounds(431, 55, 76, 28);
 		add(btnSartu);
 
 		JLabel lblOfertaKop = new JLabel("Oferta kop:");
@@ -71,7 +74,7 @@ public class FoundPanelClient extends JPanel {
 		JLabel searchOfert = new JLabel("");
 		searchOfert.setBounds(496, 11, 36, 14);
 		add(searchOfert);
-		searchOfert.setText(Integer.toString(h.get(ind).getOffers().size()));
+		searchOfert.setText(Integer.toString(h.get(ind).getOffer().size()));
 
 		// JLabel lblFavDa = new JLabel("");
 		// lblFavDa.setBounds(431, 36, 76, 23);
@@ -102,9 +105,25 @@ public class FoundPanelClient extends JPanel {
 				btnNewButton.setEnabled(false);
 			}
 		});
-		btnNewButton.setBounds(431, 36, 76, 23);
+		btnNewButton.setBounds(431, 30, 76, 23);
 		add(btnNewButton);
-
+		
+		if (h.elementAt(ind).getOwner().getLogin().equals(c.getLogin())){
+			JButton btnEdit = new JButton("Edit");
+			btnEdit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+						ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
+						StartWindow.setEditRH((Owner) c,h.get(ind));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
+			btnEdit.setBounds(431, 85, 76, 23);
+			add(btnEdit);
+		}
 		
 
 		Vector<RuralHouse> vec = c.getRuralFav();

@@ -119,7 +119,28 @@ public class Login extends JPanel {
 		});
 		btnRegister.setBounds(23, 136, 89, 23);
 		add(btnRegister);
+		
+		
+		
+		JButton btnNewButton = new JButton("Bilatu ofertak");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFrame a= new FindOffers();
+				a.setVisible(true);
+			}
+			
+			
+		});
+		btnNewButton.setBounds(23, 170, 192, 23);
+		add(btnNewButton);
+		
+		
+		
+		
+		
 	}
+	
+	
 	
 	public JTextField getTextFieldLogin() {
 		return textFieldLogin;

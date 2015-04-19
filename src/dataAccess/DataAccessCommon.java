@@ -11,8 +11,6 @@ import java.util.Vector;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
-import com.db4o.query.Constraint;
-import com.db4o.query.Query;
 
 import configuration.ConfigXML;
 import domain.Booking;
@@ -134,13 +132,105 @@ public class DataAccessCommon implements DataAccessInterface {
 	public Boolean saveRuralHouse(Integer ze, String hi, String de, Owner o) {
 		db.delete(o);
 		db.commit();
+		// Owner berria = AddRuralHouse.owner;
+		// ImpgetAllRuralHouses(getAllRuralHouses());
+		// inprimatuEtxeakOwner(berria);
+		// System.out.println("ownwer gorde: " + berria + ": " +
+		// berria.getName()
+		// + " " + berria.getAbizena());
+		// System.out.println("landetxea gorde: " + ze + " " + hi + " " + de);
+		// berria.addRuralHouse(ze, hi, de);
+		// db.store(berria);
+		// ImpgetAllRuralHouses(getAllRuralHouses());
+		// inprimatuEtxeakOwner(berria);
+		// db.commit();
 		RuralHouse etxetxoa = new RuralHouse(ze, o, de, hi);
+		// o.addRuralHouse(etxetxoa);
 		System.out.println(o.getRuralHouses().size());
+
 		o.addRuralHouse(etxetxoa);
 		System.out.println(o.getRuralHouses().size());
+
 		db.store(o.getRuralHouses());
+		// db.store(etxetxoa);
 		db.commit();
 		return true;
+	}
+
+	public Boolean editRuralHouse(String hi, String de, Owner o, RuralHouse rh) {
+		Owner galderaO = new Owner(null, null, null, null, null, o.getLogin(),
+				null, null, null);
+		RuralHouse galderaRH = new RuralHouse(rh.getHouseNumber(), null, null,
+				null);
+		try {
+			ObjectContainer db = DataAccessCommon.getContainer();
+			ObjectSet resultO = db.queryByExample(galderaO);
+			ObjectSet resultRH = db.queryByExample(galderaRH);
+			if (resultO.hasNext() && resultRH.hasNext()) {
+				Owner originalOwner = (Owner) resultO.next();
+				RuralHouse originalRH = (RuralHouse) resultRH.next();
+				originalOwner.getRHByNumber(rh.getHouseNumber()).setCity(hi);
+				originalOwner.getRHByNumber(rh.getHouseNumber())
+						.setDescription(de);
+				originalRH.setCity(hi);
+				originalRH.setDescription(de);
+				db.store(originalOwner);
+				db.store(originalRH);
+				db.commit();
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception exc) {
+			exc.printStackTrace();
+			return false;
+		}
+	}
+
+	public Boolean deleteRuralHouse(Owner o, RuralHouse rh) {
+		Owner galderaO = new Owner(null, null, null, null, null, o.getLogin(),
+				null, null, null);
+		RuralHouse galderaRH = new RuralHouse(rh.getHouseNumber(), null, null,
+				null);
+		try {
+			ObjectContainer db = DataAccessCommon.getContainer();
+			ObjectSet resultO = db.queryByExample(galderaO);
+			ObjectSet resultRH = db.queryByExample(galderaRH);
+			if (resultO.hasNext() && resultRH.hasNext()) {
+				Owner originalOwner = (Owner) resultO.next();
+				RuralHouse originalRH = (RuralHouse) resultRH.next();
+				System.out.println(originalOwner.getRuralHouses().size());
+				originalOwner.deleteRH(originalRH);
+				System.out.println(originalOwner.getRuralHouses().size());
+				db.store(originalOwner);
+
+				Iterator it = originalOwner.getRuralHouses().iterator();
+				while (it.hasNext())
+					System.out.println("PROBA" + it.next());
+
+				db.delete(originalRH);
+				db.commit();
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception exc) {
+			exc.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean saveOffer(RuralHouse rh, Date d1, Date d2, Float prezioa) {
+		// db.delete(rh);
+		// db.commit();
+		Offer oferta = new Offer(rh, d1, d2, prezioa);
+		rh.addOffer(oferta);
+		System.out.println("holaaaa");
+		db.store(rh.getOffer());
+		System.out.println(rh.getOffer());
+		db.commit();
+		return true;
+
 	}
 
 	public void inprimatuEtxeakOwner(Owner ow) {
@@ -204,6 +294,29 @@ public class DataAccessCommon implements DataAccessInterface {
 		}
 	}
 
+	public boolean VerifyOffer(RuralHouse ruralHouse, Date firstDay,
+			Date lastDay) {
+
+		Offer galdera = new Offer(ruralHouse, firstDay, lastDay, 0);
+		try {
+			ObjectContainer db = DataAccessCommon.getContainer();
+			ObjectSet result = db.queryByExample(galdera);
+			System.out.println(result.size());
+			if (result.hasNext()) {
+				Offer c = (Offer) result.next();
+				return true;
+
+			} else {
+				return false;
+			}
+
+		} catch (Exception exc) {
+			exc.printStackTrace();
+			return false;
+		}
+
+	}
+
 	public Offer createOffer(RuralHouse ruralHouse, Date firstDay,
 			Date lastDay, float price) {
 
@@ -211,16 +324,17 @@ public class DataAccessCommon implements DataAccessInterface {
 
 			// if (c.isDatabaseLocal()==false) openObjectContainer();
 
-			RuralHouse proto = new RuralHouse(ruralHouse.getHouseNumber(),
-					null, null, null);
+			@SuppressWarnings("null")
+			RuralHouse proto = new RuralHouse((Integer) null, null, null, null);
+			// System.out.println(.getOwner() + ruralHouse.getCity());
+
 			ObjectSet<RuralHouse> result = db.queryByExample(proto);
 			RuralHouse rh = result.next();
-			Offer o = rh.createOffer(theDB4oManagerAux.offerNumber++, firstDay,
-					lastDay, price);
-			db.store(theDB4oManagerAux); // To store the new value for
-											// offerNumber
-			db.store(o);
-			db.commit();
+			Offer o = rh.createOffer(firstDay, lastDay, price);
+			// db.store(theDB4oManagerAux); // To store the new value for
+			// offerNumber
+			// db.store(o);
+			// db.commit();
 			return o;
 		} catch (com.db4o.ext.ObjectNotStorableException e) {
 			System.out
@@ -293,6 +407,97 @@ public class DataAccessCommon implements DataAccessInterface {
 			// db.close();
 		}
 	}
+
+	public Vector<Offer> getOffers(Date firstDay, Date lastDay) {
+		try {
+			Offer proto = new Offer(null, firstDay, lastDay, 0);
+			ObjectSet<Offer> result = db.queryByExample(proto);
+			Vector<Offer> Offers = new Vector<Offer>();
+			while (result.hasNext())
+				Offers.add(result.next());
+			return Offers;
+		} finally {
+			// db.close();
+		}
+	}
+
+	public Vector<Offer> findOffer(Date firstDay, Date lastDay) {
+		Vector<Offer> offers = new Vector<Offer>();
+
+		Iterator<Offer> e = offers.iterator();
+		Offer offer = null;
+		while (e.hasNext()) {
+			offer = e.next();
+			if ((offer.getFirstDay().compareTo(firstDay) == 0)
+					&& (offer.getLastDay().compareTo(lastDay) == 0))
+				offers.add(offer);
+		}
+		return offers;
+
+	}
+
+	public Vector<RuralHouse> SarchByCity(String city) {
+		try {
+			int i = 0;
+			RuralHouse proto = new RuralHouse(0, null, null, city);
+			ObjectSet<RuralHouse> result = db.queryByExample(proto);
+			System.out.println(city + "--> " + proto.getCity());
+			Vector<RuralHouse> ruralHouses = new Vector<RuralHouse>();
+			System.out.println(" while1 ");
+			while (result.hasNext()) {
+				System.out.println(i + " : ");
+				ruralHouses.add(result.next());
+				i++;
+			}
+
+			return ruralHouses;
+		} finally {
+			System.out.println(" close ");
+			// db.close();
+		}
+	}
+
+	public Boolean updateClient(Client c) {
+		Client galdera = new Client(null, null, c.getLogin(), null, null, null);
+
+		try {
+			ObjectContainer db = DataAccessCommon.getContainer();
+			ObjectSet result = db.queryByExample(galdera);
+			if (result.hasNext()) {
+
+				Client b = (Client) result.get(0);
+
+				db.delete(b);
+				db.commit();
+
+				Client update = new Client(c.getName(), c.getAbizena(),
+						c.getLogin(), c.getPassword(), c.getIsOwner(),
+						new Vector<RuralHouse>());
+
+				int j = 0;
+				while (j < (c.getRuralFav().size())) {
+					update.addRuralFav(c.getRuralFav().get(j));
+					j++;
+				}
+
+				db.store(update);
+				db.commit();
+
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception exc) {
+			exc.printStackTrace();
+			return false;
+		}
+
+	}
+
+	/*
+	 * public void printResultingList(Vector<RuralHouse> result){ // Owner p;
+	 * for (Object o : result) System.out.println(o); }
+	 */
 
 	public void ImpgetAllRuralHouses(Vector<RuralHouse> bek) {
 
@@ -435,62 +640,46 @@ public class DataAccessCommon implements DataAccessInterface {
 		}
 	}
 
-	public Vector<RuralHouse> SarchByCity(String city) {
+	public RuralHouse rhBuleta(String city) {
 		try {
-			int i = 0;
-			RuralHouse proto = new RuralHouse(0, null, null, city);
-			ObjectSet<RuralHouse> result = db.queryByExample(proto);
-			System.out.println(city + "--> " + proto.getCity());
-			Vector<RuralHouse> ruralHouses = new Vector<RuralHouse>();
-			System.out.println(" while1 ");
+			RuralHouse proto = new RuralHouse((Integer) null, null, null, null);
+			ObjectSet result = db.queryByExample(proto);
+			Vector<RuralHouse> rh = new Vector<RuralHouse>();
 			while (result.hasNext()) {
-				System.out.println(i + " : ");
-				ruralHouses.add(result.next());
-				i++;
-			}
-
-			return ruralHouses;
-		} finally {
-			System.out.println(" close ");
-			// db.close();
-		}
-	}
-	
-
-
-	public  Boolean updateClient(Client c) {
-		Client galdera = new Client(null,null , c.getLogin(),  null, null, null);
-
-		try {
-			ObjectContainer db = DataAccessCommon.getContainer();
-			ObjectSet result = db.queryByExample(galdera);
-			if(result.hasNext()){
-				
-				Client b = (Client) result.get(0);
-				
-				db.delete(b);
-				db.commit();
-			
-				Client update = new Client(c.getName(),c.getAbizena(),c.getLogin(),c.getPassword(), c.getIsOwner(), new Vector<RuralHouse>());		
-				
-				int j = 0;
-				while(j<(c.getRuralFav().size())){
-					update.addRuralFav(c.getRuralFav().get(j));
-					j++;
+				RuralHouse r = (RuralHouse) result.next();
+				if (r.getCity().equals(city)) {
+					System.out.println("bat egiten dute");
+					return r;
 				}
-				
-				db.store(update);
-				db.commit();
-				
-				return true;
-			} else {
-				return false;
 			}
-		} catch (Exception exc) {
-			exc.printStackTrace();
-			return false;
+			return null;
+		} finally {
+
 		}
+
+	}
+
+	public Vector<RuralHouse> SarchssByOwner(Owner o) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
-	
+	public Vector<RuralHouse> SarchByOwner(String LoginName) {
+
+			Owner galdera = new Owner(null,null, null,null,null,LoginName, null, true,null);
+			
+			try {
+				ObjectContainer db = DataAccessCommon.getContainer();
+				ObjectSet result = db.queryByExample(galdera);
+				if (result.hasNext()) {
+					Owner o = (Owner) result.next();
+					return (o.getRuralHouses());
+				} else {
+					return null;
+				}
+			} catch (Exception exc) {
+				exc.printStackTrace();
+				return null;
+			}
+		}
 }

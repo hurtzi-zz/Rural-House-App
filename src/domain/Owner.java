@@ -5,6 +5,7 @@ import gui.StartWindow;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 
@@ -25,9 +26,11 @@ public class Owner extends Client implements Serializable  {
 	
 	//jabea
 	public Owner(Integer tlfn, String bankAccount,Vector<RuralHouse> ruralHousesBektorea,String name, String abizena, String login, String password,Boolean isOwner, Vector<RuralHouse> ruralFav){
-		super(name,abizena,login,password,true,ruralFav);
+		super(name,abizena,login,password,true, ruralFav);
 		this.bankAccount=bankAccount;
 		this.tlfn=tlfn;
+
+		
 	}
 	
 	
@@ -92,5 +95,20 @@ public class Owner extends Client implements Serializable  {
 		this.ruralHouses.add(rh);
 	}
 
+	public RuralHouse getRHByNumber(int num){
+		Iterator it = ruralHouses.iterator();
+		RuralHouse test = null;
+		while (it.hasNext()) {
+			test = (RuralHouse) it.next();
+			if (test.getHouseNumber()==num){
+				return test;
+			}
+		}
+		return null;
+	}
+	
+	public Boolean deleteRH(RuralHouse rh){
+		return ruralHouses.remove(rh);
+	}
 	
 }

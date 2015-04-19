@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -87,7 +88,7 @@ public class StartWindow extends JFrame {
 		JPanel LoginPanel = new Login();
 		LoginPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
 		LoginPanel.setBackground(Color.WHITE);
-		LoginPanel.setBounds(38, 32, 238, 170);
+		LoginPanel.setBounds(38, 32, 238, 212);
 		contentPane.add(LoginPanel);
 		
 //		JPanel SearchPanel = new JPanel();
@@ -138,7 +139,8 @@ public class StartWindow extends JFrame {
 		JPanel login = new Login();
 		login.setBorder(new EmptyBorder(1, 1, 1, 1));
 		login.setBackground(Color.WHITE);
-		login.setBounds(25, 34, 233, 171);
+		//login.setBounds(41, 102, 152, 18);
+		login.setBounds(25, 34, 233, 271);
 		contentPane.add(login);
 		contentPane.setVisible(true);
 		
@@ -189,9 +191,37 @@ public class StartWindow extends JFrame {
 		lblRuralHouses.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 96));
 		lblRuralHouses.setBounds(360, 11, 551, 140);
 		contentPane.add(lblRuralHouses);		
+		
 		JPanel FoundPanel = new FoundRuralHouseClient(c,bek,ind);
 		FoundPanel.setBounds(331, 148, 636, 546);
 		contentPane.add(FoundPanel);
+		contentPane.setVisible(true);
+	}
+	
+	public static void setEditRH(Owner o, RuralHouse rh){
+		contentPane.setVisible(false);
+		contentPane.removeAll();
+		
+		JPanel loged = new Loged(o);
+		loged.setBorder(new EmptyBorder(1, 1, 1, 1));
+		loged.setBackground(Color.WHITE);
+		loged.setBounds(25, 34, 230, 400);
+		contentPane.add(loged);
+		contentPane.setVisible(true);
+		
+		JPanel SearchPanel = new SearchRuralHouseClient(o);
+		SearchPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
+		SearchPanel.setBounds(959, 32, 375, 119);
+		contentPane.add(SearchPanel);
+		
+		JLabel lblRuralHouses = DefaultComponentFactory.getInstance().createTitle("Rural Houses");
+		lblRuralHouses.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 96));
+		lblRuralHouses.setBounds(360, 11, 551, 140);
+		contentPane.add(lblRuralHouses);		
+		
+		JPanel editPanel = new EditRuralHouse(o, rh);
+		editPanel.setBounds(331, 148, 636, 546);
+		contentPane.add(editPanel);
 		contentPane.setVisible(true);
 	}
 	
@@ -239,8 +269,35 @@ public class StartWindow extends JFrame {
 		JPanel addRuralHouse = new AddRuralHouse(o);
 		addRuralHouse.setBorder(new EmptyBorder(1, 1, 1, 1));
 		addRuralHouse.setBackground(Color.WHITE);
-		addRuralHouse.setBounds(25, 34, 329, 276);
+		addRuralHouse.setBounds(25, 34, 618, 276);
 		contentPane.add(addRuralHouse);
 		contentPane.setVisible(true);
+		
+		
 	}
+	
+	/*public static void setOfertaGehitu(Owner o){
+		contentPane.setVisible(false);
+		contentPane.removeAll();
+		
+		JFrame ofertagehitu = new OfertaGehitu(o);
+		((JFrame) ofertagehitu).setBorder(new EmptyBorder(1, 1, 1, 1));
+		ofertagehitu.setBackground(Color.WHITE);
+		ofertagehitu.setBounds(25, 34, 700, 500);
+		contentPane.add(ofertagehitu);
+		contentPane.setVisible(true);
+		
+	}*/
+	
+	/*public static void setFindOffers(){
+		contentPane.setVisible(false);
+		contentPane.removeAll();
+		
+		JPanel ofertabilatu = new FindOffers();
+		ofertabilatu.setBorder(new EmptyBorder(1, 1, 1, 1));
+		ofertabilatu.setBackground(Color.WHITE);
+		ofertabilatu.setBounds(25, 34, 700, 500);
+		contentPane.add(ofertabilatu);
+		contentPane.setVisible(true);
+	}*/
 }

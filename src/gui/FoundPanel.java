@@ -64,7 +64,7 @@ public class FoundPanel extends JPanel {
 		JLabel searchOfert = new JLabel("");
 		searchOfert.setBounds(496, 11, 36, 14);
 		add(searchOfert);
-		searchOfert.setText(Integer.toString(h.get(ind).getOffers().size()));
+		searchOfert.setText(Integer.toString(h.get(ind).getOffer().size()));
 
 	}
 	

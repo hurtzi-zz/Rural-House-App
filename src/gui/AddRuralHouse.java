@@ -199,6 +199,9 @@ public class AddRuralHouse extends JPanel {
 						Owner bi = StartWindow.facadeInterface.ownerBuelta(owner.getLogin());
 					//	bi.addRuralHouse(gorde);
 						StartWindow.facadeInterface.saveRuralHouse(zb, textHiria.getText(), textDeskribapena.getText(), bi);
+						lblOharrak.setText("Landetxea ondo eratu da!");
+						lblOharrak.setForeground(Color.GREEN);
+						lblOharrak.setVisible(true);
 					} catch (RemoteException e) {
 						e.printStackTrace();
 					} catch (Exception e) {

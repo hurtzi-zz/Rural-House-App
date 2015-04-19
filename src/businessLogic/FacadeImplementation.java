@@ -137,6 +137,10 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 
 	}
 
+	public boolean saveOffer(RuralHouse rh, Date d1, Date d2, Float prezioa) {
+		return DataAccessCommon.getInstance().saveOffer(rh, d1, d2, prezioa);
+	}
+
 	public Owner getOwner(Client c) throws RemoteException {
 		return DataAccessCommon.getInstance().getOwner(c);
 	}
@@ -144,10 +148,24 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 	// public void updateOwner(Owner del, Owner add) throws RemoteException{
 	// DataAccessCommon.getInstance().updateOwner(del,add);
 	// }
+	public Vector<Offer> getOffers(Date firstDay, Date lastDay)
+			throws RemoteException {
+		return DataAccessCommon.getInstance().getOffers(firstDay, lastDay);
+	}
 
 	public Boolean saveRuralHouse(Integer ze, String hi, String de, Owner o)
 			throws RemoteException {
 		return DataAccessCommon.getInstance().saveRuralHouse(ze, hi, de, o);
+	}
+	
+	public Boolean editRuralHouse(String hi, String de, Owner o, RuralHouse rh)
+			throws RemoteException {
+		return DataAccessCommon.getInstance().editRuralHouse(hi, de, o, rh);
+	}
+	
+	public Boolean deleteRuralHouse(Owner o, RuralHouse rh)
+			throws RemoteException {
+		return DataAccessCommon.getInstance().deleteRuralHouse(o, rh);
 	}
 
 	public Owner clientToOwner(Client t) throws RemoteException, Exception {
@@ -160,18 +178,35 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 		return DataAccessCommon.getInstance().bektoreaLortu(login);
 	}
 
+	public RuralHouse rhBuleta(String city) {
+		return DataAccessCommon.getInstance().rhBuleta(city);
+	}
+
+	public boolean VerifyOffer(RuralHouse ruralHouse, Date firstDay,
+			Date lastDay) {
+		return DataAccessCommon.getInstance().VerifyOffer(ruralHouse, firstDay,
+				lastDay);
+	}
+
+	public Vector<Offer> findOffer(Date firstDay, Date lastDay) {
+		return DataAccessCommon.getInstance().findOffer(firstDay, lastDay);
+	}
+
 	public Owner ownerBuelta(String login) throws RemoteException, Exception {
 		return DataAccessCommon.getInstance().ownerBuelta(login);
 	}
 
-	// 5.erab kasua
 	public Vector<RuralHouse> SarchByCity(String city) throws RemoteException,
 			Exception {
 		return DataAccessCommon.getInstance().SarchByCity(city);
 	}
 
-	public Boolean updateClient(Client c)
-			throws RemoteException {
+	public Boolean updateClient(Client c) throws RemoteException {
 		return DataAccessCommon.getInstance().updateClient(c);
 	}
+	
+	public Vector<RuralHouse> SarchByOwner(String LoginName) throws RemoteException,
+	Exception {
+		return DataAccessCommon.getInstance().SarchByOwner(LoginName);
+}
 }

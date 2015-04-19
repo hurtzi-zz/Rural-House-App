@@ -214,8 +214,7 @@ private static final long serialVersionUID = 1L;
 	  		jLabel5.setText(jTextField3.getText()+ " is not a valid price");
 	  	} catch (OverlappingOfferExists e1) {
 	  		jLabel5.setText("There exists an overlapping offer");
-	  	}
-	  	catch (BadDates e1) {
+	  	} catch (BadDates e1) {
 	  		jLabel5.setText("Last day is before first day in the offer");
 	  	} catch (Exception e1) {
 

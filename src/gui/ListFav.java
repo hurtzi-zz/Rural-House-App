@@ -65,6 +65,3 @@ public class ListFav extends JFrame {
 	}
 
 }
-
-
-

@@ -8,7 +8,7 @@ import java.util.Date;
 public class Offer implements Serializable {
 	
 
-	private int offerNumber;
+	//private int offerNumberl;
 	private Date firstDay; // Dates are stored as java.util.Date objects instead of java.sql.Date objects
 	private Date lastDay;  // because, they are not well stored in db4o as java.util.Date objects
 	private float price;   // This is coherent because objects of java.sql.Date are objects of java.util.Date 
@@ -16,13 +16,16 @@ public class Offer implements Serializable {
 	private RuralHouse ruralHouse;
 
 	
-	public Offer(int offerNumber,RuralHouse ruralHouse, Date firstDay, Date lastDay, float price){
+	public Offer(RuralHouse ruralHouse, Date firstDay, Date lastDay, float price){
 		  this.firstDay=firstDay;
 		  this.lastDay=lastDay;
 		  this.price=price;
 		  this.ruralHouse=ruralHouse;
-		  this.offerNumber=offerNumber;
+		  //this.offerNumber=offerNumber;
 	}
+
+	
+
 	/**
 	 * Get the house number of the offer
 	 * 
@@ -47,9 +50,9 @@ public class Offer implements Serializable {
 	 * 
 	 * @return offer number
 	 */
-	public int getOfferNumber() {
+	/*public int getOfferNumber() {
 		return this.offerNumber;
-	}
+	}*/
 
 	
 
@@ -141,6 +144,6 @@ public class Offer implements Serializable {
 	}
 	
 	public String toString(){
-		return offerNumber+";"+firstDay.toString()+";"+lastDay.toString()+";"+price+";"+ruralHouse;
+		return firstDay.toString()+";"+lastDay.toString()+";"+price+";"+ruralHouse;
 	}
 }

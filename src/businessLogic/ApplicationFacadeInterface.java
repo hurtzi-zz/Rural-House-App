@@ -66,23 +66,53 @@ public interface ApplicationFacadeInterface extends Remote {
     public Client verifyLogin(String a, String b) throws RemoteException;
 //
 	public boolean verifyLoginName(String a) throws RemoteException;
+	
 
     public boolean createOwner( Integer telefonoa, String bank,String Izena, String Abizena,String login, String pasahitza) throws RemoteException;
     
     public boolean  createClient(String Izena, String Abizena, String login, String pasahitza, boolean isOwner) throws RemoteException;
 	
+    /**
+     * Bezero bat emanda jabe klasea itzuliko du, datu guztiak izateko
+     * @param c
+     * @return The (Owner)client + it's owner info
+     */
     public Owner getOwner(Client c) throws RemoteException;
+   // public Vector<RuralHouse> getOwnerRuralHouses(Owner o);
 	
 //    public void updateOwner(Owner del, Owner add) throws RemoteException;
-
+    //public Vector<RuralHouse> bektoreaLortu(String login);
+    
 	public Boolean saveRuralHouse(Integer ze, String hi, String de, Owner o)throws RemoteException;
+	public Boolean editRuralHouse(String hi, String de, Owner o, RuralHouse rh)throws RemoteException;
+	public Boolean deleteRuralHouse(Owner o, RuralHouse rh)throws RemoteException;
+	
+	
 	public Owner clientToOwner( Client t ) throws RemoteException, Exception ;
+	
 	public Vector<RuralHouse> ownerBektoreaBueltatu(String login) throws RemoteException, Exception;
+	
 	public Owner ownerBuelta(String login) throws RemoteException, Exception;
+	
+	public RuralHouse rhBuleta(String city)throws RemoteException;
+	
+	
+	public boolean VerifyOffer(RuralHouse ruralHouse, Date firstDay,Date lastDay)throws RemoteException;
+	
+	public boolean saveOffer (RuralHouse rh, Date d1, Date d2, Float prezioa) throws RemoteException;
+	
+	public Vector<Offer> getOffers(Date firstDay,  Date lastDay) throws RemoteException;	
+	
+	public Vector<Offer> findOffer( Date firstDay,  Date lastDay)throws RemoteException;
 	
 	//5.erab kasua
 	public Vector<RuralHouse> SarchByCity(String city) throws RemoteException, Exception;
+	
 	//6.erab kasua
 	public Boolean updateClient(Client c) throws RemoteException;
+	
+	public Vector<RuralHouse> SarchByOwner(String LoginName) throws RemoteException, Exception;
+
+
 
 }

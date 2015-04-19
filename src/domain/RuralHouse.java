@@ -18,7 +18,7 @@ public class RuralHouse implements Serializable {
 	private String description;
 	private Owner owner;
 	private String city; 
-	public Vector<Offer> offers;
+	public Vector<Offer> offers= new Vector();
 	
 
 
@@ -63,14 +63,15 @@ public class RuralHouse implements Serializable {
 		return city;
 	}
 	
-	
 	public void setCity(String city) {
 		this.city=city;
 	}
 	
-	public Vector<Offer> getOffers() {
+	public Vector<Offer> getOffer(){
 		return offers;
 	}
+
+
 	
 	public String toString() {
 		return this.houseNumber + ": " + this.city;
@@ -83,8 +84,8 @@ public class RuralHouse implements Serializable {
 	 *            number, start day, last day and price
 	 * @return None
 	 */
-	public Offer createOffer(int offerNumber,Date firstDay, Date lastDay, float price)  {
-        Offer off=new Offer(offerNumber,this,firstDay,lastDay,price);
+	public Offer createOffer(Date firstDay, Date lastDay, float price)  {
+        Offer off=new Offer(/*offerNumber,*/this,firstDay,lastDay,price);
         offers.add(off);
         return off;
 	}
@@ -172,7 +173,8 @@ public class RuralHouse implements Serializable {
 		return null;
 		
 	}
-
+	
+	
 	/**
 	 * This method obtains the first offer that overlaps with the provided dates
 	 * 
@@ -197,6 +199,24 @@ public class RuralHouse implements Serializable {
 	public void imprimatu() {
 		String s =this.houseNumber+","+this.description+","+this.city;
 		System.out.println(s);
+	}
+	
+	public String goString() {
+		String s =this.houseNumber+","+this.description+","+this.city;
+		return s;
+		}
+
+	
+	public Offer addOffer(RuralHouse rh, Date d1, Date d2, Float prezioa){
+		Offer of = new Offer (rh, d1, d2, prezioa);
+		offers.add(of);
+		return of;
+		
+	}
+	
+	public void addOffer (Offer of){
+		this.offers.add(of);
+		
 	}
 
 }

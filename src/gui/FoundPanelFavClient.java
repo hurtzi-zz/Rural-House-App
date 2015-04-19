@@ -72,7 +72,7 @@ public class FoundPanelFavClient extends JPanel {
 		JLabel searchOfert = new JLabel("");
 		searchOfert.setBounds(496, 11, 36, 14);
 		add(searchOfert);
-		searchOfert.setText(Integer.toString(h.get(ind).getOffers().size()));
+		searchOfert.setText(Integer.toString(h.get(ind).getOffer().size()));
 
 		// JLabel lblFavDa = new JLabel("");
 		// lblFavDa.setBounds(431, 36, 76, 23);
@@ -111,16 +111,16 @@ public class FoundPanelFavClient extends JPanel {
 			}
 			
 			
-		JButton btnNewButton_1 = new JButton("Delete Fav");
-		btnNewButton_1.setForeground(Color.RED);
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//linked list edo mugitzeko metodoren bat
-				//vec.remove(ind);
-			}
-		});
-		btnNewButton_1.setBounds(418, 62, 90, 23);
-		add(btnNewButton_1);
+//		JButton btnNewButton_1 = new JButton("Delete Fav");
+//		btnNewButton_1.setForeground(Color.RED);
+//		btnNewButton_1.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				//linked list edo mugitzeko metodoren bat
+//				//vec.remove(ind);
+//			}
+//		});
+//		btnNewButton_1.setBounds(418, 62, 90, 23);
+//		add(btnNewButton_1);
 
 		
 
