@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Vector;
 
 public class RuralHouse implements Serializable {
@@ -17,22 +18,22 @@ public class RuralHouse implements Serializable {
 	private int houseNumber;
 	private String description;
 	private Owner owner;
-	private String city; 
-	public Vector<Offer> offers= new Vector();
-	
-
-
+	private String city;
+	public Vector<Offer> offers = new Vector<Offer>();
+	public LinkedList<Comment> comments;
 
 	public RuralHouse() {
 		super();
 	}
 
-	public RuralHouse(int houseNumber, Owner owner, String description, String city) {
+	public RuralHouse(int houseNumber, Owner owner, String description,
+			String city) {
 		this.houseNumber = houseNumber;
 		this.description = description;
 		this.owner = owner;
 		this.city = city;
-		offers=new Vector<Offer>();
+		offers = new Vector<Offer>();
+		comments = new LinkedList<Comment>();
 	}
 
 	public int getHouseNumber() {
@@ -46,9 +47,9 @@ public class RuralHouse implements Serializable {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public void setDescription(String description) {
-		this.description=description;
+		this.description = description;
 	}
 
 	public Owner getOwner() {
@@ -56,38 +57,37 @@ public class RuralHouse implements Serializable {
 	}
 
 	public void setOwner(Owner owner) {
-		this.owner=owner;
+		this.owner = owner;
 	}
-	
+
 	public String getCity() {
 		return city;
 	}
-	
+
 	public void setCity(String city) {
-		this.city=city;
+		this.city = city;
 	}
-	
-	public Vector<Offer> getOffer(){
+
+	public Vector<Offer> getOffer() {
 		return offers;
 	}
 
-
-	
 	public String toString() {
 		return this.houseNumber + ": " + this.city;
 	}
-	
+
 	/**
-	 * This method creates an offer with a house number, first day, last day and price
+	 * This method creates an offer with a house number, first day, last day and
+	 * price
 	 * 
 	 * @param House
 	 *            number, start day, last day and price
 	 * @return None
 	 */
-	public Offer createOffer(Date firstDay, Date lastDay, float price)  {
-        Offer off=new Offer(/*offerNumber,*/this,firstDay,lastDay,price);
-        offers.add(off);
-        return off;
+	public Offer createOffer(Date firstDay, Date lastDay, float price) {
+		Offer off = new Offer(/* offerNumber, */this, firstDay, lastDay, price);
+		offers.add(off);
+		return off;
 	}
 
 	@Override
@@ -111,112 +111,141 @@ public class RuralHouse implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 	/**
-	 * This method obtains the account number of the owner of the  house number
+	 * This method obtains the account number of the owner of the house number
 	 * 
 	 * @param houseNumber
 	 *            Number of the house
 	 * @return Owner account number of the house
 	 */
 	public String getAccountNumber(int houseNumber) {
-		/*try {
-			dbMngr=DBManager.getInstance();
-			return dbMngr.getOwner(houseNumber).getBankAccount();
-
-		} catch (Exception e) {
-			System.out.println("Error, accessing to DB Manager: "
-					+ e.toString());
-			return null;
-		}*/ return null;
+		/*
+		 * try { dbMngr=DBManager.getInstance(); return
+		 * dbMngr.getOwner(houseNumber).getBankAccount();
+		 * 
+		 * } catch (Exception e) {
+		 * System.out.println("Error, accessing to DB Manager: " +
+		 * e.toString()); return null; }
+		 */return null;
 	}
-	
+
 	/**
-	 * This method obtains available offers for a concrete house in a certain period 
+	 * This method obtains available offers for a concrete house in a certain
+	 * period
 	 * 
-	 * @param houseNumber, the house number where the offers must be obtained 
-	 * @param firstDay, first day in a period range 
-	 * @param lastDay, last day in a period range
-	 * @return a vector of offers(Offer class)  available  in this period
+	 * @param houseNumber
+	 *            , the house number where the offers must be obtained
+	 * @param firstDay
+	 *            , first day in a period range
+	 * @param lastDay
+	 *            , last day in a period range
+	 * @return a vector of offers(Offer class) available in this period
 	 */
-	public Vector<Offer> getOffers( Date firstDay,  Date lastDay) {
-		
-		Vector<Offer> availableOffers=new Vector<Offer>();
-		Iterator<Offer> e=offers.iterator();
+	public Vector<Offer> getOffers(Date firstDay, Date lastDay) {
+
+		Vector<Offer> availableOffers = new Vector<Offer>();
+		Iterator<Offer> e = offers.iterator();
 		Offer offer;
-		while (e.hasNext()){
-			offer=e.next();
-			if ( (offer.getFirstDay().compareTo(firstDay)>=0) && (offer.getLastDay().compareTo(lastDay)<=0) && (offer.getBooking()==null) )
+		while (e.hasNext()) {
+			offer = e.next();
+			if ((offer.getFirstDay().compareTo(firstDay) >= 0)
+					&& (offer.getLastDay().compareTo(lastDay) <= 0)
+					&& (offer.getBooking() == null))
 				availableOffers.add(offer);
 		}
 		return availableOffers;
-		
+
 	}
-	
+
 	/**
-	 * This method obtains the offer that match exactly with a given dates that has not been booked
+	 * This method obtains the offer that match exactly with a given dates that
+	 * has not been booked
 	 * 
-	 * @param firstDay, first day in a period range 
-	 * @param lastDay, last day in a period range
-	 * @return the  offer(Offer class)  available  for a this period
+	 * @param firstDay
+	 *            , first day in a period range
+	 * @param lastDay
+	 *            , last day in a period range
+	 * @return the offer(Offer class) available for a this period
 	 */
-	public Offer findOffer( Date firstDay,  Date lastDay) {
-		
-		Iterator<Offer> e=offers.iterator();
-		Offer offer=null;
-		while (e.hasNext()){
-			offer=e.next();
-			if ( (offer.getFirstDay().compareTo(firstDay)==0) && (offer.getLastDay().compareTo(lastDay)==0) && (offer.getBooking()==null) )
+	public Offer findOffer(Date firstDay, Date lastDay) {
+
+		Iterator<Offer> e = offers.iterator();
+		Offer offer = null;
+		while (e.hasNext()) {
+			offer = e.next();
+			if ((offer.getFirstDay().compareTo(firstDay) == 0)
+					&& (offer.getLastDay().compareTo(lastDay) == 0)
+					&& (offer.getBooking() == null))
 				return offer;
 		}
 		return null;
-		
+
 	}
-	
-	
+
 	/**
 	 * This method obtains the first offer that overlaps with the provided dates
 	 * 
-	 * @param firstDay, first day in a period range 
-	 * @param lastDay, last day in a period range
-	 * @return the first offer that overlaps with those dates, or null if there is no overlapping offer
+	 * @param firstDay
+	 *            , first day in a period range
+	 * @param lastDay
+	 *            , last day in a period range
+	 * @return the first offer that overlaps with those dates, or null if there
+	 *         is no overlapping offer
 	 */
 
-	public Offer overlapsWith( Date firstDay,  Date lastDay) {
-		
-		Iterator<Offer> e=offers.iterator();
-		Offer offer=null;
-		while (e.hasNext()){
-			offer=e.next();
-			if ( (offer.getFirstDay().compareTo(lastDay)<0) && (offer.getLastDay().compareTo(firstDay)>0))
+	public Offer overlapsWith(Date firstDay, Date lastDay) {
+
+		Iterator<Offer> e = offers.iterator();
+		Offer offer = null;
+		while (e.hasNext()) {
+			offer = e.next();
+			if ((offer.getFirstDay().compareTo(lastDay) < 0)
+					&& (offer.getLastDay().compareTo(firstDay) > 0))
 				return offer;
 		}
 		return null;
-		
+
 	}
 
 	public void imprimatu() {
-		String s =this.houseNumber+","+this.description+","+this.city;
+		String s = this.houseNumber + "," + this.description + "," + this.city;
 		System.out.println(s);
 	}
-	
-	public String goString() {
-		String s =this.houseNumber+","+this.description+","+this.city;
-		return s;
-		}
 
-	
-	public Offer addOffer(RuralHouse rh, Date d1, Date d2, Float prezioa){
-		Offer of = new Offer (rh, d1, d2, prezioa);
+	public String goString() {
+		String s = this.houseNumber + "," + this.description + "," + this.city;
+		return s;
+	}
+
+	public Offer addOffer(RuralHouse rh, Date d1, Date d2, Float prezioa) {
+		Offer of = new Offer(rh, d1, d2, prezioa);
 		offers.add(of);
 		return of;
-		
+
 	}
-	
-	public void addOffer (Offer of){
+
+	public void addOffer(Offer of) {
 		this.offers.add(of);
-		
+
 	}
+
+
+	public LinkedList<Comment> getComments() {
+		return comments;
+	}
+
+	public Comment addComent(Client cli, int botoa, String comme) {
+		Comment com = new Comment(cli, botoa, comme);
+		comments.add(com);
+		return com;
+
+	}
+
+	public void addComent(Comment co) {
+		this.comments.add(co);
+	}
+
+
 
 }

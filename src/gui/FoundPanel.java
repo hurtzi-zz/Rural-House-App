@@ -1,5 +1,6 @@
 package gui;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
@@ -13,7 +14,10 @@ import java.util.Vector;
 import javax.swing.JRadioButton;
 
 import domain.RuralHouse;
+
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class FoundPanel extends JPanel {
 
@@ -54,6 +58,12 @@ public class FoundPanel extends JPanel {
 		searchDescription.setText(h.get(ind).getDescription());
 
 		JButton btnSartu = new JButton("Go");
+		btnSartu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFrame a= new Go(h.get(ind));
+				a.setVisible(true);
+			}
+		});
 		btnSartu.setBounds(453, 46, 55, 55);
 		add(btnSartu);
 

@@ -15,6 +15,7 @@ import com.db4o.ObjectSet;
 import configuration.ConfigXML;
 import domain.Booking;
 import domain.Client;
+import domain.Comment;
 import domain.Offer;
 import domain.Owner;
 import domain.RuralHouse;
@@ -92,7 +93,22 @@ public class DataAccessCommon implements DataAccessInterface {
 		ow2.addRuralHouse(2, "Gaztetxea", "donos");
 		ow2.addRuralHouse(1, "Gaztetxea", "donos");
 
-		ow2.addRuralHouse(5, "Gaztetxea", "a");
+		
+		Comment co1 = new Comment(cl1,10,"putamadre dago");
+		Comment co2 = new Comment(cl0,2,"mierde");
+		Comment co3 = new Comment(cl0,5,"ok");
+		Comment co4 = new Comment(cl0,6,"ondoo");
+
+		RuralHouse rh= ow2.addRuralHouse(5, "Gaztetxea", "a");
+		
+		rh.addComent(co1);
+		rh.addComent(co2);
+		rh.addComent(co3);
+		rh.addComent(co4);
+		
+		
+		
+		
 		ow2.addRuralHouse(3, "Gaztetxea", "a");
 		ow2.addRuralHouse(2, "Gaztetxea", "a");
 		ow2.addRuralHouse(1, "Gaztetxea", "a");
@@ -682,4 +698,10 @@ public class DataAccessCommon implements DataAccessInterface {
 				return null;
 			}
 		}
+	
+//33333333333
+	public void RuralHouseRefactorComment(RuralHouse rh) {
+		// TODO Auto-generated method stub
+		
+	}
 }

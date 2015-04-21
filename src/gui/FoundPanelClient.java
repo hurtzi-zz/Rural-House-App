@@ -1,5 +1,6 @@
 package gui;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
@@ -64,6 +65,24 @@ public class FoundPanelClient extends JPanel {
 		searchDescription.setText(h.get(ind).getDescription());
 
 		JButton btnSartu = new JButton("Go");
+		if(c.getIsOwner()){
+			btnSartu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					JFrame a= new Go(h.get(ind));
+					a.setVisible(true);
+				}
+			});
+			
+		}else{
+			btnSartu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFrame a= new GoClient(h.get(ind));
+				a.setVisible(true);
+			}
+		});
+		}
+		
+		
 		btnSartu.setBounds(431, 55, 76, 28);
 		add(btnSartu);
 

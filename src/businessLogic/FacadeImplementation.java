@@ -157,12 +157,12 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 			throws RemoteException {
 		return DataAccessCommon.getInstance().saveRuralHouse(ze, hi, de, o);
 	}
-	
+
 	public Boolean editRuralHouse(String hi, String de, Owner o, RuralHouse rh)
 			throws RemoteException {
 		return DataAccessCommon.getInstance().editRuralHouse(hi, de, o, rh);
 	}
-	
+
 	public Boolean deleteRuralHouse(Owner o, RuralHouse rh)
 			throws RemoteException {
 		return DataAccessCommon.getInstance().deleteRuralHouse(o, rh);
@@ -204,9 +204,14 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 	public Boolean updateClient(Client c) throws RemoteException {
 		return DataAccessCommon.getInstance().updateClient(c);
 	}
-	
-	public Vector<RuralHouse> SarchByOwner(String LoginName) throws RemoteException,
-	Exception {
+
+	public Vector<RuralHouse> SarchByOwner(String LoginName)
+			throws RemoteException, Exception {
 		return DataAccessCommon.getInstance().SarchByOwner(LoginName);
-}
+	}
+	
+	//urtzi 3.itera
+	public RuralHouse  RuralHouseRefactorComment(RuralHouse rh) throws RemoteException, Exception {
+		DataAccessCommon.getInstance().RuralHouseRefactorComment(rh);	
+	}
 }
