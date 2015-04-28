@@ -63,28 +63,52 @@ public class FoundPanelClient extends JPanel {
 		add(searchDescription);
 		searchDescription.setBackground(Color.WHITE);
 		searchDescription.setText(h.get(ind).getDescription());
+		
+		JLabel lblHiria = new JLabel("Hiria:");
+		lblHiria.setBounds(262, 11, 36, 14);
+		add(lblHiria);
+		JLabel searchHiria = new JLabel("");
+		searchHiria.setBounds(308, 11, 100, 14);
+		add(searchHiria);
+		searchHiria.setText(h.get(ind).getCity());
 
-		JButton btnSartu = new JButton("Go");
-		if(c.getIsOwner()){
+		
+
+		if (c.getIsOwner()) {
+			if (h.elementAt(ind).getOwner().getLogin().equals(c.getLogin())) {
+				JButton btnSartu = new JButton("Go");
+				btnSartu.setBounds(431, 55, 76, 28);
+				add(btnSartu);
+				btnSartu.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+							ApplicationFacadeInterface facades = StartWindow
+									.getBusinessLogic();
+							Owner o = facades.clienToOwner(c);
+							JFrame a = new GoOwner(h.get(ind), o);
+							a.setVisible(true);
+
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+
+					}
+
+				});
+			}
+
+		} else {
+			JButton btnSartu = new JButton("Go");
+			btnSartu.setBounds(431, 55, 76, 28);
+			add(btnSartu);
 			btnSartu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					JFrame a= new Go(h.get(ind));
+					JFrame a = new GoClient(h.get(ind), c);
 					a.setVisible(true);
 				}
 			});
-			
-		}else{
-			btnSartu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JFrame a= new GoClient(h.get(ind));
-				a.setVisible(true);
-			}
-		});
 		}
-		
-		
-		btnSartu.setBounds(431, 55, 76, 28);
-		add(btnSartu);
 
 		JLabel lblOfertaKop = new JLabel("Oferta kop:");
 		lblOfertaKop.setBounds(418, 11, 68, 14);
@@ -99,41 +123,48 @@ public class FoundPanelClient extends JPanel {
 		// lblFavDa.setBounds(431, 36, 76, 23);
 		// add(lblFavDa);
 		// lblFavDa.setText("Fav da");
-		
-		
+
 		JButton btnNewButton = new JButton("Favorite");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				c.addRuralFav(h.elementAt(ind));
-				
-				//...................
-					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
-						Boolean j=false;
-						try {
-							j = facades.updateClient(c);
-						} catch (RemoteException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}if (j) {
-							System.out.println("ondo update client");
-						} else {
-							System.out.println("gaizki update client");
-						}
-				//.................
-						
+
+				// ...................
+				ApplicationFacadeInterface facades = StartWindow
+						.getBusinessLogic();
+				Boolean j = false;
+				try {
+					j = facades.updateClient(c);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (j) {
+					System.out.println("ondo update client");
+				} else {
+					System.out.println("gaizki update client");
+				}
+				// .................
+
 				btnNewButton.setEnabled(false);
 			}
 		});
 		btnNewButton.setBounds(431, 30, 76, 23);
 		add(btnNewButton);
 		
-		if (h.elementAt(ind).getOwner().getLogin().equals(c.getLogin())){
+		
+		
+		
+
+		// edit
+		if (h.elementAt(ind).getOwner().getLogin().equals(c.getLogin())) {
 			JButton btnEdit = new JButton("Edit");
 			btnEdit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
-						StartWindow.setEditRH((Owner) c,h.get(ind));
+						ApplicationFacadeInterface facades = StartWindow
+								.getBusinessLogic();
+						StartWindow.setEditRH((Owner) c, h.get(ind));
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -143,26 +174,22 @@ public class FoundPanelClient extends JPanel {
 			btnEdit.setBounds(431, 85, 76, 23);
 			add(btnEdit);
 		}
-		
 
 		Vector<RuralHouse> vec = c.getRuralFav();
 		Iterator it = vec.iterator();
 		RuralHouse unekoa = h.elementAt(ind);
-		Integer num=unekoa.getHouseNumber();
-		String city=unekoa.getCity();
+		Integer num = unekoa.getHouseNumber();
+		String city = unekoa.getCity();
 		while (it.hasNext()) {
 			RuralHouse rh = (RuralHouse) it.next();
 			if (unekoa.equals(rh)) {
-				if(rh.getHouseNumber()==num){
-					if(rh.getCity().equals(city)){
+				if (rh.getHouseNumber() == num) {
+					if (rh.getCity().equals(city)) {
 						btnNewButton.setEnabled(false);
-					}				
+					}
 				}
 			}
 		}
-		
-		
-		
 
 	}
 }

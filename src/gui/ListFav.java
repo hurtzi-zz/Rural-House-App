@@ -9,6 +9,7 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -45,13 +46,11 @@ public class ListFav extends JFrame {
 		contentPane.add(FoundPanel);
 		contentPane.setVisible(true);
 		
-		
 	}
 	
 	public static void setListFav(Client c, int ind){
 		contentPane.setVisible(false);
 		contentPane.removeAll();
-		
 		JLabel lblNewJgoodiesTitle = DefaultComponentFactory.getInstance().createTitle("Favorite Rural Houses");
 		lblNewJgoodiesTitle.setFont(new Font("Imprint MT Shadow", Font.PLAIN, 38));
 		lblNewJgoodiesTitle.setBounds(123, 11, 383, 46);
@@ -62,6 +61,16 @@ public class ListFav extends JFrame {
 		FoundPanel.setBounds(10, 51, 622, 494);
 		contentPane.add(FoundPanel);
 		contentPane.setVisible(true);
+		
+		
 	}
+	public void close(){
+		
+	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+	frame.dispose();
+	
+	}
+	
+
 
 }

@@ -1,13 +1,16 @@
 package gui;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
 import java.awt.Color;
+import java.awt.Window;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.Vector;
@@ -16,6 +19,7 @@ import javax.swing.JRadioButton;
 
 import businessLogic.ApplicationFacadeInterface;
 import domain.Client;
+import domain.Owner;
 import domain.RuralHouse;
 
 import java.awt.SystemColor;
@@ -61,9 +65,48 @@ public class FoundPanelFavClient extends JPanel {
 		searchDescription.setBackground(Color.WHITE);
 		searchDescription.setText(h.get(ind).getDescription());
 
-		JButton btnSartu = new JButton("Go");
-		btnSartu.setBounds(448, 93, 45, 26);
-		add(btnSartu);
+		JLabel lblHiria = new JLabel("Hiria:");
+		lblHiria.setBounds(262, 11, 36, 14);
+		add(lblHiria);
+		JLabel searchHiria = new JLabel("");
+		searchHiria.setBounds(308, 11, 100, 14);
+		add(searchHiria);
+		searchHiria.setText(h.get(ind).getCity());
+
+		if (c.getIsOwner()) {
+			if (h.elementAt(ind).getOwner().getLogin().equals(c.getLogin())) {
+				JButton btnSartu = new JButton("Go");
+				btnSartu.setBounds(431, 55, 76, 28);
+				add(btnSartu);
+				btnSartu.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+							ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
+							Owner o = facades.clienToOwner(c);
+							JFrame a = new GoOwner(h.get(ind), o);
+							a.setVisible(true);
+
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+
+					}
+
+				});
+			}
+
+		} else {
+			JButton btnSartu = new JButton("Go");
+			btnSartu.setBounds(425, 64, 76, 28);
+			add(btnSartu);
+			btnSartu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					JFrame a = new GoClient(h.get(ind), c);
+					a.setVisible(true);
+				}
+			});
+		}
 
 		JLabel lblOfertaKop = new JLabel("Oferta kop:");
 		lblOfertaKop.setBounds(418, 11, 68, 14);
@@ -79,56 +122,81 @@ public class FoundPanelFavClient extends JPanel {
 		// add(lblFavDa);
 		// lblFavDa.setText("Fav da");
 
-		
 		JButton btnNewButton = new JButton("Favorite");
-//		btnNewButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				c.addRuralFav(h.elementAt(ind));
-//				btnNewButton.setEnabled(false);
-//			}
-//		});
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				c.addRuralFav(h.elementAt(ind));
+
+				// ...................
+				ApplicationFacadeInterface facades = StartWindow
+						.getBusinessLogic();
+				Boolean j = false;
+				try {
+					j = facades.updateClient(c);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (j) {
+					System.out.println("ondo update client");
+				} else {
+					System.out.println("gaizki update client");
+				}
+				// .................
+
+				btnNewButton.setEnabled(false);
+			}
+		});
 		btnNewButton.setBounds(418, 36, 90, 23);
 		add(btnNewButton);
-		
-		lblHiria = new JLabel("Hiria:");
-		lblHiria.setBounds(10, 34, 46, 14);
-		add(lblHiria);
-		
-		JLabel searchHiria = new JLabel("");
-		searchHiria.setBounds(10, 48, 108, 14);
-		add(searchHiria);
-		searchHiria.setText(h.get(ind).getCity());		
-		
-		
+
 		Vector<RuralHouse> vec = c.getRuralFav();
 		Iterator it = vec.iterator();
 		RuralHouse unekoa = h.elementAt(ind);
 		while (it.hasNext()) {
 			RuralHouse rh = (RuralHouse) it.next();
-			if (unekoa.equals(rh)) {	
+			if (unekoa.equals(rh)) {
 				btnNewButton.setEnabled(false);
-
 			}
-			
-			
-//		JButton btnNewButton_1 = new JButton("Delete Fav");
-//		btnNewButton_1.setForeground(Color.RED);
-//		btnNewButton_1.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				//linked list edo mugitzeko metodoren bat
-//				//vec.remove(ind);
-//			}
-//		});
-//		btnNewButton_1.setBounds(418, 62, 90, 23);
-//		add(btnNewButton_1);
 
-		
-
-		
 		}
-		
-		
-		
+
+		JButton btnNewButton_1 = new JButton("Delete Fav");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// c.addRuralFav(h.elementAt(ind));
+				c.getRuralFav().remove(ind);
+				System.out.println(c.getRuralFav());
+
+				// ...................
+				ApplicationFacadeInterface facades = StartWindow
+						.getBusinessLogic();
+				Boolean j = false;
+				try {
+					j = facades.updateClient(c);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (j) {
+					System.out.println("ondo update client");
+				} else {
+					System.out.println("gaizki update client");
+				}
+				// .................
+				btnNewButton_1.setEnabled(false);
+				close();	
+			}
+		});
+		btnNewButton_1.setForeground(Color.RED);
+		btnNewButton_1.setBounds(418, 98, 90, 23);
+		add(btnNewButton_1);
 
 	}
+
+	public void close() {
+		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+		frame.dispose();
+	}
+
 }

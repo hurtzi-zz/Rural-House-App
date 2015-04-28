@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.Date;
 
+import dataAccess.DataAccessCommon;
 import dataAccess.DataAccessInterface;
 import domain.Booking;
 import domain.Client;
@@ -113,6 +114,11 @@ public interface ApplicationFacadeInterface extends Remote {
 	
 	public Vector<RuralHouse> SarchByOwner(String LoginName) throws RemoteException, Exception;
 
+	//urtzi 3.itera
+    public Boolean RuralHouseRefactorComment(RuralHouse rh) throws RemoteException, Exception;
+
+    
+	public Owner clienToOwner(Client c) throws RemoteException, Exception;
 
 
 }

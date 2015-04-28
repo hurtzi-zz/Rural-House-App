@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import domain.Client;
 import domain.Comment;
+import domain.Owner;
 import domain.RuralHouse;
 import gui.CommentFrame;
 
@@ -26,7 +27,7 @@ import javax.swing.JTextField;
 
 import java.awt.SystemColor;
 
-public class GoClient extends JFrame {
+public class GoOwner extends JFrame {
 
 	private static JPanel contentPane;
 
@@ -36,7 +37,7 @@ public class GoClient extends JFrame {
 
 
 	
-	public GoClient(RuralHouse h, Client c) {
+	public GoOwner(RuralHouse h, Owner c) {
 		
 
 
@@ -69,14 +70,19 @@ public class GoClient extends JFrame {
 		label.setBounds(34, 78, 93, 14);
 		getContentPane().add(label);
 		
-		JButton btnNewButton = new JButton("New Comment & Mark");
+		JButton btnNewButton = new JButton("Delete all Comments & Marks");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame a= new CommentFrame(h,c);
-				a.setVisible(true);
+				h.deleteAllComents();
+				//-.-.-.-.-.---------------------...-...--.-..-.--..--..-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.--.-..-bukatzeko datu basean gorde.
+				
+//				JFrame a= new CommentFrame(h,c);
+//				a.setVisible(true);
+				
 			}
 		});
-		btnNewButton.setBounds(441, 61, 156, 56);
+		btnNewButton.setForeground(Color.RED);
+		btnNewButton.setBounds(380, 61, 217, 56);
 		contentPane.add(btnNewButton);
 		contentPane.setVisible(true);
 
@@ -141,6 +147,8 @@ public class GoClient extends JFrame {
 			}
 			searchAvg.setText(Double.toString(NotaAvg));
 		}
+		
+		
 
 		JLabel lblComments = new JLabel("Comments:");
 		lblComments.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -151,7 +159,7 @@ public class GoClient extends JFrame {
 		// panelComment.setBounds(44, 240, 575, 399);
 		// contentPane.add(panelComment);
 
-		JPanel panelComment = new SearchCommentPanelClient(h, 0, c);
+		JPanel panelComment = new SearchCommentPanelOwner(h, 0, c);
 		panelComment.setBounds(44, 240, 575, 410);
 		contentPane.add(panelComment);
 		contentPane.setVisible(true);
@@ -181,15 +189,17 @@ public class GoClient extends JFrame {
 		label.setBounds(34, 78, 93, 14);
 		contentPane.add(label);
 		
-		JButton btnNewButton = new JButton("New Comment & Mark");
+		JButton btnNewButton = new JButton("Delete all Comments & Marks");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame a= new CommentFrame(h,c);
-				a.setVisible(true);
+				
+//				JFrame a= new CommentFrame(h,c);
+//				a.setVisible(true);
+				
 			}
 		});
-		
-		btnNewButton.setBounds(441, 61, 156, 56);
+		btnNewButton.setForeground(Color.RED);
+		btnNewButton.setBounds(380, 61, 217, 56);
 		contentPane.add(btnNewButton);
 		contentPane.setVisible(true);
 
@@ -266,9 +276,7 @@ public class GoClient extends JFrame {
 		contentPane.setVisible(false);
 		contentPane.removeAll();
 		ini(h,c);
-		// LinkedList<Comment> Lista = h.getComments();
-
-		JPanel panelComment = new SearchCommentPanelClient(h, ind, c);
+		JPanel panelComment = new SearchCommentPanelOwner(h, ind, c);
 		panelComment.setBounds(44, 240, 575, 410);
 		contentPane.add(panelComment);
 		contentPane.setVisible(true);

@@ -26,7 +26,7 @@ import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
 
-public class SearchCommentPanelClient extends JPanel {
+public class SearchCommentPanelOwner extends JPanel {
 
 	/**
 	 * Create the panel.
@@ -34,7 +34,7 @@ public class SearchCommentPanelClient extends JPanel {
 	public int page;
 	public LinkedList<Comment> comments;
 	
-	public SearchCommentPanelClient(RuralHouse h, int pag, Client c) {
+	public SearchCommentPanelOwner(RuralHouse h, int pag, Client c) {
 		
 		this.page = pag;
 		this.comments = h.getComments();
@@ -52,37 +52,37 @@ public class SearchCommentPanelClient extends JPanel {
 
 		if (orriKopu == 0) {
 			if (lekuak == 1) {
-				JPanel panel1 = new CommentPanel(comments, pag);
+				JPanel panel1 = new CommentPanelOwner(comments, pag);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(12, 2, 542, 90);
 				add(panel1);
 				panel1.setLayout(null);
 			} else if (lekuak == 2) {
-				JPanel panel1 = new CommentPanel(comments, pag);
+				JPanel panel1 = new CommentPanelOwner(comments, pag);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(12, 2, 542, 90);
 				add(panel1);
 				panel1.setLayout(null);
 
-				JPanel panel2 = new CommentPanel(comments, pag + 1);
+				JPanel panel2 = new CommentPanelOwner(comments, pag + 1);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
 				panel1.setBounds(12, 102, 542, 90);
 				add(panel2);
 			} else if (lekuak == 3) {
-				JPanel panel1 = new CommentPanel(comments, pag);
+				JPanel panel1 = new CommentPanelOwner(comments, pag);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(12, 202, 542, 90);
 				add(panel1);
 				panel1.setLayout(null);
 
-				JPanel panel2 = new CommentPanel(comments, pag + 1);
+				JPanel panel2 = new CommentPanelOwner(comments, pag + 1);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
 				panel1.setBounds(12, 102, 542, 90);
 				add(panel2);
 
-				JPanel panel3 = new CommentPanel(comments, pag + 2);
+				JPanel panel3 = new CommentPanelOwner(comments, pag + 2);
 				panel3.setLayout(null);
 				panel3.setBackground(Color.WHITE);
 				panel1.setBounds(12, 202, 542, 90);
@@ -99,7 +99,7 @@ public class SearchCommentPanelClient extends JPanel {
 				btnPrevious.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						page--;
-						GoClient.setCommentPanel(h, (page - 2),c);
+						GoOwner.setCommentPanel(h, (page - 2),c);
 					}
 				});
 			}
@@ -115,7 +115,7 @@ public class SearchCommentPanelClient extends JPanel {
 				btnNext.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						page++;
-						GoClient.setCommentPanel(h, (page + 2),c);
+						GoOwner.setCommentPanel(h, (page + 2),c);
 					}
 
 				});
@@ -133,37 +133,37 @@ public class SearchCommentPanelClient extends JPanel {
 			pagNext.setText("Page " + (pag / 3 + 2));
 
 			if (lekuak == 1) {
-				JPanel panel1 = new CommentPanel(comments, pag);
+				JPanel panel1 = new CommentPanelOwner(comments, pag);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(12, 2, 542, 90);
 				add(panel1);
 				panel1.setLayout(null);
 			} else if (lekuak == 2) {
-				JPanel panel1 = new CommentPanel(comments, pag);
+				JPanel panel1 = new CommentPanelOwner(comments, pag);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(12, 102, 542, 90);
 				add(panel1);
 				panel1.setLayout(null);
 
-				JPanel panel2 = new CommentPanel(comments, pag + 1);
+				JPanel panel2 = new CommentPanelOwner(comments, pag + 1);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
 				panel2.setBounds(12, 202, 542, 90);
 				add(panel2);
 			} else if (lekuak == 3) {
-				JPanel panel1 = new CommentPanel(comments, pag);
+				JPanel panel1 = new CommentPanelOwner(comments, pag);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(12, 2, 542, 90);
 				add(panel1);
 				panel1.setLayout(null);
 
-				JPanel panel2 = new CommentPanel(comments, pag + 1);
+				JPanel panel2 = new CommentPanelOwner(comments, pag + 1);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
 				panel1.setBounds(12, 102, 542, 90);
 				add(panel2);
 
-				JPanel panel3 = new CommentPanel(comments, pag + 2);
+				JPanel panel3 = new CommentPanelOwner(comments, pag + 2);
 				panel3.setLayout(null);
 				panel3.setBackground(Color.WHITE);
 				panel1.setBounds(12, 202, 542, 90);
@@ -171,19 +171,19 @@ public class SearchCommentPanelClient extends JPanel {
 			}
 		} else {
 
-			JPanel panel1 = new CommentPanel(comments, pag);
+			JPanel panel1 = new CommentPanelOwner(comments, pag);
 			panel1.setBackground(Color.WHITE);
 			panel1.setBounds(12, 2, 542, 90);
 			add(panel1);
 			panel1.setLayout(null);
 
-			JPanel panel2 = new CommentPanel(comments, pag + 1);
+			JPanel panel2 = new CommentPanelOwner(comments, pag + 1);
 			panel2.setLayout(null);
 			panel2.setBackground(Color.WHITE);
 			panel2.setBounds(12, 102, 542, 90);
 			add(panel2);
 
-			JPanel panel3 = new CommentPanel(comments, pag + 2);
+			JPanel panel3 = new CommentPanelOwner(comments, pag + 2);
 			panel3.setLayout(null);
 			panel3.setBackground(Color.WHITE);
 			panel3.setBounds(12, 202, 542, 90);
@@ -199,7 +199,7 @@ public class SearchCommentPanelClient extends JPanel {
 				btnPrevious.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						page--;
-						GoClient.setCommentPanel(h, (page - 2),c);
+						GoOwner.setCommentPanel(h, (page - 2),c);
 					}
 				});
 			}
@@ -215,7 +215,7 @@ public class SearchCommentPanelClient extends JPanel {
 				btnNext.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						page++;
-						GoClient.setCommentPanel(h, (page + 2),c);
+						GoOwner.setCommentPanel(h, (page + 2),c);
 					}
 
 				});

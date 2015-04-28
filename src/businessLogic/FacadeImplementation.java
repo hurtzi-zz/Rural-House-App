@@ -211,7 +211,11 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 	}
 	
 	//urtzi 3.itera
-	public RuralHouse  RuralHouseRefactorComment(RuralHouse rh) throws RemoteException, Exception {
-		DataAccessCommon.getInstance().RuralHouseRefactorComment(rh);	
+	public Boolean RuralHouseRefactorComment(RuralHouse rh) throws RemoteException, Exception {
+		return DataAccessCommon.getInstance().RuralHouseRefactorComment(rh);	
+	}
+
+	public Owner clienToOwner(Client c) throws RemoteException, Exception {
+		return DataAccessCommon.getInstance().clienToOwner(c);
 	}
 }

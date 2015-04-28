@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Vector;
 
 import com.db4o.ObjectContainer;
@@ -60,6 +61,9 @@ public class DataAccessCommon implements DataAccessInterface {
 
 	public void initializeDB() {
 
+		Client cl2 = new Client("q", "q", "q", "q", false,
+				new Vector<RuralHouse>());
+
 		Client cl0 = new Client("clientName", "clientSurname", "nickName",
 				"pass", false, new Vector<RuralHouse>());
 
@@ -75,7 +79,7 @@ public class DataAccessCommon implements DataAccessInterface {
 				new Vector<RuralHouse>());
 
 		Owner ow2 = new Owner(987654321, null, new Vector<RuralHouse>(),
-				"Itziar", "Altuna", "jaltuna", "000", true,
+				"Itziar", "Altuna", "a", "a", true,
 				new Vector<RuralHouse>());
 
 		Owner ow3 = new Owner(652729490, "1rrrrrr", new Vector<RuralHouse>(),
@@ -93,22 +97,18 @@ public class DataAccessCommon implements DataAccessInterface {
 		ow2.addRuralHouse(2, "Gaztetxea", "donos");
 		ow2.addRuralHouse(1, "Gaztetxea", "donos");
 
-		
-		Comment co1 = new Comment(cl1,10,"putamadre dago");
-		Comment co2 = new Comment(cl0,2,"mierde");
-		Comment co3 = new Comment(cl0,5,"ok");
-		Comment co4 = new Comment(cl0,6,"ondoo");
+		Comment co1 = new Comment(cl1, 10, "putamadre dago");
+		Comment co2 = new Comment(cl0, 2, "mierde");
+		Comment co3 = new Comment(cl0, 5, "ok");
+		Comment co4 = new Comment(cl0, 6, "ondoo");
 
-		RuralHouse rh= ow2.addRuralHouse(5, "Gaztetxea", "a");
-		
+		RuralHouse rh = ow2.addRuralHouse(5, "Gaztetxea", "a");
+
 		rh.addComent(co1);
 		rh.addComent(co2);
 		rh.addComent(co3);
 		rh.addComent(co4);
-		
-		
-		
-		
+
 		ow2.addRuralHouse(3, "Gaztetxea", "a");
 		ow2.addRuralHouse(2, "Gaztetxea", "a");
 		ow2.addRuralHouse(1, "Gaztetxea", "a");
@@ -117,6 +117,7 @@ public class DataAccessCommon implements DataAccessInterface {
 
 		db.store(cl0);
 		db.store(cl1);
+		db.store(cl2);
 
 		db.store(ow0);
 		db.store(ow1);
@@ -679,29 +680,87 @@ public class DataAccessCommon implements DataAccessInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public Vector<RuralHouse> SarchByOwner(String LoginName) {
 
-			Owner galdera = new Owner(null,null, null,null,null,LoginName, null, true,null);
-			
-			try {
-				ObjectContainer db = DataAccessCommon.getContainer();
-				ObjectSet result = db.queryByExample(galdera);
-				if (result.hasNext()) {
-					Owner o = (Owner) result.next();
-					return (o.getRuralHouses());
-				} else {
-					return null;
-				}
-			} catch (Exception exc) {
-				exc.printStackTrace();
+		Owner galdera = new Owner(null, null, null, null, null, LoginName,
+				null, true, null);
+
+		try {
+			ObjectContainer db = DataAccessCommon.getContainer();
+			ObjectSet result = db.queryByExample(galdera);
+			if (result.hasNext()) {
+				Owner o = (Owner) result.next();
+				return (o.getRuralHouses());
+			} else {
 				return null;
 			}
+		} catch (Exception exc) {
+			exc.printStackTrace();
+			return null;
 		}
-	
-//33333333333
-	public void RuralHouseRefactorComment(RuralHouse rh) {
-		// TODO Auto-generated method stub
-		
 	}
+
+	// 33333333333
+
+	public Boolean RuralHouseRefactorComment(RuralHouse rh) {
+
+		System.out.println("getHouseNumber: " + rh.getHouseNumber());
+		System.out.println("getOwner: " + rh.getOwner().getName());
+		System.out.println("getCity: " + rh.getCity());
+		
+		System.out.println("*********************1");
+		ImpgetAllRuralHouses(getAllRuralHouses());
+		System.out.println("*********************2");
+		Owner bezeroa = rh.getOwner();
+		Vector<Offer> vo = rh.getOffers();
+		LinkedList<Comment> lc = rh.getComments();
+		
+		inprimatuEtxeakOwner(bezeroa);
+		System.out.println("*********************3");
+
+		RuralHouse galdera = new RuralHouse(rh.getHouseNumber(), null, null, rh.getCity());
+
+
+		try {
+			ObjectContainer db = DataAccessCommon.getContainer();
+			ObjectSet result = db.queryByExample(galdera);
+
+			System.out.println("result.size(): " + result.size());
+
+			int i = 0;
+			if(result.hasNext()) {
+				System.out.println("-------------i: " + i);
+				RuralHouse b = (RuralHouse) result.next();
+				
+				
+				b.imprimatu();
+				System.out.println("*********************4");
+
+				db.delete(b);
+				db.commit();
+
+				RuralHouse update = new RuralHouse(rh.getHouseNumber(),
+						rh.getOwner(), rh.getDescription(), rh.getCity());
+				update.setComments(lc);
+				update.setOffers(vo);
+
+				db.store(update);
+				db.commit();
+
+				i++;
+
+			} if (result.size()<1) {
+				return false;
+			}
+			return true;
+		} catch (Exception exc) {
+			exc.printStackTrace();
+			return false;
+		}
+
+	}
+
+	
+
 }

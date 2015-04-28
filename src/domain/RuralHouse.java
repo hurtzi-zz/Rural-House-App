@@ -20,7 +20,7 @@ public class RuralHouse implements Serializable {
 	private Owner owner;
 	private String city;
 	public Vector<Offer> offers = new Vector<Offer>();
-	public LinkedList<Comment> comments;
+	public LinkedList<Comment> comments = new LinkedList<Comment>();
 
 	public RuralHouse() {
 		super();
@@ -34,6 +34,25 @@ public class RuralHouse implements Serializable {
 		this.city = city;
 		offers = new Vector<Offer>();
 		comments = new LinkedList<Comment>();
+	}
+
+	public Vector<Offer> getOffers() {
+		return this.offers;
+	}
+	
+	public void setOffers(Vector<Offer> offers) {
+		this.offers = offers;
+	}
+	
+	
+	public LinkedList<Comment> getComments() {
+		return this.comments;
+	}
+
+	
+
+	public void setComments(LinkedList<Comment> comments) {
+		this.comments = comments;
 	}
 
 	public int getHouseNumber() {
@@ -76,21 +95,12 @@ public class RuralHouse implements Serializable {
 		return this.houseNumber + ": " + this.city;
 	}
 
-	/**
-	 * This method creates an offer with a house number, first day, last day and
-	 * price
-	 * 
-	 * @param House
-	 *            number, start day, last day and price
-	 * @return None
-	 */
 	public Offer createOffer(Date firstDay, Date lastDay, float price) {
 		Offer off = new Offer(/* offerNumber, */this, firstDay, lastDay, price);
 		offers.add(off);
 		return off;
 	}
 
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -98,7 +108,6 @@ public class RuralHouse implements Serializable {
 		return result;
 	}
 
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -112,36 +121,6 @@ public class RuralHouse implements Serializable {
 		return true;
 	}
 
-	/**
-	 * This method obtains the account number of the owner of the house number
-	 * 
-	 * @param houseNumber
-	 *            Number of the house
-	 * @return Owner account number of the house
-	 */
-	public String getAccountNumber(int houseNumber) {
-		/*
-		 * try { dbMngr=DBManager.getInstance(); return
-		 * dbMngr.getOwner(houseNumber).getBankAccount();
-		 * 
-		 * } catch (Exception e) {
-		 * System.out.println("Error, accessing to DB Manager: " +
-		 * e.toString()); return null; }
-		 */return null;
-	}
-
-	/**
-	 * This method obtains available offers for a concrete house in a certain
-	 * period
-	 * 
-	 * @param houseNumber
-	 *            , the house number where the offers must be obtained
-	 * @param firstDay
-	 *            , first day in a period range
-	 * @param lastDay
-	 *            , last day in a period range
-	 * @return a vector of offers(Offer class) available in this period
-	 */
 	public Vector<Offer> getOffers(Date firstDay, Date lastDay) {
 
 		Vector<Offer> availableOffers = new Vector<Offer>();
@@ -158,16 +137,6 @@ public class RuralHouse implements Serializable {
 
 	}
 
-	/**
-	 * This method obtains the offer that match exactly with a given dates that
-	 * has not been booked
-	 * 
-	 * @param firstDay
-	 *            , first day in a period range
-	 * @param lastDay
-	 *            , last day in a period range
-	 * @return the offer(Offer class) available for a this period
-	 */
 	public Offer findOffer(Date firstDay, Date lastDay) {
 
 		Iterator<Offer> e = offers.iterator();
@@ -182,17 +151,6 @@ public class RuralHouse implements Serializable {
 		return null;
 
 	}
-
-	/**
-	 * This method obtains the first offer that overlaps with the provided dates
-	 * 
-	 * @param firstDay
-	 *            , first day in a period range
-	 * @param lastDay
-	 *            , last day in a period range
-	 * @return the first offer that overlaps with those dates, or null if there
-	 *         is no overlapping offer
-	 */
 
 	public Offer overlapsWith(Date firstDay, Date lastDay) {
 
@@ -230,10 +188,7 @@ public class RuralHouse implements Serializable {
 
 	}
 
-
-	public LinkedList<Comment> getComments() {
-		return comments;
-	}
+	
 
 	public Comment addComent(Client cli, int botoa, String comme) {
 		Comment com = new Comment(cli, botoa, comme);
@@ -245,7 +200,9 @@ public class RuralHouse implements Serializable {
 	public void addComent(Comment co) {
 		this.comments.add(co);
 	}
-
-
+	
+	public void deleteAllComents() {
+		this.comments.removeAll(this.comments);
+	}
 
 }

@@ -76,6 +76,14 @@ public class FoundPanel extends JPanel {
 		add(searchOfert);
 		searchOfert.setText(Integer.toString(h.get(ind).getOffer().size()));
 
+		
+		JLabel lblHiria = new JLabel("Hiria:");
+		lblHiria.setBounds(262, 11, 36, 14);
+		add(lblHiria);
+		JLabel searchHiria = new JLabel("");
+		searchHiria.setBounds(308, 11, 100, 14);
+		add(searchHiria);
+		searchHiria.setText(h.get(ind).getCity());
 	}
 	
 	

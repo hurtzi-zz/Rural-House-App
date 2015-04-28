@@ -18,21 +18,21 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
-public class CommentPanel extends JPanel {
+public class CommentPanelOwner extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public CommentPanel(LinkedList<Comment> commentList, int ind) {
+	public CommentPanelOwner(LinkedList<Comment> commentList, int ind) {
 		setLayout(null);
 		
 
 		JLabel lblOwner = new JLabel("Data:");
-		lblOwner.setBounds(173, 11, 46, 14);
+		lblOwner.setBounds(123, 11, 46, 14);
 		add(lblOwner);
 		
 		JLabel searchDate = new JLabel("");
-		searchDate.setBounds(206, 11, 171, 14);
+		searchDate.setBounds(156, 11, 138, 14);
 		add(searchDate);
 		SimpleDateFormat sf = new SimpleDateFormat("dd-MM-YYYY"); 
         DateFormat formatoHora = new SimpleDateFormat("HH:mm");
@@ -53,12 +53,12 @@ public class CommentPanel extends JPanel {
 
 		JLabel lblVote = new JLabel("Vote:");
 		lblVote.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblVote.setBounds(478, 11, 38, 14);
+		lblVote.setBounds(305, 11, 38, 14);
 		add(lblVote);
 		
 		JLabel searchVote = new JLabel("");
 		searchVote.setFont(new Font("Tahoma", Font.BOLD, 11));
-		searchVote.setBounds(514, 11, 32, 14);
+		searchVote.setBounds(341, 11, 32, 14);
 		add(searchVote);
 		Integer Nota = commentList.get(ind).getBotua(); 
 		if(Nota>=8){
@@ -80,17 +80,25 @@ public class CommentPanel extends JPanel {
 		add(lblComment);
 
 		JLabel searchComment = new JLabel("");
-		searchComment.setBounds(20, 52, 552, 26);
+		searchComment.setBounds(20, 52, 513, 26);
 		add(searchComment);
 		searchComment.setBackground(Color.WHITE);
 		searchComment.setText(commentList.get(ind).getComent());
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				commentList.remove(ind);
+				//-+--+-+-+-+-+-+-+---+-++-+----+-+-++-+-+-+-+-+--+-+--+-+-+--+-+-+-+-+-+-+++-+--+--+-+-+-+--+-+-+-+datu basean gorde
+			}
+		});
+		btnDelete.setForeground(Color.RED);
+		btnDelete.setBounds(444, 7, 89, 23);
+		add(btnDelete);
 		
 		
 		
 		
 
 	}
-	
-
-
 }
