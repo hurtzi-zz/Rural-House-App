@@ -11,7 +11,9 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import domain.Client;
@@ -24,6 +26,8 @@ import java.awt.Font;
 
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+
+import businessLogic.ApplicationFacadeInterface;
 
 import java.awt.SystemColor;
 
@@ -70,19 +74,37 @@ public class GoOwner extends JFrame {
 		label.setBounds(34, 78, 93, 14);
 		getContentPane().add(label);
 		
+		JLabel lblStoreDelet = new JLabel("");
+		lblStoreDelet.setHorizontalAlignment(SwingConstants.CENTER);
+		lblStoreDelet.setBounds(391, 123, 194, 14);
+		contentPane.add(lblStoreDelet);
+		contentPane.setVisible(true);
+		
 		JButton btnNewButton = new JButton("Delete all Comments & Marks");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				h.deleteAllComents();
-				//-.-.-.-.-.---------------------...-...--.-..-.--..--..-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.--.-..-bukatzeko datu basean gorde.
-				
-//				JFrame a= new CommentFrame(h,c);
-//				a.setVisible(true);
+				ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
+				try {
+					Boolean rhUpdate = facades.deleteAllCom(h);
+					if(rhUpdate){
+						lblStoreDelet.setForeground(Color.GREEN);
+						lblStoreDelet.setText("Komentario guztiak ezabatu dira");
+						JOptionPane.showMessageDialog(null,"Komentario guztiak ezabatu dira", "Information",JOptionPane.INFORMATION_MESSAGE);
+						//close();
+						dispose();
+					}else{
+						lblStoreDelet.setForeground(Color.RED);
+						lblStoreDelet.setText("Komentarioa gaizki gorde da");
+					}
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 		});
 		btnNewButton.setForeground(Color.RED);
-		btnNewButton.setBounds(380, 61, 217, 56);
+		btnNewButton.setBounds(381, 57, 217, 56);
 		contentPane.add(btnNewButton);
 		contentPane.setVisible(true);
 
@@ -93,7 +115,7 @@ public class GoOwner extends JFrame {
 
 		JTextField searchDescription = new JTextField("");
 		searchDescription.setEditable(false);
-		searchDescription.setBounds(54, 144, 544, 38);
+		searchDescription.setBounds(54, 148, 544, 37);
 		getContentPane().add(searchDescription);
 		searchDescription.setBackground(new Color(245, 245, 245));
 		searchDescription.setText(h.getDescription());
@@ -162,7 +184,8 @@ public class GoOwner extends JFrame {
 		JPanel panelComment = new SearchCommentPanelOwner(h, 0, c);
 		panelComment.setBounds(44, 240, 575, 410);
 		contentPane.add(panelComment);
-		contentPane.setVisible(true);
+		
+		
 
 	}
 
@@ -189,17 +212,36 @@ public class GoOwner extends JFrame {
 		label.setBounds(34, 78, 93, 14);
 		contentPane.add(label);
 		
+		JLabel lblStoreDelet = new JLabel("");
+		lblStoreDelet.setHorizontalAlignment(SwingConstants.CENTER);
+		lblStoreDelet.setBounds(391, 123, 194, 14);
+		contentPane.add(lblStoreDelet);
+		contentPane.setVisible(true);
+		
 		JButton btnNewButton = new JButton("Delete all Comments & Marks");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-//				JFrame a= new CommentFrame(h,c);
-//				a.setVisible(true);
+				ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
+				try {
+					Boolean rhUpdate = facades.deleteAllCom(h);
+					if(rhUpdate){
+						lblStoreDelet.setForeground(Color.GREEN);
+						lblStoreDelet.setText("Komentario guztiak ezabatu dira");
+						JOptionPane.showMessageDialog(null,"Komentario guztiak ezabatu dira", "Information",JOptionPane.INFORMATION_MESSAGE);
+						//close();
+					}else{
+						lblStoreDelet.setForeground(Color.RED);
+						lblStoreDelet.setText("Komentarioa gaizki gorde da");
+					}
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 		});
 		btnNewButton.setForeground(Color.RED);
-		btnNewButton.setBounds(380, 61, 217, 56);
+		btnNewButton.setBounds(381, 57, 217, 56);
 		contentPane.add(btnNewButton);
 		contentPane.setVisible(true);
 
@@ -282,5 +324,9 @@ public class GoOwner extends JFrame {
 		contentPane.setVisible(true);
 
 	}
-
+	
+	public void close() {
+		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+		frame.dispose();
+	}
 }

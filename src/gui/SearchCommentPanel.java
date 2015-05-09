@@ -39,10 +39,11 @@ public class SearchCommentPanel extends JPanel {
 		this.comments = h.getComments();
 
 		setLayout(null);
-		int etxeKopu = comments.size();
-		int lekuak = etxeKopu;
+		int ComKopu = comments.size();
+		int lekuak = ComKopu;
 		int orriKopu = 0;
-		System.out.println("etxeKop: " + etxeKopu);
+		System.out.println("ComKopu: " + ComKopu);
+		
 		while (lekuak > 3) {
 			orriKopu++;
 			lekuak = lekuak - 3;
@@ -56,7 +57,21 @@ public class SearchCommentPanel extends JPanel {
 				panel1.setBounds(12, 2, 542, 90);
 				add(panel1);
 				panel1.setLayout(null);
+				
 			} else if (lekuak == 2) {
+				JPanel panel2 = new CommentPanel(comments, pag + 1);
+				panel2.setLayout(null);
+				panel2.setBackground(Color.WHITE);
+				panel2.setBounds(12, 102, 542, 90);
+				add(panel2);
+
+				JPanel panel3 = new CommentPanel(comments, pag + 2);
+				panel3.setLayout(null);
+				panel3.setBackground(Color.WHITE);
+				panel3.setBounds(12, 202, 542, 90);
+				add(panel3);
+				
+			} else if (lekuak == 3) {
 				JPanel panel1 = new CommentPanel(comments, pag);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(12, 2, 542, 90);
@@ -66,25 +81,13 @@ public class SearchCommentPanel extends JPanel {
 				JPanel panel2 = new CommentPanel(comments, pag + 1);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
-				panel1.setBounds(12, 102, 542, 90);
-				add(panel2);
-			} else if (lekuak == 3) {
-				JPanel panel1 = new CommentPanel(comments, pag);
-				panel1.setBackground(Color.WHITE);
-				panel1.setBounds(12, 202, 542, 90);
-				add(panel1);
-				panel1.setLayout(null);
-
-				JPanel panel2 = new CommentPanel(comments, pag + 1);
-				panel2.setLayout(null);
-				panel2.setBackground(Color.WHITE);
-				panel1.setBounds(12, 102, 542, 90);
+				panel2.setBounds(12, 102, 542, 90);
 				add(panel2);
 
 				JPanel panel3 = new CommentPanel(comments, pag + 2);
 				panel3.setLayout(null);
 				panel3.setBackground(Color.WHITE);
-				panel1.setBounds(12, 202, 542, 90);
+				panel3.setBounds(12, 202, 542, 90);
 				add(panel3);
 			}
 		} else if ((page + 1) > (orriKopu * 3)) {
@@ -134,20 +137,21 @@ public class SearchCommentPanel extends JPanel {
 			if (lekuak == 1) {
 				JPanel panel1 = new CommentPanel(comments, pag);
 				panel1.setBackground(Color.WHITE);
-				panel1.setBounds(12, 2, 542, 90);
+				panel1.setBounds(12, 002, 542, 90);
 				add(panel1);
 				panel1.setLayout(null);
+				
 			} else if (lekuak == 2) {
 				JPanel panel1 = new CommentPanel(comments, pag);
 				panel1.setBackground(Color.WHITE);
-				panel1.setBounds(12, 102, 542, 90);
+				panel1.setBounds(12, 2, 542, 90);
 				add(panel1);
 				panel1.setLayout(null);
 
 				JPanel panel2 = new CommentPanel(comments, pag + 1);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
-				panel2.setBounds(12, 202, 542, 90);
+				panel2.setBounds(12, 102, 542, 90);
 				add(panel2);
 			} else if (lekuak == 3) {
 				JPanel panel1 = new CommentPanel(comments, pag);
@@ -159,13 +163,13 @@ public class SearchCommentPanel extends JPanel {
 				JPanel panel2 = new CommentPanel(comments, pag + 1);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
-				panel1.setBounds(12, 102, 542, 90);
+				panel2.setBounds(12, 102, 542, 90);
 				add(panel2);
 
 				JPanel panel3 = new CommentPanel(comments, pag + 2);
 				panel3.setLayout(null);
 				panel3.setBackground(Color.WHITE);
-				panel1.setBounds(12, 202, 542, 90);
+				panel3.setBounds(12, 202, 542, 90);
 				add(panel3);
 			}
 		} else {

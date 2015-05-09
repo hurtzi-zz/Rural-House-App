@@ -90,7 +90,7 @@ public class DataAccessCommon implements DataAccessInterface {
 				"vito");
 		ow3.addRuralHouse(2, "SomoEtxe", "vito");
 		ow1.addRuralHouse(3, "Etxetxikia", "vito");
-		ow1.addRuralHouse(4, "Udaletxea", "vito");
+		ow1.addRuralHouse(5, "Udaletxea", "vito");
 		ow1.addRuralHouse(1, "Ezkioko etxea", "Sanse");
 		ow2.addRuralHouse(5, "Gaztetxea", "vito");
 		ow2.addRuralHouse(3, "Gaztetxea", "donos");
@@ -99,21 +99,40 @@ public class DataAccessCommon implements DataAccessInterface {
 
 		Comment co1 = new Comment(cl1, 10, "putamadre dago");
 		Comment co2 = new Comment(cl0, 2, "mierde");
-		Comment co3 = new Comment(cl0, 5, "ok");
+		Comment co3 = new Comment(cl2, 5, "ok");
 		Comment co4 = new Comment(cl0, 6, "ondoo");
+		
+		Comment co5 = new Comment(cl1, 10, "putamadre ssdago");
+		Comment co6 = new Comment(cl2, 1, "mierdessss");
+		Comment co7 = new Comment(cl0, 3, "okaaa");
+		
+		Comment co8 = new Comment(cl2, 3, "putamadre dago");
+		Comment co9 = new Comment(cl0, 2, "mierde");
 
-		RuralHouse rh = ow2.addRuralHouse(5, "Gaztetxea", "a");
+		
+		Comment co10 = new Comment(cl2, 9, "putamadressssss dago");
 
+
+		RuralHouse rh = ow2.addRuralHouse(4, "Gaztetxearerte", "a");
 		rh.addComent(co1);
 		rh.addComent(co2);
 		rh.addComent(co3);
 		rh.addComent(co4);
 
-		ow2.addRuralHouse(3, "Gaztetxea", "a");
-		ow2.addRuralHouse(2, "Gaztetxea", "a");
-		ow2.addRuralHouse(1, "Gaztetxea", "a");
+		
+		RuralHouse rh1 = ow2.addRuralHouse(3, "Gaztetxeaee", "a");
+		rh1.addComent(co5);
+		rh1.addComent(co6);
+		rh1.addComent(co7);
+		
+		RuralHouse rh2 = ow2.addRuralHouse(2, "Gaztetxeargg", "a");
+		rh2.addComent(co8);
+		rh2.addComent(co9);
+		
+		RuralHouse rh3 = ow2.addRuralHouse(1, "Gaztetxeadf", "a");
+		rh3.addComent(co10);
 
-		ow1.setBankAccount("1234berri");
+
 
 		db.store(cl0);
 		db.store(cl1);
@@ -761,6 +780,108 @@ public class DataAccessCommon implements DataAccessInterface {
 
 	}
 
+	public RuralHouse addComment(Client c, int botua, String kom, RuralHouse rh) {
+		rh.addComent(c, botua, kom);
+        return rh;
+	}
+	
+	public Boolean updateHouse(RuralHouse rh) {
+		db.store(rh);
+		db.commit();
+		return true;
+	}
+	public Boolean updateHouse2(RuralHouse rh) {
+
+		
+		System.out.println("*********************1");
+		ImpgetAllRuralHouses(getAllRuralHouses());
+		System.out.println("*********************2");
+		Owner bezeroa = rh.getOwner();
+		Vector<Offer> vo = rh.getOffers();
+		LinkedList<Comment> lc = rh.getComments();
+		
+		System.out.println("*********************3");
+		if(lc.size()<1){
+			System.out.println("no comments");
+		}else{
+			for(int i = 0; i<lc.size(); i++){
+				System.out.print("("+i+"):--> ");
+				System.out.print(Integer.toString(lc.get(i).getBotua())+", ");
+				System.out.print(lc.get(i).getComent()+", ");
+				System.out.println(lc.get(i).getEgilea().getLogin()+" ");
+			}
+		}		
+		System.out.println("*********************4");
+
+		
+		inprimatuEtxeakOwner(bezeroa);
+		System.out.println("*********************5");
+
+		RuralHouse galdera = new RuralHouse(rh.getHouseNumber(), null, null, rh.getCity());
+		
+		try {
+			ObjectContainer db = DataAccessCommon.getContainer();
+			ObjectSet result = db.queryByExample(galdera);
+
+			System.out.println("result.size(): " + result.size());
+
+			int i = 0;
+			if(result.hasNext()) {
+				System.out.println("-------------i: " + i);
+				RuralHouse b = (RuralHouse) result.next();
+								
+				b.imprimatu();
+				System.out.println("*********************4");
+
+				db.delete(b);
+				db.commit();
+
+				RuralHouse update = new RuralHouse(rh.getHouseNumber(),rh.getOwner(), rh.getDescription(), rh.getCity());
+				update.setComments(lc);
+				update.setOffers(vo);
+
+				db.store(update);
+				db.commit();
+
+				db.store(rh);
+				db.commit();
+				
+				i++;
+
+			} if (result.size()<1) {
+				return false;
+			}
+			return true;
+		} catch (Exception exc) {
+			exc.printStackTrace();
+			return false;
+		}
+
+	}
+
+	
+	public Boolean deleteAllCom(RuralHouse rh) {
+		int kop= rh.getComments().size();
+		System.out.println("kop1----------------->"+kop);
+		for(int i=0; i<kop; i++){
+			System.out.println("delete: "+i);
+			rh.getComments().remove();
+		}
+		System.out.println("kop2----------------->"+rh.getComments().size());
+		db.store(rh);
+		db.commit();
+		return true;
+	}
+
+	public Boolean deleteCom(RuralHouse rh, int i) {
+//		RuralHouse rhn = (RuralHouse) db.queryByExample(new RuralHouse(rh.getHouseNumber(), null, null, null)).next();
+//		System.out.println("botua:" +rhn.getComments().get(i).getBotua());
+//		rhn.getComments().remove(i);
+		rh.getComments().remove(i);
+		db.store(rh);
+		db.commit();
+		return true;
+	}
 	
 
 }

@@ -119,7 +119,6 @@ public class CommentFrame extends JFrame {
 				if (!notStr.equals("") && !com.equals("")) {
 					int not = Integer.parseInt(notStr);
 					
-					Comment newComment = new Comment(c,not,com);
 					System.out.println("*********************11");
 					DataAccessCommon.getInstance().inprimatuEtxeakOwner(h.getOwner());
 					
@@ -136,16 +135,22 @@ public class CommentFrame extends JFrame {
 						}
 					}System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 
-					h.addComent(newComment);					
+	
 					
-					System.out.println("*********************22");
-					DataAccessCommon.getInstance().inprimatuEtxeakOwner(h.getOwner());
 					
+					//111111111111
 					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
 					
 					
 					try {
-						Boolean rhUpdate = facades.RuralHouseRefactorComment(h);
+						//22222222222222
+						//Boolean rhUpdate = facades.RuralHouseRefactorComment(h);
+						RuralHouse rhUp = facades.addComment(c,not,com,h);
+						Boolean rhUpdate = facades.updateHouse(rhUp);
+						
+						System.out.println("*********************22");
+						DataAccessCommon.getInstance().inprimatuEtxeakOwner(h.getOwner());
+						
 						if(rhUpdate){
 							lblStoreConf.setForeground(Color.GREEN);
 							lblStoreConf.setText("Komentarioa ondo gorde da");

@@ -167,6 +167,10 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 			throws RemoteException {
 		return DataAccessCommon.getInstance().deleteRuralHouse(o, rh);
 	}
+	
+    public Owner clienToOwner(Client c) throws RemoteException, Exception {
+		return DataAccessCommon.getInstance().clienToOwner(c);
+	}
 
 	public Owner clientToOwner(Client t) throws RemoteException, Exception {
 
@@ -211,11 +215,22 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 	}
 	
 	//urtzi 3.itera
-	public Boolean RuralHouseRefactorComment(RuralHouse rh) throws RemoteException, Exception {
-		return DataAccessCommon.getInstance().RuralHouseRefactorComment(rh);	
+	public RuralHouse addComment(Client c, int botua, String kom, RuralHouse rh) throws RemoteException, Exception {
+		return DataAccessCommon.getInstance().addComment(c,botua, kom,rh);	
+	}
+	
+    public Boolean updateHouse(RuralHouse rh) throws RemoteException, Exception{
+		return DataAccessCommon.getInstance().updateHouse(rh);	
 	}
 
-	public Owner clienToOwner(Client c) throws RemoteException, Exception {
-		return DataAccessCommon.getInstance().clienToOwner(c);
-	}
+    public Boolean deleteAllCom(RuralHouse rh) throws RemoteException, Exception{
+  		return DataAccessCommon.getInstance().deleteAllCom(rh);	
+  	}
+    
+    public Boolean deleteCom(RuralHouse rh,int i) throws RemoteException, Exception{
+  		return DataAccessCommon.getInstance().deleteCom(rh,i);	
+  	}
+
+
+	
 }

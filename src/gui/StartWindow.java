@@ -248,8 +248,6 @@ public class StartWindow extends JFrame {
 
 	}
 	
-	
-	
 	public static void setLoginPanel(){
 		contentPane.setVisible(false);
 		contentPane.removeAll();
@@ -276,28 +274,5 @@ public class StartWindow extends JFrame {
 		
 	}
 	
-	/*public static void setOfertaGehitu(Owner o){
-		contentPane.setVisible(false);
-		contentPane.removeAll();
-		
-		JFrame ofertagehitu = new OfertaGehitu(o);
-		((JFrame) ofertagehitu).setBorder(new EmptyBorder(1, 1, 1, 1));
-		ofertagehitu.setBackground(Color.WHITE);
-		ofertagehitu.setBounds(25, 34, 700, 500);
-		contentPane.add(ofertagehitu);
-		contentPane.setVisible(true);
-		
-	}*/
-	
-	/*public static void setFindOffers(){
-		contentPane.setVisible(false);
-		contentPane.removeAll();
-		
-		JPanel ofertabilatu = new FindOffers();
-		ofertabilatu.setBorder(new EmptyBorder(1, 1, 1, 1));
-		ofertabilatu.setBackground(Color.WHITE);
-		ofertabilatu.setBounds(25, 34, 700, 500);
-		contentPane.add(ofertabilatu);
-		contentPane.setVisible(true);
-	}*/
+
 }

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import domain.RuralHouse;
@@ -18,12 +19,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
+import javax.swing.SwingConstants;
+
+import businessLogic.ApplicationFacadeInterface;
+
 public class CommentPanelOwner extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public CommentPanelOwner(LinkedList<Comment> commentList, int ind) {
+	public CommentPanelOwner(RuralHouse h, LinkedList<Comment> commentList, int ind) {
 		setLayout(null);
 		
 
@@ -39,9 +44,6 @@ public class CommentPanelOwner extends JPanel {
         searchDate.setText(sf.format(commentList.get(ind).getEguna()) +"  "+ formatoHora.format(commentList.get(ind).getEguna()) );
         
         
-
-
-	
 		JLabel lblEgilea = new JLabel("Egilea:");
 		lblEgilea.setBounds(10, 11, 38, 14);
 		add(lblEgilea);
@@ -85,16 +87,36 @@ public class CommentPanelOwner extends JPanel {
 		searchComment.setBackground(Color.WHITE);
 		searchComment.setText(commentList.get(ind).getComent());
 		
+		JLabel lblDeleteOk = new JLabel("");
+		lblDeleteOk.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDeleteOk.setBounds(383, 11, 77, 14);
+		add(lblDeleteOk);
+		
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				commentList.remove(ind);
-				//-+--+-+-+-+-+-+-+---+-++-+----+-+-++-+-+-+-+-+--+-+--+-+-+--+-+-+-+-+-+-+++-+--+--+-+-+-+--+-+-+-+datu basean gorde
+				ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
+				try {
+					Boolean rhUpdate = facades.deleteCom(h,ind);
+					if(rhUpdate){
+						lblDeleteOk.setForeground(Color.GREEN);
+						lblDeleteOk.setText("Delete OK");
+					}else{
+						lblDeleteOk.setForeground(Color.RED);
+						lblDeleteOk.setText("gaizki");
+					}
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		btnDelete.setForeground(Color.RED);
-		btnDelete.setBounds(444, 7, 89, 23);
+		btnDelete.setBounds(470, 7, 63, 23);
 		add(btnDelete);
+		
+		
 		
 		
 		

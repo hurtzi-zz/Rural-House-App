@@ -35,10 +35,9 @@ public class CommentPanel extends JPanel {
 		searchDate.setBounds(206, 11, 171, 14);
 		add(searchDate);
 		SimpleDateFormat sf = new SimpleDateFormat("dd-MM-YYYY"); 
-        DateFormat formatoHora = new SimpleDateFormat("HH:mm");
+        DateFormat formatoHora = new SimpleDateFormat("HH:mm");       
         searchDate.setText(sf.format(commentList.get(ind).getEguna()) +"  "+ formatoHora.format(commentList.get(ind).getEguna()) );
-        
-        
+
 
 
 	

@@ -88,7 +88,7 @@ public interface ApplicationFacadeInterface extends Remote {
 	public Boolean editRuralHouse(String hi, String de, Owner o, RuralHouse rh)throws RemoteException;
 	public Boolean deleteRuralHouse(Owner o, RuralHouse rh)throws RemoteException;
 	
-	
+	public Owner clienToOwner(Client c) throws RemoteException, Exception;
 	public Owner clientToOwner( Client t ) throws RemoteException, Exception ;
 	
 	public Vector<RuralHouse> ownerBektoreaBueltatu(String login) throws RemoteException, Exception;
@@ -106,19 +106,23 @@ public interface ApplicationFacadeInterface extends Remote {
 	
 	public Vector<Offer> findOffer( Date firstDay,  Date lastDay)throws RemoteException;
 	
-	//5.erab kasua
 	public Vector<RuralHouse> SarchByCity(String city) throws RemoteException, Exception;
 	
-	//6.erab kasua
 	public Boolean updateClient(Client c) throws RemoteException;
 	
 	public Vector<RuralHouse> SarchByOwner(String LoginName) throws RemoteException, Exception;
 
 	//urtzi 3.itera
-    public Boolean RuralHouseRefactorComment(RuralHouse rh) throws RemoteException, Exception;
+    public RuralHouse addComment(Client c, int botua, String kom, RuralHouse rh) throws RemoteException, Exception;
+    public Boolean updateHouse(RuralHouse rh) throws RemoteException, Exception;
+    public Boolean deleteCom(RuralHouse rh,int i) throws RemoteException, Exception;
+    public Boolean deleteAllCom(RuralHouse rh) throws RemoteException, Exception;
+
+
+
 
     
-	public Owner clienToOwner(Client c) throws RemoteException, Exception;
+	
 
 
 }

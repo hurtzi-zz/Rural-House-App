@@ -39,6 +39,9 @@ public class DataAccessLocal extends DataAccessCommon {
 			System.out.println("DataBase Opened");
 			configuration = Db4oEmbedded.newConfiguration();
 			db = Db4oEmbedded.openFile(configuration, db4oFileName);
+			//kotuz!!!!
+			db.ext().configure().updateDepth(5);
+
 
 		} else if (mode.compareTo("initialize") == 0) {
 			configuration = Db4oEmbedded.newConfiguration();
