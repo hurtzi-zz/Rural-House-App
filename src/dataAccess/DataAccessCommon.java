@@ -44,6 +44,9 @@ public class DataAccessCommon implements DataAccessInterface, Serializable {
 		return theDataAccessCommon;
 	}
 
+	
+	
+	
 	public DataAccessCommon() {
 		theDB4oManagerAux = new DB4oManagerAux(0, 0);
 		c = ConfigXML.getInstance();
