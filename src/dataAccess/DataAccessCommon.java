@@ -35,10 +35,11 @@ public class DataAccessCommon implements DataAccessInterface, Serializable {
 	private int offerNumber = 0; // if it is "static" then it is not serialized
 
 	protected static DB4oManagerAux theDB4oManagerAux;
-	ConfigXML c;
+	ConfigXML c;  
 
 	private static DataAccessCommon theDataAccessCommon = new DataAccessCommon();
 
+	
 	public static DataAccessCommon getInstance() {
 
 		return theDataAccessCommon;
