@@ -1,8 +1,10 @@
 package gui;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
+
 
 
 
@@ -18,7 +20,7 @@ import exceptions.DB4oManagerCreationException;
 import businessLogic.ApplicationFacadeInterface;
 import businessLogic.FacadeImplementation;
 
-public class Launcher {
+public class Launcher implements Serializable{
 	
 	
 	

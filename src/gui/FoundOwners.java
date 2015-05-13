@@ -13,7 +13,7 @@ import java.util.Vector;
 
 import javax.swing.JRadioButton;
 
-import domain.Client;
+import domain.Owner;
 import domain.RuralHouse;
 
 import java.awt.SystemColor;
@@ -24,15 +24,15 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 
-public class FoundRuralHouseClient extends JPanel implements Serializable{
+public class FoundOwners extends JPanel implements Serializable{
 
 	/**
 	 * Create the panel.
 	 */
 	public int page;
-	public Vector<RuralHouse> houses;
+	public Vector<Owner> houses;
 
-	public FoundRuralHouseClient(final Client c, final Vector<RuralHouse> h, int pag) {
+	public FoundOwners(final Vector<Owner> h, int pag) {
 
 		this.page = pag;
 		this.houses = h;
@@ -50,37 +50,37 @@ public class FoundRuralHouseClient extends JPanel implements Serializable{
 
 		if (orriKopu == 0) {
 			if (lekuak == 1) {
-				JPanel panel1 = new FoundPanelClient(c, h, pag);
+				JPanel panel1 = new FoundOwnerPanel(h, pag);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(27, 11, 542, 131);
 				add(panel1);
 				panel1.setLayout(null);
 			} else if (lekuak == 2) {
-				JPanel panel1 = new FoundPanelClient(c, h, pag);
+				JPanel panel1 = new FoundOwnerPanel(h, pag);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(27, 11, 542, 131);
 				add(panel1);
 				panel1.setLayout(null);
 
-				JPanel panel2 = new FoundPanelClient(c, h, pag + 1);
+				JPanel panel2 = new FoundOwnerPanel(h, pag + 1);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
 				panel2.setBounds(27, 153, 542, 131);
 				add(panel2);
 			} else if (lekuak == 3) {
-				JPanel panel1 = new FoundPanelClient(c, h, pag);
+				JPanel panel1 = new FoundOwnerPanel(h, pag);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(27, 11, 542, 131);
 				add(panel1);
 				panel1.setLayout(null);
 
-				JPanel panel2 = new FoundPanelClient(c, h, pag + 1);
+				JPanel panel2 = new FoundOwnerPanel(h, pag + 1);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
 				panel2.setBounds(27, 153, 542, 131);
 				add(panel2);
 
-				JPanel panel3 = new FoundPanelClient(c, h, pag + 2);
+				JPanel panel3 = new FoundOwnerPanel(h, pag + 2);
 				panel3.setLayout(null);
 				panel3.setBackground(Color.WHITE);
 				panel3.setBounds(27, 295, 542, 131);
@@ -97,7 +97,7 @@ public class FoundRuralHouseClient extends JPanel implements Serializable{
 				btnPrevious.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						page--;
-						StartWindow.setFoundPanelClient(c, h, (page - 2));
+						StartWindow.setFoundOwnersPanel(h, (page - 2));
 					}
 				});
 			}
@@ -113,7 +113,7 @@ public class FoundRuralHouseClient extends JPanel implements Serializable{
 				btnNext.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						page++;
-						StartWindow.setFoundPanelClient(c, h, (page + 2));
+						StartWindow.setFoundOwnersPanel(h, (page + 2));
 					}
 
 				});
@@ -131,37 +131,37 @@ public class FoundRuralHouseClient extends JPanel implements Serializable{
 			pagNext.setText("Page " + (pag / 3 + 2));
 
 			if (lekuak == 1) {
-				JPanel panel1 = new FoundPanelClient(c, h, pag);
+				JPanel panel1 = new FoundOwnerPanel(h, pag);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(27, 11, 542, 131);
 				add(panel1);
 				panel1.setLayout(null);
 			} else if (lekuak == 2) {
-				JPanel panel1 = new FoundPanelClient(c, h, pag);
+				JPanel panel1 = new FoundOwnerPanel(h, pag);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(27, 11, 542, 131);
 				add(panel1);
 				panel1.setLayout(null);
 
-				JPanel panel2 = new FoundPanelClient(c, h, pag + 1);
+				JPanel panel2 = new FoundOwnerPanel(h, pag + 1);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
 				panel2.setBounds(27, 153, 542, 131);
 				add(panel2);
 			} else if (lekuak == 3) {
-				JPanel panel1 = new FoundPanelClient(c, h, pag);
+				JPanel panel1 = new FoundOwnerPanel(h, pag);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(27, 11, 542, 131);
 				add(panel1);
 				panel1.setLayout(null);
 
-				JPanel panel2 = new FoundPanelClient(c, h, pag + 1);
+				JPanel panel2 = new FoundOwnerPanel(h, pag + 1);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
 				panel2.setBounds(27, 153, 542, 131);
 				add(panel2);
 
-				JPanel panel3 = new FoundPanelClient(c, h, pag + 2);
+				JPanel panel3 = new FoundOwnerPanel(h, pag + 2);
 				panel3.setLayout(null);
 				panel3.setBackground(Color.WHITE);
 				panel3.setBounds(27, 295, 542, 131);
@@ -169,19 +169,19 @@ public class FoundRuralHouseClient extends JPanel implements Serializable{
 			}
 		} else {
 
-			JPanel panel1 = new FoundPanelClient(c, h, pag);
+			JPanel panel1 = new FoundOwnerPanel(h, pag);
 			panel1.setBackground(Color.WHITE);
 			panel1.setBounds(27, 11, 542, 131);
 			add(panel1);
 			panel1.setLayout(null);
 
-			JPanel panel2 = new FoundPanelClient(c, h, pag + 1);
+			JPanel panel2 = new FoundOwnerPanel(h, pag + 1);
 			panel2.setLayout(null);
 			panel2.setBackground(Color.WHITE);
 			panel2.setBounds(27, 153, 542, 131);
 			add(panel2);
 
-			JPanel panel3 = new FoundPanelClient(c, h, pag + 2);
+			JPanel panel3 = new FoundOwnerPanel(h, pag + 2);
 			panel3.setLayout(null);
 			panel3.setBackground(Color.WHITE);
 			panel3.setBounds(27, 295, 542, 131);
@@ -197,7 +197,7 @@ public class FoundRuralHouseClient extends JPanel implements Serializable{
 				btnPrevious.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						page--;
-						StartWindow.setFoundPanelClient(c, h, (page - 2));
+						StartWindow.setFoundOwnersPanel(h, (page - 2));
 					}
 				});
 			}
@@ -213,7 +213,7 @@ public class FoundRuralHouseClient extends JPanel implements Serializable{
 				btnNext.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						page++;
-						StartWindow.setFoundPanelClient(c, h, (page + 2));
+						StartWindow.setFoundOwnersPanel(h, (page + 2));
 					}
 
 				});

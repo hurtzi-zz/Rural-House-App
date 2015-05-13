@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 
 import javax.swing.border.TitledBorder;
 import javax.swing.ButtonGroup;
@@ -23,7 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 
-public class Register extends JFrame implements ActionListener {
+public class Register extends JFrame implements ActionListener, Serializable{
 
 	private JPanel contentPane;
 	private JPanel panelPrinci;
@@ -81,7 +82,6 @@ public class Register extends JFrame implements ActionListener {
 	// contentPane.setVisible(false);
 	// contentPane.removeAll();
 
-	@Override
 	public void actionPerformed(ActionEvent ae) {
 		// TODO Auto-generated method stub
 		if (ae.getActionCommand().compareTo("User") == 0) {

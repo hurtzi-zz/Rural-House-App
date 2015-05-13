@@ -14,6 +14,7 @@ import domain.RuralHouse;
 import domain.Comment;
 
 import java.awt.Font;
+import java.io.Serializable;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,12 +24,15 @@ import javax.swing.SwingConstants;
 
 import businessLogic.ApplicationFacadeInterface;
 
-public class CommentPanelOwner extends JPanel {
+public class CommentPanelOwner extends JPanel implements Serializable{
 
 	/**
 	 * Create the panel.
 	 */
-	public CommentPanelOwner(RuralHouse h, LinkedList<Comment> commentList, int ind) {
+	private JLabel lblDeleteOk = new JLabel("");
+
+	
+	public CommentPanelOwner(final RuralHouse h, LinkedList<Comment> commentList, final int ind) {
 		setLayout(null);
 		
 
@@ -87,7 +91,6 @@ public class CommentPanelOwner extends JPanel {
 		searchComment.setBackground(Color.WHITE);
 		searchComment.setText(commentList.get(ind).getComent());
 		
-		JLabel lblDeleteOk = new JLabel("");
 		lblDeleteOk.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDeleteOk.setBounds(383, 11, 77, 14);
 		add(lblDeleteOk);

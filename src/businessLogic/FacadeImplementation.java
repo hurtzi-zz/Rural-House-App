@@ -1,5 +1,6 @@
 package businessLogic;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ import java.util.Vector;
 
 import dataAccess.DataAccessCommon;
 import dataAccess.DataAccessInterface;
+import domain.Activity;
+import domain.Admin;
 import domain.Booking;
 import domain.Client;
 import domain.Offer;
@@ -19,15 +22,16 @@ import exceptions.DB4oManagerCreationException;
 import exceptions.OfferCanNotBeBooked;
 import exceptions.OverlappingOfferExists;
 
-public class FacadeImplementation extends UnicastRemoteObject implements
-		ApplicationFacadeInterface {
+public class FacadeImplementation extends UnicastRemoteObject implements ApplicationFacadeInterface, Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+
 	Vector<Owner> owners;
+	Vector<Client> clients;
 	Vector<RuralHouse> ruralHouses;
 	DataAccessInterface dB4oManager;
 
@@ -90,6 +94,16 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 		} else
 			return owners = dB4oManager.getOwners();
 	}
+	
+	public Vector<Client> getClients() throws RemoteException, Exception {
+
+		if (clients != null) {
+			System.out
+					.println("Clients obtained directly from business logic layer");
+			return clients;
+		} else
+			return clients = dB4oManager.getClients();
+	}
 
 	public Vector<RuralHouse> getAllRuralHouses() throws RemoteException,
 			Exception {
@@ -104,11 +118,13 @@ public class FacadeImplementation extends UnicastRemoteObject implements
 	}
 
 	public void close() throws RemoteException {
-		dB4oManager.close();
-
+		try{
+			dB4oManager.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
-	@Override
 	public void setDataAccess(DataAccessInterface dai) throws RemoteException {
 		dB4oManager = dai;
 		// TODO Auto-generated method stub
@@ -231,6 +247,52 @@ public class FacadeImplementation extends UnicastRemoteObject implements
   		return DataAccessCommon.getInstance().deleteCom(rh,i);	
   	}
 
-
+    public int getFreeNumber() throws RemoteException, Exception{
+    	return DataAccessCommon.getInstance().getFreeNumber();
+    }
+    
+    public Boolean createActivity(String izena, String deskribapena, int kop, Boolean egunez, Owner owner) throws RemoteException, Exception{
+    	return DataAccessCommon.getInstance().createActivity(izena, deskribapena, kop, egunez, owner);
+    }
 	
+    public Vector<Activity> getOwnerActivities(Owner o) throws RemoteException, Exception{
+    	return DataAccessCommon.getInstance().getOwnerActivities(o);
+    }
+    
+    public Vector<Activity> getHouseActivities(RuralHouse rh) throws RemoteException, Exception{
+    	return DataAccessCommon.getInstance().getHouseActivities(rh);
+    }
+    
+    public Boolean addActivity(Activity a, RuralHouse rh) throws RemoteException, Exception{
+    	return DataAccessCommon.getInstance().addActivity(a, rh);
+    }
+    
+    public Vector<Offer> OfertakBueltatu(String Login) throws RemoteException, Exception{
+		return DataAccessCommon.getInstance().OfertakBueltatu(Login);
+	}
+    
+    public Offer offerBuelta(RuralHouse rh, Date d1, Date d2, Float price)throws RemoteException {
+		return DataAccessCommon.getInstance().offerBuelta(rh, d1, d2, price);
+	}
+    
+    public Boolean deleteOferta(RuralHouse rh, Offer o)throws RemoteException {
+		return DataAccessCommon.getInstance().deleteOferta(rh,o);
+	}
+    
+    public Vector<Offer> getOffersRH(RuralHouse rh, Date firstDay, Date lastDay) throws RemoteException, Exception{
+		return DataAccessCommon.getInstance().getOffersRH(rh, firstDay, lastDay);
+	}
+    public  Boolean verifyAdmin(String log, String pass)throws RemoteException{
+    	return DataAccessCommon.getInstance().verifyAdmin(log, pass);
+    }
+	
+	public  Admin getAdmin(String log, String pass)throws RemoteException{
+    	return DataAccessCommon.getInstance().getAdmin(log, pass);
+    }
+	public Boolean deleteOwner(Owner o)throws RemoteException{
+		return DataAccessCommon.getInstance().deleteOwner(o);
+	}
+	 public Boolean deleteClient(Client o)throws RemoteException{
+		 return DataAccessCommon.getInstance().deleteClient(o);
+	 }
 }

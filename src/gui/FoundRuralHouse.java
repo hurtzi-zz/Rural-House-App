@@ -17,10 +17,13 @@ import domain.RuralHouse;
 
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
 
-public class FoundRuralHouse extends JPanel {
+import javax.swing.SwingConstants;
+
+import java.awt.event.ActionListener;
+import java.io.Serializable;
+
+public class FoundRuralHouse extends JPanel implements Serializable{
 
 	/**
 	 * Create the panel.
@@ -28,7 +31,7 @@ public class FoundRuralHouse extends JPanel {
 	public int page;
 	public Vector<RuralHouse> houses;
 
-	public FoundRuralHouse(Vector<RuralHouse> h, int pag) {
+	public FoundRuralHouse(final Vector<RuralHouse> h, int pag) {
 
 		this.page = pag;
 		this.houses = h;

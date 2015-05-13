@@ -15,9 +15,10 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.Serializable;
 
 
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 

@@ -29,23 +29,28 @@ import domain.RuralHouse;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
 
 import javax.swing.SwingConstants;
 
-public class CommentFrame extends JFrame {
+public class CommentFrame extends JFrame implements Serializable{
 
 	private JPanel contentPane;
 	private JTextField textSlider;
 	private JTextField comment;
+	private JSlider slider = new JSlider();
+	private JLabel lblStoreConf = new JLabel("");
+
+
 
 	/**
 	 * Create the frame.
 	 */
 	
 	
-	public CommentFrame(RuralHouse h,Client c) {
+	public CommentFrame(final RuralHouse h,final Client c) {
 	
 		setBounds(830, 2, 497, 499);
 		contentPane = new JPanel();
@@ -73,7 +78,6 @@ public class CommentFrame extends JFrame {
 		contentPane.add(textSlider);
 		textSlider.setColumns(10);
 
-		JSlider slider = new JSlider();
 		slider.setValue(5);
 		slider.setMinorTickSpacing(1);
 		slider.addChangeListener(new ChangeListener() {
@@ -97,7 +101,6 @@ public class CommentFrame extends JFrame {
 		comment.setColumns(10);
 
 		
-		JLabel lblStoreConf = new JLabel("");
 		lblStoreConf.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStoreConf.setBounds(111, 429, 268, 14);
 		contentPane.add(lblStoreConf);

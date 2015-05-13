@@ -30,18 +30,19 @@ import javax.swing.JTextField;
 import businessLogic.ApplicationFacadeInterface;
 
 import java.awt.SystemColor;
+import java.io.Serializable;
 
-public class GoOwner extends JFrame {
+public class GoOwner extends JFrame implements Serializable {
 
 	private static JPanel contentPane;
-
+	private static JLabel lblStoreDelet = new JLabel("");
 	/**
 	 * Create the frame.
 	 */
 
 
 	
-	public GoOwner(RuralHouse h, Owner c) {
+	public GoOwner(final RuralHouse h, Owner c) {
 		
 
 
@@ -74,7 +75,7 @@ public class GoOwner extends JFrame {
 		label.setBounds(34, 78, 93, 14);
 		getContentPane().add(label);
 		
-		JLabel lblStoreDelet = new JLabel("");
+		
 		lblStoreDelet.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStoreDelet.setBounds(391, 123, 194, 14);
 		contentPane.add(lblStoreDelet);
@@ -189,7 +190,7 @@ public class GoOwner extends JFrame {
 
 	}
 
-	public static void ini(RuralHouse h, Client c) {
+	public static void ini(final RuralHouse h, Client c) {
 
 		JLabel searchOwnerN = new JLabel("");
 		searchOwnerN.setBounds(79, 103, 184, 14);
@@ -212,7 +213,7 @@ public class GoOwner extends JFrame {
 		label.setBounds(34, 78, 93, 14);
 		contentPane.add(label);
 		
-		JLabel lblStoreDelet = new JLabel("");
+		
 		lblStoreDelet.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStoreDelet.setBounds(391, 123, 194, 14);
 		contentPane.add(lblStoreDelet);

@@ -17,11 +17,12 @@ import businessLogic.ApplicationFacadeInterface;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.Vector;
 
-public class EditRuralHouse extends JPanel {
+public class EditRuralHouse extends JPanel implements Serializable{
 
 	private Owner owner;
 	//private static Owner updatedOwner;
@@ -37,37 +38,44 @@ public class EditRuralHouse extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public EditRuralHouse(Owner o, RuralHouse rh) {
+	public EditRuralHouse(final Owner o, final RuralHouse rh) {
 		this.owner = o;
 		this.ruralhouse = rh;
 		setLayout(null);
+		
 		JLabel lblLandetxearenDatuakBete = new JLabel("Landetxearen datu berriak bete:");
 		lblLandetxearenDatuakBete.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblLandetxearenDatuakBete.setBounds(50, 40, 260, 25);
 		add(lblLandetxearenDatuakBete);
+		
 		JLabel lblZenbakia = new JLabel("Landetxe zbkia:");
 		lblZenbakia.setBounds(50, 100, 100, 25);
 		add(lblZenbakia);
+		
 		JLabel lblDeskribapena = new JLabel("Deskribapena:");
 		lblDeskribapena.setBounds(50, 150, 100, 25);
 		add(lblDeskribapena);
+		
 		textZenbakia = new JLabel(Integer.toString(rh.getHouseNumber()));
 		textZenbakia.setBounds(160, 102, 150, 25);
 		add(textZenbakia);
+		
 		textDeskribapena = new JTextField();
 		textDeskribapena.setBounds(160, 152, 150, 50);
 		add(textDeskribapena);
 		textDeskribapena.setColumns(10);
+		
 		JLabel lblHiria = new JLabel("Hiria:");
 		lblHiria.setBounds(50, 225, 100, 25);
 		add(lblHiria);
+		
 		textHiria = new JTextField();
 		textHiria.setBounds(160, 225, 150, 25);
 		add(textHiria);
 		textHiria.setColumns(10);
 		
 		lblOharrak = new JLabel("");
-		lblOharrak.setBounds(372, 177, 150, 25);
+		lblOharrak.setBounds(372, 205, 150, 20);
 		add(lblOharrak);
 		lblOharrak.setVisible(false);
 
@@ -117,6 +125,7 @@ public class EditRuralHouse extends JPanel {
 		add(btnBueltatu);
 		
 		JButton btnEzabatu = new JButton("Ezabatu");
+		btnEzabatu.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnEzabatu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -145,8 +154,24 @@ public class EditRuralHouse extends JPanel {
 			}
 		});
 		btnEzabatu.setForeground(new Color(255, 0, 0));
-		btnEzabatu.setBounds(433, 151, 89, 23);
+		btnEzabatu.setBounds(447, 150, 75, 25);
 		add(btnEzabatu);
+		
+		JButton btnEkitaldiak = new JButton("Ekitaldia gehitu");
+		btnEkitaldiak.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try {
+					StartWindow.setAddActivityPanel(owner, ruralhouse);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
+		btnEkitaldiak.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnEkitaldiak.setForeground(new Color(0, 0, 128));
+		btnEkitaldiak.setBounds(372, 177, 150, 25);
+		add(btnEkitaldiak);
 	}
 	
 	public void GTFO(){

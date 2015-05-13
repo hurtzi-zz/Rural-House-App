@@ -10,7 +10,7 @@ import configuration.ConfigXML;
 
 import java.io.*;
 
-public class DataAccessLocal extends DataAccessCommon {
+public class DataAccessLocal extends DataAccessCommon implements Serializable {
 	private static EmbeddedConfiguration configuration;
 
 	public DataAccessLocal() {

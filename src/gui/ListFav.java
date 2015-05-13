@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.io.Serializable;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -18,7 +19,7 @@ import domain.Client;
 import domain.Owner;
 import domain.RuralHouse;
 
-public class ListFav extends JFrame {
+public class ListFav extends JFrame implements Serializable{
 
 	private static JPanel contentPane;
 

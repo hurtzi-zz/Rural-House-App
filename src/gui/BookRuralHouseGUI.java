@@ -9,6 +9,7 @@ import domain.RuralHouse;
 import exceptions.OfferCanNotBeBooked;
 
 import java.beans.*;
+import java.io.Serializable;
 import java.text.*;
 import java.util.*;
 
@@ -19,7 +20,7 @@ import java.awt.event.*;
 
 
 
-public class BookRuralHouseGUI extends JFrame {
+public class BookRuralHouseGUI extends JFrame implements Serializable{
 private static final long serialVersionUID = 1L;
 public static final long MILLSECS_PER_DAY= 24 * 60 * 60 * 1000;
 
@@ -102,7 +103,7 @@ public BookRuralHouseGUI()
     this.setSize(new Dimension(410, 413));
     this.setTitle("Book Rural House");
     jLabel1.setText("Rural house:");
-    ApplicationFacadeInterface facade=MainWindow.getBusinessLogic();
+    ApplicationFacadeInterface facade=StartWindow.getBusinessLogic();
 	ruralHouses=facade.getAllRuralHouses();
 
 	jComboBox1 = new JComboBox(ruralHouses);
@@ -166,7 +167,7 @@ public BookRuralHouseGUI()
         	try {
 				
         		//Obtain the business logic from a StartWindow class (local or remote)
-        		ApplicationFacadeInterface facade=MainWindow.getBusinessLogic();
+        		ApplicationFacadeInterface facade=StartWindow.getBusinessLogic();
         		        		
         		Booking book=facade.createBooking(house, firstDay, lastDay, telephone);
 				if (book!=null) {

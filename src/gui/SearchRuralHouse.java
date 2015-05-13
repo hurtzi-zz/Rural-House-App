@@ -17,12 +17,14 @@ import domain.RuralHouse;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.Vector;
+
 import javax.swing.JLabel;
 
-public class SearchRuralHouse extends JPanel {
+public class SearchRuralHouse extends JPanel implements Serializable{
 	private JTextField textCity;
 
 	/**
@@ -43,7 +45,7 @@ public class SearchRuralHouse extends JPanel {
 		panel.add(textCity);
 		textCity.setColumns(10);
 		
-		JLabel searchCity = new JLabel("");
+		final JLabel searchCity = new JLabel("");
 		searchCity.setBounds(41, 78, 284, 30);
 		add(searchCity);
 		

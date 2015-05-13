@@ -1,5 +1,6 @@
 package dataAccess;
 
+import java.io.Serializable;
 import java.util.ListIterator;
 
 import com.db4o.ObjectSet;
@@ -8,7 +9,7 @@ import com.db4o.cs.config.ClientConfiguration;
 
 import domain.Owner;
 
-public class DataAccessRemote extends DataAccessCommon {
+public class DataAccessRemote extends DataAccessCommon implements Serializable{
 	private static ClientConfiguration configurationCS;
 
 	public DataAccessRemote(){

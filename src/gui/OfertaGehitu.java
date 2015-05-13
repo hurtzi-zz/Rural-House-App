@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,7 +31,7 @@ import domain.Owner;
 import domain.RuralHouse;
 import businessLogic.ApplicationFacadeInterface;
 
-public class OfertaGehitu extends JFrame {
+public class OfertaGehitu extends JFrame implements Serializable{
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -41,7 +43,7 @@ public class OfertaGehitu extends JFrame {
 	ApplicationFacadeInterface facade = StartWindow.getBusinessLogic();
 	private JTextField textField_1 = new JTextField();
 	private JTextField textField_2 = new JTextField();
-	private JComboBox comboBox = null;
+	private JComboBox comboBox;
 	private JCalendar jCalendar1 = new JCalendar();
 	private JCalendar jCalendar2 = new JCalendar();
 	private JLabel lblMezu = new JLabel("");
@@ -65,8 +67,18 @@ public class OfertaGehitu extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws Exception 
+	 * @throws RemoteException 
 	 */
-	public OfertaGehitu(Owner o) {
+	public OfertaGehitu(Owner o) throws RemoteException, Exception {
+		//ApplicationFacadeInterface facade=StartWindow.getBusinessLogic();
+		
+		//Vector<RuralHouse> rhs=facade.getAllRuralHouses();
+		
+		
+		
+		Vector<RuralHouse> houses = facade.SarchByOwner(o.getLogin());
+		//comboBox = new JComboBox(houses);
 		setBounds(100, 100, 459, 377);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -121,13 +133,13 @@ public class OfertaGehitu extends JFrame {
 		getContentPane().add(textField_2);
 		textField_2.setColumns(10);
 
-		JComboBox comboBox = new JComboBox(o.getRuralHouses());
+		comboBox = new JComboBox(o.getRuralHouses());
 		comboBox.setBounds(98, 49, 76, 20);
+		getContentPane().add(comboBox);
 
-		try {
+		/*try {
 
-			Vector<RuralHouse> houses = facade.ownerBektoreaBueltatu(o
-					.getLogin());
+			Vector<RuralHouse> houses = facade.SarchByOwner(o.getLogin());
 
 			Vector<String> housenames = new Vector<String>();
 			for (int i = 0; i < houses.size(); i++) {
@@ -140,8 +152,7 @@ public class OfertaGehitu extends JFrame {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		getContentPane().add(comboBox);
+		}*/
 
 		// calendarios
 
@@ -192,77 +203,82 @@ public class OfertaGehitu extends JFrame {
 		getContentPane().add(btnOk);
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JComboBox comboBox = new JComboBox(o.getRuralHouses());
-				System.out.println("a ver");
-				RuralHouse ruralHouse = ((RuralHouse) comboBox
-						.getSelectedItem());
-				System.out.println(comboBox.getSelectedItem());
-
-				Date d1 = trim(new Date(jCalendar1.getCalendar().getTime()
-						.getTime()));
-				String s1 = d1.toString();
-				Date d2 = trim(new Date(jCalendar2.getCalendar().getTime()
-						.getTime()));
-				String s2 = d2.toString();
-
-				
-				if (!textField.getText().equals("")
-						&& !textField_1.getText().equals("")
-						&& !textField_2.getText().equals("")) {
-
-					lblMezu.setVisible(true);
-					try {
-
-						float prezioa = Float.parseFloat(textField.getText());
-						if (prezioa==0){
-							lblMezu.setForeground(Color.RED);
-							lblMezu.setText("Prezioa aldatu (Prezio minimoa 1€)");
-							
-						} else if (d2.before(d1)) {
-							System.out.println("Gaizki datak");
-							lblMezu.setForeground(Color.RED);
-							lblMezu.setText("Sartu berriro datak.");
-						}else{
-							boolean of = facade.VerifyOffer(ruralHouse, d1, d2);
-							if (of) {
-								lblMezu.setForeground(Color.RED);
-								lblMezu.setText("Badago oferta bat data hauetan");
-								System.out.println("dentro del of");
-							
-							} else {
-								Boolean off = facade.saveOffer(ruralHouse, d1, d2,
-										prezioa);
-								if (off) {
-									lblMezu.setForeground(Color.BLUE);
-									lblMezu.setText("Oferta eratu da!");
-								} else {
-									lblMezu.setForeground(Color.RED);
-									lblMezu.setText("Error, try again");
-								}
-							}
-						} }catch (java.lang.NumberFormatException e1) {
-							lblMezu.setForeground(Color.RED);
-							lblMezu.setText("Error, try again");
-						
-						} catch (Exception e1) {
-					  		e1.printStackTrace();
-					  	}
-					
-					
-					} else {
-						lblMezu.setForeground(Color.RED);
-						lblMezu.setText("Bete eremu guztiak");
-						System.out.println("eremuak bete");
-					}
-				
-				}					
-			
+				//JComboBox comboBox = new JComboBox(o.getRuralHouses());
+				btnOk_actionPerformed(e);
+			}
 
 		});
 
 
 	}
 
+	protected void btnOk_actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("a ver");
+		RuralHouse ruralHouse = (RuralHouse) comboBox.getSelectedItem();
+		System.out.println(comboBox.getSelectedItem());
+		System.out.println("etxea " + ruralHouse.getCity());
+
+		Date d1 = trim(new Date(jCalendar1.getCalendar().getTime().getTime()));
+		String s1 = d1.toString();
+		Date d2 = trim(new Date(jCalendar2.getCalendar().getTime().getTime()));
+		String s2 = d2.toString();
+
+		if (!textField.getText().equals("")
+				&& !textField_1.getText().equals("")
+				&& !textField_2.getText().equals("")) {
+
+			lblMezu.setVisible(true);
+			try {
+
+				float prezioa = Float.parseFloat(textField.getText());
+				if (prezioa == 0) {
+					lblMezu.setForeground(Color.RED);
+					lblMezu.setText("Prezioa aldatu (Prezio minimoa 1€)");
+
+				} else if (d2.before(d1)) {
+					System.out.println("Gaizki datak");
+					lblMezu.setForeground(Color.RED);
+					lblMezu.setText("Sartu berriro datak.");
+				} else {
+					boolean of = facade.VerifyOffer(ruralHouse, d1, d2);
+					if (of) {
+						lblMezu.setForeground(Color.RED);
+						lblMezu.setText("Badago oferta bat data hauetan");
+						System.out.println("dentro del of");
+
+					} else {
+						Boolean off = facade.saveOffer(ruralHouse, d1, d2,
+								prezioa);
+						if (off) {
+							lblMezu.setForeground(Color.BLUE);
+							lblMezu.setText("Oferta eratu da!");
+						} else {
+							lblMezu.setForeground(Color.RED);
+							lblMezu.setText("Error, try again");
+						}
+					}
+				}
+			} catch (java.lang.NumberFormatException e1) {
+				lblMezu.setForeground(Color.RED);
+				lblMezu.setText("Error, try again");
+
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+
+		} else {
+			lblMezu.setForeground(Color.RED);
+			lblMezu.setText("Bete eremu guztiak");
+			System.out.println("eremuak bete");
+		}
+
+	
+
+	}
+
+	//private btnOk_actionPerformed(ActionEvent e) {
+		
 	private Date trim(Date date) {
 
 		Calendar calendar = Calendar.getInstance();

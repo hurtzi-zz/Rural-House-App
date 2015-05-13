@@ -25,14 +25,17 @@ import domain.RuralHouse;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 
-public class FoundPanelFavClient extends JPanel {
+public class FoundPanelFavClient extends JPanel implements Serializable {
 	private JLabel lblHiria;
+	private JButton btnNewButton = new JButton("Favorite");
+	private JButton btnNewButton_1 = new JButton("Delete Fav");
 
 	/**
 	 * Create the panel.
 	 */
-	public FoundPanelFavClient(Client c, Vector<RuralHouse> h, int ind) {
+	public FoundPanelFavClient(final Client c, final Vector<RuralHouse> h, final int ind) {
 
 		setLayout(null);
 
@@ -122,7 +125,7 @@ public class FoundPanelFavClient extends JPanel {
 		// add(lblFavDa);
 		// lblFavDa.setText("Fav da");
 
-		JButton btnNewButton = new JButton("Favorite");
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				c.addRuralFav(h.elementAt(ind));
@@ -161,7 +164,7 @@ public class FoundPanelFavClient extends JPanel {
 
 		}
 
-		JButton btnNewButton_1 = new JButton("Delete Fav");
+		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// c.addRuralFav(h.elementAt(ind));

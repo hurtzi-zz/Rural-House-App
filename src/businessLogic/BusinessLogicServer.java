@@ -20,8 +20,9 @@ import dataAccess.DataAccessRemote;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 
-public class BusinessLogicServer extends JDialog {
+public class BusinessLogicServer extends JDialog implements Serializable {
 
 	/**
 	 * 
@@ -108,7 +109,7 @@ public class BusinessLogicServer extends JDialog {
 				if (c.isDatabaseLocal()) 
 				 server.setDataAccess(new DataAccessLocal());
 				 else 
-				  server.setDataAccess(new DataAccessRemote());
+				 server.setDataAccess(new DataAccessRemote());
 				
 			}
 			catch (com.db4o.ext.DatabaseFileLockedException e) {

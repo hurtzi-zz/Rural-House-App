@@ -9,7 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import configuration.ConfigXML;
+import domain.Admin;
 import domain.Client;
+import domain.Offer;
 import domain.Owner;
 import domain.RuralHouse;
 import businessLogic.ApplicationFacadeInterface;
@@ -23,9 +25,10 @@ import javax.swing.JLabel;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import java.awt.Font;
+import java.io.Serializable;
 import java.util.Vector;
 
-public class StartWindow extends JFrame {
+public class StartWindow extends JFrame implements Serializable{
 
 	private static JPanel contentPane;
 	
@@ -70,8 +73,6 @@ public class StartWindow extends JFrame {
 		initialize();
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-		
-
 
 	
 	private void initialize() {
@@ -178,7 +179,7 @@ public class StartWindow extends JFrame {
 		JPanel loged = new Loged(c);
 		loged.setBorder(new EmptyBorder(1, 1, 1, 1));
 		loged.setBackground(Color.WHITE);
-		loged.setBounds(25, 34, 230, 400);
+		loged.setBounds(25, 34, 230, 600);
 		contentPane.add(loged);
 		contentPane.setVisible(true);
 		
@@ -205,7 +206,7 @@ public class StartWindow extends JFrame {
 		JPanel loged = new Loged(o);
 		loged.setBorder(new EmptyBorder(1, 1, 1, 1));
 		loged.setBackground(Color.WHITE);
-		loged.setBounds(25, 34, 230, 400);
+		loged.setBounds(25, 34, 230, 600);
 		contentPane.add(loged);
 		contentPane.setVisible(true);
 		
@@ -232,7 +233,7 @@ public class StartWindow extends JFrame {
 		JPanel loged = new Loged(c);
 		loged.setBorder(new EmptyBorder(1, 1, 1, 1));
 		loged.setBackground(Color.WHITE);
-		loged.setBounds(25, 34, 230, 400);
+		loged.setBounds(25, 34, 230, 600);
 		contentPane.add(loged);
 		contentPane.setVisible(true);
 			
@@ -270,9 +271,92 @@ public class StartWindow extends JFrame {
 		addRuralHouse.setBounds(25, 34, 618, 276);
 		contentPane.add(addRuralHouse);
 		contentPane.setVisible(true);
-		
-		
 	}
 	
+	public static void setCreateActivityPanel(Owner o){
+		contentPane.setVisible(false);
+		contentPane.removeAll();
 
+		JPanel createActivity = new CreateActivity(o);
+		createActivity.setBorder(new EmptyBorder(1, 1, 1, 1));
+		createActivity.setBackground(Color.WHITE);
+		createActivity.setBounds(25, 34, 618, 276);
+		contentPane.add(createActivity);
+		contentPane.setVisible(true);
+	}
+	
+	public static void setAddActivityPanel(Owner o, RuralHouse rh){
+		contentPane.setVisible(false);
+		contentPane.removeAll();
+
+		JPanel AddActivity = new AddActivity(o, rh);
+		AddActivity.setBorder(new EmptyBorder(1, 1, 1, 1));
+		AddActivity.setBackground(Color.WHITE);
+		AddActivity.setBounds(25, 34, 618, 276);
+		contentPane.add(AddActivity);
+		contentPane.setVisible(true);
+	}
+	
+	public static void setOfertakBistaratuPanel(Owner o, Vector<Offer> bek,int ind){
+		contentPane.setVisible(false);
+		contentPane.removeAll();
+		
+		JPanel loged = new Loged(o);
+		loged.setBorder(new EmptyBorder(1, 1, 1, 1));
+		loged.setBackground(Color.WHITE);
+		loged.setBounds(25, 34, 230, 600);
+		contentPane.add(loged);
+		contentPane.setVisible(true);
+		
+//		JPanel SearchPanel = new SearchRuralHouseClient(c);
+//		SearchPanel.setBorder(new EmptyBorder(1, 1, 1, 1));
+//		SearchPanel.setBounds(959, 32, 375, 119);
+//		contentPane.add(SearchPanel);
+		
+		JLabel lblRuralHouses = DefaultComponentFactory.getInstance().createTitle("Rural Houses");
+		lblRuralHouses.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 96));
+		lblRuralHouses.setBounds(360, 11, 551, 140);
+		contentPane.add(lblRuralHouses);		
+		
+		JPanel FoundPanel = new OfertakBistaratuPanel(o,bek,ind);
+		FoundPanel.setBounds(331, 148, 636, 546);
+		contentPane.add(FoundPanel);
+		contentPane.setVisible(true);
+	}
+	public static void setAdminPanel(Admin ad){
+		contentPane.setVisible(false);
+		contentPane.removeAll();
+		
+		JPanel loged = new LogedAdmin(ad);
+		loged.setBorder(new EmptyBorder(1, 1, 1, 1));
+		loged.setBackground(Color.WHITE);
+		loged.setBounds(24, 34, 230, 600);
+		contentPane.add(loged);
+		contentPane.setVisible(true);
+		
+		
+		JLabel lblRuralHouses = DefaultComponentFactory.getInstance().createTitle("Rural Houses");
+		lblRuralHouses.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 96));
+		lblRuralHouses.setBounds(360, 11, 551, 140);
+		contentPane.add(lblRuralHouses);	
+
+	}
+	public static void setFoundOwnersPanel(Vector<Owner> bek,int ind){
+		contentPane.setVisible(false);
+		contentPane.removeAll();
+		ini();
+		JPanel FoundPanel = new FoundOwners(bek,ind);
+		FoundPanel.setBounds(331, 148, 636, 546);
+		contentPane.add(FoundPanel);
+		contentPane.setVisible(true);
+	}
+	public static void setFoundClientsPanel(Vector<Client> bek,int ind){
+		contentPane.setVisible(false);
+		contentPane.removeAll();
+		ini();
+		JPanel FoundPanel = new FoundClients(bek,ind);
+		FoundPanel.setBounds(331, 148, 636, 546);
+		contentPane.add(FoundPanel);
+		contentPane.setVisible(true);
+	}
 }

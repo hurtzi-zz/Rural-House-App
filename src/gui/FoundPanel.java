@@ -18,46 +18,58 @@ import domain.RuralHouse;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
-public class FoundPanel extends JPanel {
-
+public class FoundPanel extends JPanel implements Serializable{
+	private JLabel searchOwnerN = new JLabel("");
+	private JLabel lblOwner = new JLabel("Owner:");
+	private JLabel searchZbkia = new JLabel("");
+	private JLabel label = new JLabel("Landetxe zbkia:");
+	private JLabel searchDescription = new JLabel("");
+	private JLabel lblDescription = new JLabel("Description:");
+	private JButton btnSartu = new JButton("Go");
+	private JLabel lblOfertaKop = new JLabel("Oferta kop:");
+	private JLabel searchOfert = new JLabel("");
+	private JLabel lblHiria = new JLabel("Hiria:");
+	private JLabel searchHiria;
+	
 	/**
 	 * Create the panel.
 	 */
-	public FoundPanel(Vector<RuralHouse> h, int ind) {
+	public FoundPanel(final Vector<RuralHouse> h, final int ind) {
 
 		setLayout(null);
 
-		JLabel searchOwnerN = new JLabel("");
+		
 		searchOwnerN.setBounds(10, 81, 108, 14);
 		add(searchOwnerN);
 		searchOwnerN.setText(h.get(ind).getOwner().getName() + " "
 				+ h.get(ind).getOwner().getAbizena());
 
-		JLabel lblOwner = new JLabel("Owner:");
+		
 		lblOwner.setBounds(10, 66, 46, 14);
 		add(lblOwner);
 
-		JLabel searchZbkia = new JLabel("");
+		
 		searchZbkia.setBounds(10, 27, 46, 14);
 		add(searchZbkia);
 		searchZbkia.setText(Integer.toString(h.get(ind).getHouseNumber()));
 
-		JLabel label = new JLabel("Landetxe zbkia:");
+		
 		label.setBounds(10, 11, 93, 14);
 		add(label);
 
-		JLabel lblDescription = new JLabel("Description:");
+		
 		lblDescription.setBounds(131, 11, 85, 14);
 		add(lblDescription);
 
-		JLabel searchDescription = new JLabel("");
+		
 		searchDescription.setBounds(141, 27, 280, 81);
 		add(searchDescription);
 		searchDescription.setBackground(Color.WHITE);
 		searchDescription.setText(h.get(ind).getDescription());
 
-		JButton btnSartu = new JButton("Go");
+		
 		btnSartu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFrame a= new Go(h.get(ind));
@@ -67,20 +79,20 @@ public class FoundPanel extends JPanel {
 		btnSartu.setBounds(453, 46, 55, 55);
 		add(btnSartu);
 
-		JLabel lblOfertaKop = new JLabel("Oferta kop:");
+		
 		lblOfertaKop.setBounds(418, 11, 68, 14);
 		add(lblOfertaKop);
 
-		JLabel searchOfert = new JLabel("");
+		
 		searchOfert.setBounds(496, 11, 36, 14);
 		add(searchOfert);
 		searchOfert.setText(Integer.toString(h.get(ind).getOffer().size()));
 
 		
-		JLabel lblHiria = new JLabel("Hiria:");
+		
 		lblHiria.setBounds(262, 11, 36, 14);
 		add(lblHiria);
-		JLabel searchHiria = new JLabel("");
+		searchHiria = new JLabel("");
 		searchHiria.setBounds(308, 11, 100, 14);
 		add(searchHiria);
 		searchHiria.setText(h.get(ind).getCity());

@@ -12,7 +12,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.*;
+import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.*;
 
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 
-public class QueryAvailabilityGUI extends JFrame {
+public class QueryAvailabilityGUI extends JFrame implements Serializable{
 private static final long serialVersionUID = 1L;
 
   private JLabel jLabel1 = new JLabel();
@@ -41,8 +43,7 @@ private static final long serialVersionUID = 1L;
   private JTable table;
   private DefaultTableModel tableModel;
   private final JLabel labelNoOffers = new JLabel("");
-  private String[] columnNames = new String[] {
-  		"Offer#", "Rural House", "First Day", "Last Day", "Price"
+  private String[] columnNames = new String[] { "Rural House", "First Day", "Last Day", "Price"
   	};
 
 
@@ -64,7 +65,7 @@ private static final long serialVersionUID = 1L;
 
   private void jbInit() throws Exception
   {
-	ApplicationFacadeInterface facade=MainWindow.getBusinessLogic();
+	ApplicationFacadeInterface facade=StartWindow.getBusinessLogic();
 		
 	Vector<RuralHouse> rhs=facade.getAllRuralHouses();
 	
@@ -126,16 +127,46 @@ private static final long serialVersionUID = 1L;
     table = new JTable();
     table.addMouseListener(new MouseAdapter() {
     	@Override
+//    	public void mouseClicked(MouseEvent e) {
+//    		int i=table.getSelectedRow();
+//    		System.out.println(i);
+//    		int houseNumber =  (int) table.getValueAt(i, 1);
+//    		System.out.println(houseNumber);
+//    		java.util.Date firstDate= ((Calendar) tableModel.getValueAt(i,2)).getTime();
+//    		java.sql.Date sqlfirstDate =  new java.sql.Date(firstDate.getTime());
+//       		System.out.println(firstDate);
+//       		Date lastDate=new Date(((java.util.Date)tableModel.getValueAt(i,3)).getTime());
+//	
+//			BookRuralHouseGUI b=new BookRuralHouseGUI(houseNumber,firstDate,lastDate);
+//			b.setVisible(true);
+//       		}
+//    });
     	public void mouseClicked(MouseEvent e) {
-    		//int i=table.getSelectedRow();
-    		//int houseNumber = (int) tableModel.getValueAt(i,1);
-       		//Date firstDate=new Date(((java.util.Date)tableModel.getValueAt(i,2)).getTime());
-       		//Date lastDate=new Date(((java.util.Date)tableModel.getValueAt(i,3)).getTime());
-	
-			//BookRuralHouseGUI b=new BookRuralHouseGUI(houseNumber,firstDate,lastDate);
-			//b.setVisible(true);
-       		}
-    });
+            
+                int i=table.getSelectedRow();
+                int houseNumber = (Integer) tableModel.getValueAt(i, 0);
+                
+                // Dates are represented as strings in the table model
+                // They have to be converted to Dates "dd/mm/aa", removing hh:mm:ss:ms with trim                    
+                DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+//                   Date firstDate= trim(df.parse((String)tableModel.getValueAt(i,2)));
+//                   Date lastDate= trim(df.parse((String)tableModel.getValueAt(i,3)));
+                   Date firstDate;
+			
+					firstDate =(Date) tableModel.getValueAt(i,1);
+				
+//                   firstDate=new Date(firstDate.getTime()+12*60*60*1000); // to add 12 hours because that is how they are stored
+                   Date lastDate;
+				
+					lastDate = (Date)tableModel.getValueAt(i,2);
+				
+//                   lastDate=new Date(lastDate.getTime()+12*60*60*1000); // to add 12 hours because that is how they are stored
+        
+                BookRuralHouseGUI b=new BookRuralHouseGUI(houseNumber,firstDate,lastDate);
+                b.setVisible(true);
+				
+    	}     
+    	});
 
     scrollPane.setViewportView(table);
     tableModel = new DefaultTableModel(
@@ -216,6 +247,7 @@ private static final long serialVersionUID = 1L;
  {		
  		// House object
  		RuralHouse rh=(RuralHouse)comboBox.getSelectedItem();
+ 		System.out.println(rh.getCity()+" "+ rh.getHouseNumber()+""+rh.getOwner().getLogin()+""+rh.getOffers().size());
  		// First day
  		//Date firstDay=new Date(jCalendar1.getCalendar().getTime().getTime());
  	    //Remove the hour:minute:second:ms from the date 
@@ -228,12 +260,18 @@ private static final long serialVersionUID = 1L;
     	
     	try {
     		
-    		ApplicationFacadeInterface facade=MainWindow.getBusinessLogic();
+    		ApplicationFacadeInterface facade=StartWindow.getBusinessLogic();
+    		//Vector<Offer> v = new Vector<Offer>();
 
-    		Vector<Offer> v=rh.getOffers(firstDay, lastDay);
+    		Vector<Offer> v= rh.getOffers(firstDay, lastDay);
+    		
+    		
+    		
   
 			Enumeration<Offer> en=v.elements();
 			Offer of;
+			System.out.println("size:"+v.size());
+			System.out.println();
 			tableModel.setDataVector(null, columnNames);
 			if (!en.hasMoreElements())
 				labelNoOffers.setText("There are no offers at these dates");

@@ -1,33 +1,65 @@
 package gui;
 
+import gui.AddActivity.ComboItem;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import domain.Activity;
 import domain.Comment;
 import domain.RuralHouse;
 
 import java.awt.Font;
+import java.io.Serializable;
 
 import javax.swing.SwingConstants;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
-public class Go extends JFrame {
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class Go extends JFrame implements Serializable{
 
 	private static JPanel contentPane;
+	private JComboBox<ComboItem> comboBox = new JComboBox<ComboItem>();
+	
+	
+	class ComboItem{
+	    private String name;
+	    private Activity act;
 
+	    public ComboItem(String key, Activity value){
+	        this.name = key;
+	        this.act = value;
+	    }
+	    @Override
+	    public String toString(){
+	        return name;
+	    }
+	    public String getKey(){
+	        return name;
+	    }
+	    public Activity getValue(){
+	        return act;
+	    }
+	}
+	
 
 	/**
 	 * Create the frame.
@@ -35,12 +67,12 @@ public class Go extends JFrame {
 	
 	public Go(RuralHouse h) {
 		
+		
 		setBounds(290, 2, 680, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
-		getContentPane().setLayout(null);
+		contentPane.setLayout(null);
 		contentPane.setLayout(null);
 
 		JLabel searchOwnerN = new JLabel("");
@@ -50,8 +82,8 @@ public class Go extends JFrame {
 				+ h.getOwner().getAbizena());
 
 		JLabel lblOwner = new JLabel("Owner:");
-		lblOwner.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblOwner.setBounds(34, 103, 46, 14);
+		lblOwner.setFont(new Font("Tahoma", Font.BOLD, 11));
 		getContentPane().add(lblOwner);
 
 		JLabel searchZbkia = new JLabel("");
@@ -60,16 +92,16 @@ public class Go extends JFrame {
 		searchZbkia.setText(Integer.toString(h.getHouseNumber()));
 
 		JLabel label = new JLabel("Landetxe zbkia:");
-		label.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label.setBounds(34, 78, 93, 14);
+		label.setFont(new Font("Tahoma", Font.BOLD, 11));
 		getContentPane().add(label);
 
-		JLabel lblDescription = new JLabel("Description:");
-		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 11));
+		final JLabel lblDescription = new JLabel("Description:");
 		lblDescription.setBounds(34, 128, 85, 14);
+		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 11));
 		getContentPane().add(lblDescription);
 
-		JTextField searchDescription = new JTextField("");
+		final JTextField searchDescription = new JTextField("");
 		searchDescription.setBounds(54, 144, 544, 38);
 		getContentPane().add(searchDescription);
 		searchDescription.setBackground(new Color(245, 245, 245));
@@ -77,8 +109,8 @@ public class Go extends JFrame {
 
 
 		JLabel lblOfertaKop = new JLabel("Oferta kop:");
-		lblOfertaKop.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblOfertaKop.setBounds(35, 53, 68, 14);
+		lblOfertaKop.setFont(new Font("Tahoma", Font.BOLD, 11));
 		getContentPane().add(lblOfertaKop);
 
 		JLabel searchOfert = new JLabel("");
@@ -87,21 +119,21 @@ public class Go extends JFrame {
 		searchOfert.setText(Integer.toString(h.getOffer().size()));
 		
 		JLabel lblRuralHouseDetails = new JLabel("Rural House Details");
+		lblRuralHouseDetails.setBounds(209, 11, 228, 32);
 		lblRuralHouseDetails.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRuralHouseDetails.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblRuralHouseDetails.setBounds(209, 11, 228, 32);
 		contentPane.add(lblRuralHouseDetails);
 		
 		JLabel lblAverageMark = new JLabel("Average mark:");
-		lblAverageMark.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblAverageMark.setBounds(34, 193, 93, 14);
+		lblAverageMark.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(lblAverageMark);
 		
 		JLabel searchAvg = new JLabel("");
+		searchAvg.setBounds(125, 183, 28, 24);
 		searchAvg.setHorizontalAlignment(SwingConstants.CENTER);
 		searchAvg.setVerticalAlignment(SwingConstants.BOTTOM);
 		searchAvg.setFont(new Font("Tahoma", Font.BOLD, 13));
-		searchAvg.setBounds(125, 183, 28, 24);
 		contentPane.add(searchAvg);
 		
 		LinkedList<Comment> lista = h.getComments();
@@ -130,8 +162,8 @@ public class Go extends JFrame {
 		
 		
 		JLabel lblComments = new JLabel("Comments:");
-		lblComments.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblComments.setBounds(34, 218, 85, 14);
+		lblComments.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(lblComments);
 		
 //		JPanel panelComment = new JPanel();
@@ -141,10 +173,96 @@ public class Go extends JFrame {
 		JPanel panelComment = new SearchCommentPanel(h,0);
 		panelComment.setBounds(44, 240, 575, 410);
 		contentPane.add(panelComment);
-		contentPane.setVisible(true);
 		
-	
+		
+		JLabel lblEkitaldiak = new JLabel("Ekitaldiak:");
+		lblEkitaldiak.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblEkitaldiak.setBounds(529, 53, 58, 24);
+		contentPane.add(lblEkitaldiak);
 
+		comboBox.setBounds(502, 78, 96, 24);
+		contentPane.add(comboBox);
+		
+		final JLabel lblEkitaldiIzena = new JLabel("Ekitaldi izena:");
+		lblEkitaldiIzena.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblEkitaldiIzena.setBounds(209, 50, 85, 14);
+		contentPane.add(lblEkitaldiIzena);
+		lblEkitaldiIzena.setVisible(false);
+		
+		final JLabel lblPartaideKopurua = new JLabel("Partaide kop.:");
+		lblPartaideKopurua.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblPartaideKopurua.setBounds(209, 75, 85, 14);
+		contentPane.add(lblPartaideKopurua);
+		lblPartaideKopurua.setVisible(false);
+		
+		final JLabel lblEgunezgauez = new JLabel("Egunez/gauez:");
+		lblEgunezgauez.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblEgunezgauez.setBounds(209, 100, 85, 14);
+		contentPane.add(lblEgunezgauez);
+		lblEgunezgauez.setVisible(false);
+		
+		final JLabel txtIzena = new JLabel("");
+		txtIzena.setBounds(304, 50, 68, 14);
+		contentPane.add(txtIzena);
+		
+		final JLabel txtKop = new JLabel("");
+		txtKop.setBounds(304, 75, 68, 14);
+		contentPane.add(txtKop);
+		
+		final JLabel txtEgunezGauez = new JLabel("");
+		txtEgunezGauez.setBounds(304, 100, 68, 14);
+		contentPane.add(txtEgunezGauez);
+		
+		JButton btnEkitaldiak = new JButton("Aztertu");
+		try{
+			Vector<Activity> houseList = StartWindow.facadeInterface.getHouseActivities(h);
+			Iterator<Activity> it = houseList.iterator();
+			Activity aTest;
+			Boolean aFlag = true;
+			while(it.hasNext()){
+				aTest = it.next();
+				comboBox.addItem(new ComboItem(aTest.getName(), aTest));
+				aFlag = false;
+			}
+			if (aFlag){
+				comboBox.setVisible(false);
+				btnEkitaldiak.setVisible(false);
+				JLabel lblEx = new JLabel("Ekitaldirik ez.");
+				lblEx.setBounds(530, 78, 72, 24);
+				lblEx.setForeground(Color.RED);
+				contentPane.add(lblEx);
+			}
+		} catch (RemoteException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		btnEkitaldiak.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try{
+					Object item = comboBox.getSelectedItem();
+					Activity act = ((ComboItem)item).getValue();
+					lblEkitaldiIzena.setVisible(true);
+					lblPartaideKopurua.setVisible(true);
+					lblEgunezgauez.setVisible(true);
+					lblDescription.setBounds(209, 125, 85, 14);
+					searchDescription.setText("                                                   " + act.getDescription());
+					txtIzena.setText(act.getName());
+					txtKop.setText(Integer.toString(act.getCantity()));
+					if (act.getDayOrNight()) txtEgunezGauez.setText("Egunez");
+					else txtEgunezGauez.setText("Gauez");
+				} catch (Exception e){
+					e.printStackTrace();
+				}
+			}
+		});
+		btnEkitaldiak.setBounds(523, 108, 75, 24);
+		btnEkitaldiak.setForeground(new Color(0, 0, 128));
+		btnEkitaldiak.setFont(new Font("Tahoma", Font.BOLD, 11));
+		contentPane.add(btnEkitaldiak);
+		contentPane.setVisible(true);
 	}
 	
 public static void ini(RuralHouse h){
@@ -236,7 +354,7 @@ public static void ini(RuralHouse h){
 	lblComments.setFont(new Font("Tahoma", Font.BOLD, 11));
 	lblComments.setBounds(34, 218, 85, 14);
 	contentPane.add(lblComments);
-		
+	
 
 	}
 	public static void setCommentPanel(RuralHouse h,int ind){
@@ -249,8 +367,6 @@ public static void ini(RuralHouse h){
 		panelComment.setBounds(44, 240, 575, 410);
 		contentPane.add(panelComment);
 		contentPane.setVisible(true);
-		
-
 	}
 	
 }

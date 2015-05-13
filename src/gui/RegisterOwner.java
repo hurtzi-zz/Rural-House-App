@@ -19,9 +19,10 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 
-public class RegisterOwner extends JPanel {
+public class RegisterOwner extends JPanel implements Serializable{
 	private JTextField surname;
 	private JTextField name;
 	private JTextField nick;

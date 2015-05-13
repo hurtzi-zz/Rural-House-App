@@ -13,6 +13,7 @@ import businessLogic.ApplicationFacadeInterface;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import domain.Client;
+import domain.Offer;
 import domain.Owner;
 import domain.RuralHouse;
 
@@ -37,11 +38,14 @@ import javax.swing.SwingConstants;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
-public class Loged extends JPanel {
+public class Loged extends JPanel implements Serializable{
 
 	private static Client client;
 	private static Owner owner = null;
+
+	private JLabel lblEran = new JLabel("");
 
 	private ApplicationFacadeInterface facade = StartWindow.getBusinessLogic();
 
@@ -50,7 +54,7 @@ public class Loged extends JPanel {
 	 */
 	// web
 
-	public Loged(Client c) {
+	public Loged(final Client c) {
 		this.client = c;
 		if (client.getIsOwner() == true) {
 			try {
@@ -89,8 +93,22 @@ public class Loged extends JPanel {
 				}
 			}
 		});
-		btnLandetxeaGehitu.setBounds(10, 238, 213, 50);
+		btnLandetxeaGehitu.setBounds(10, 213, 213, 40);
 		add(btnLandetxeaGehitu);
+		
+		JButton btnEkitaldiaGehitu = new JButton("Ekitaldia sortu");
+		btnEkitaldiaGehitu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try {
+					StartWindow.setCreateActivityPanel(getOwner());
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
+		btnEkitaldiaGehitu.setBounds(10, 313, 213, 40);
+		add(btnEkitaldiaGehitu);
 
 		JLabel lblNewLabel = new JLabel("Ongi etorri, " + client.getName());
 		lblNewLabel.setBounds(20, 11, 175, 25);
@@ -125,7 +143,7 @@ public class Loged extends JPanel {
 
 			}
 		});
-		btnFavorite.setBounds(10, 113, 213, 50);
+		btnFavorite.setBounds(10, 113, 213, 40);
 		add(btnFavorite);
 		
 		JButton btnOfertaGehitu = new JButton("Oferta gehitu");
@@ -146,12 +164,11 @@ public class Loged extends JPanel {
 				
 			}
 		});
-		btnOfertaGehitu.setBounds(10, 299, 213, 50);
+		btnOfertaGehitu.setBounds(10, 263, 213, 40);
 		add(btnOfertaGehitu);
 		
 		
 
-		JLabel lblEran = new JLabel("");
 		lblEran.setBounds(10, 83, 213, 19);
 		add(lblEran);
 		
@@ -184,22 +201,63 @@ public class Loged extends JPanel {
 				}
 			}
 		});
-		btnNireLandetxeak.setBounds(10, 174, 213, 53);
+		btnNireLandetxeak.setBounds(10, 163, 213, 40);
 		add(btnNireLandetxeak);
+			
+		JButton btnEgindakoOfertak = new JButton("Egindako ofertak");
+		btnEgindakoOfertak.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String name = client.getName();
+				Vector<Offer> o = new Vector<Offer>();
+				try {
+					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
+					o=facades.OfertakBueltatu(client.getLogin());
+					if(o.size()==0){
+						lblEran.setForeground(Color.RED);
+						lblEran.setText("Oraindik ez dituzu ofertak");
+					}else{
+						Iterator<Offer> it = o.iterator();
+						System.out.println(name+"-n ofertak:");
+						while (it.hasNext()) {
+							Offer of = (Offer) it.next();
+							System.out.println();
+						}
+						StartWindow.setOfertakBistaratuPanel(owner,o,0);
+					}
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		btnEgindakoOfertak.setBounds(10, 363, 213, 40);
+		add(btnEgindakoOfertak);
 		
-		
-		
-		if(client.getIsOwner()==false){
-			btnNireLandetxeak.setVisible(false);
-			btnLandetxeaGehitu.setVisible(false);
-			btnOfertaGehitu.setVisible(false);
-		}
-		
+		JButton btnErreserbatu = new JButton("Erreserbatu");
+		btnErreserbatu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFrame a= new QueryAvailabilityGUI();
+				a.setVisible(true);
+			}
+		});
+		btnErreserbatu.setBounds(10, 413, 213, 40);
+		add(btnErreserbatu);
 
 //		if (client.getIsOwner() == true) {
 //			btnFavorite.setVisible(false);
 //		}
 
+		if(client.getIsOwner()==false){
+			btnNireLandetxeak.setVisible(false);
+			btnLandetxeaGehitu.setVisible(false);
+			btnOfertaGehitu.setVisible(false);
+			btnEkitaldiaGehitu.setVisible(false);
+			btnEgindakoOfertak.setVisible(false);
+			btnErreserbatu.setBounds(10, 163, 213, 40);
+		}
+		
 	}
 
 	public static Owner getOwner() {

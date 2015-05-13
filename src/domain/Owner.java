@@ -20,7 +20,8 @@ public class Owner extends Client implements Serializable  {
 //	private Boolean isOwner=true;
 	private Integer tlfn = null;
 	private String bankAccount = "";
-	private Vector<RuralHouse> ruralHouses=new Vector();
+	private Vector<RuralHouse> ruralHouses=new Vector<RuralHouse>();
+	private Vector<Activity> activities = new Vector<Activity>();
 
 
 	
@@ -29,8 +30,6 @@ public class Owner extends Client implements Serializable  {
 		super(name,abizena,login,password,true, ruralFav);
 		this.bankAccount=bankAccount;
 		this.tlfn=tlfn;
-
-		
 	}
 	
 	
@@ -48,8 +47,6 @@ public class Owner extends Client implements Serializable  {
 	}
 	
 
-
-	
 	/**
 	 * This method returns the owner bank account number
 	 * 
@@ -110,5 +107,17 @@ public class Owner extends Client implements Serializable  {
 	public Boolean deleteRH(RuralHouse rh){
 		return ruralHouses.remove(rh);
 	}
+	
+	public Vector<Activity> getActivities(){
+		return activities;
+	}
+	
+	public void appendActivity(Activity a){
+		activities.addElement(a);
+	}
+	
+//	public Vector<Activity> getOwnerActivities(){
+//		return activities;
+//	}
 	
 }

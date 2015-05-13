@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JComboBox;
 
 import java.awt.Rectangle;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -17,7 +18,7 @@ import domain.RuralHouse;
 import javax.swing.JLabel;
 
 
-public class SetAvailabilityGUI extends JFrame {
+public class SetAvailabilityGUI extends JFrame implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;

@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.ParsePosition;
@@ -38,7 +39,7 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 
-public class FindOffers extends JFrame {
+public class FindOffers extends JFrame implements Serializable{
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -46,6 +47,12 @@ public class FindOffers extends JFrame {
 	private Calendar calendarInicio = null;
 	private Calendar calendarFin = null;
 	ApplicationFacadeInterface facade = StartWindow.getBusinessLogic();
+	private JCalendar jCalendar1 = new JCalendar();
+	private JCalendar jCalendar2 = new JCalendar();
+	private JLabel lblMezu = new JLabel("");
+
+
+
 
 	/**
 	 * Launch the application.
@@ -72,7 +79,6 @@ public class FindOffers extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblMezu = new JLabel("");
 		lblMezu.setBounds(292, 226, 139, 14);
 		contentPane.add(lblMezu);
 
@@ -98,11 +104,9 @@ public class FindOffers extends JFrame {
 		getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 
-		JCalendar jCalendar1 = new JCalendar();
 		jCalendar1.setBounds(32, 69, 190, 146);
 		getContentPane().add(jCalendar1);
 
-		JCalendar jCalendar2 = new JCalendar();
 		jCalendar2.setBounds(241, 69, 190, 146);
 		getContentPane().add(jCalendar2);
 

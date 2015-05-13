@@ -22,8 +22,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
-public class FoundFavHouseClient extends JPanel {
+public class FoundFavHouseClient extends JPanel implements Serializable{
 
 	/**
 	 * Create the panel.
@@ -31,7 +32,7 @@ public class FoundFavHouseClient extends JPanel {
 	public int page;
 	public Vector<RuralHouse> houses;
 
-	public FoundFavHouseClient(Client c, Vector<RuralHouse> h, int pag) {
+	public FoundFavHouseClient(final Client c, Vector<RuralHouse> h, int pag) {
 
 		this.page = pag;
 		this.houses = h;

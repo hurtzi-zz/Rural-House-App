@@ -25,8 +25,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
-public class SearchCommentPanelOwner extends JPanel {
+public class SearchCommentPanelOwner extends JPanel implements Serializable {
 
 	/**
 	 * Create the panel.
@@ -34,7 +35,7 @@ public class SearchCommentPanelOwner extends JPanel {
 	public int page;
 	public LinkedList<Comment> comments;
 	
-	public SearchCommentPanelOwner(RuralHouse h, int pag, Client c) {
+	public SearchCommentPanelOwner(final RuralHouse h, int pag, final Client c) {
 		
 		this.page = pag;
 		this.comments = h.getComments();

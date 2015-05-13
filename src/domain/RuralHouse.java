@@ -21,6 +21,7 @@ public class RuralHouse implements Serializable {
 	private String city;
 	public Vector<Offer> offers = new Vector<Offer>();
 	public LinkedList<Comment> comments = new LinkedList<Comment>();
+	private Vector<Activity> activities = new Vector<Activity>();
 
 	public RuralHouse() {
 		super();
@@ -101,25 +102,25 @@ public class RuralHouse implements Serializable {
 		return off;
 	}
 
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + houseNumber;
-		return result;
-	}
-
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		RuralHouse other = (RuralHouse) obj;
-		if (houseNumber != other.houseNumber)
-			return false;
-		return true;
-	}
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + houseNumber;
+//		return result;
+//	}
+//
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		RuralHouse other = (RuralHouse) obj;
+//		if (houseNumber != other.houseNumber)
+//			return false;
+//		return true;
+//	}
 
 	public Vector<Offer> getOffers(Date firstDay, Date lastDay) {
 
@@ -188,8 +189,6 @@ public class RuralHouse implements Serializable {
 
 	}
 
-	
-
 	public Comment addComent(Client cli, int botoa, String comme) {
 		Comment com = new Comment(cli, botoa, comme);
 		comments.add(com);
@@ -204,5 +203,17 @@ public class RuralHouse implements Serializable {
 	public void deleteAllComents() {
 		this.comments.removeAll(this.comments);
 	}
+	
+	public Vector<Activity> getActivities(){
+		return activities;
+	}
 
+	public void appendActivity(Activity a){
+		activities.addElement(a);
+	}
+	
+	public Boolean removeOferta(Offer o){
+		return offers.remove(o);
+	}
+	
 }

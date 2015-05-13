@@ -1,7 +1,7 @@
 package gui;
 import java.beans.*;
+import java.io.Serializable;
 import java.text.DateFormat;
-import java.util.Date;
 import java.util.*;
 
 import javax.swing.*;
@@ -20,7 +20,7 @@ import exceptions.BadDates;
 
 
 
-public class SetAvailability2GUI extends JFrame  {
+public class SetAvailability2GUI extends JFrame implements Serializable {
 private static final long serialVersionUID = 1L;
 	
   private JComboBox jComboBox1;

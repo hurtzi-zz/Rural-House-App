@@ -1,19 +1,23 @@
 package gui;
 
 import javax.swing.JFrame;
+
 import java.awt.Dimension;
+
 import javax.swing.JLabel;
+
 import java.awt.Rectangle;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
 
 import domain.Booking;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 
-public class BookRuralHouseConfirmationWindow extends JFrame {
+public class BookRuralHouseConfirmationWindow extends JFrame implements Serializable{
  private static final long serialVersionUID = 1L;
 	
   private JLabel jLabel1 = new JLabel();

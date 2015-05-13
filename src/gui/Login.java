@@ -12,6 +12,7 @@ import businessLogic.ApplicationFacadeInterface;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
+import domain.Admin;
 import domain.Client;
 import domain.Owner;
 
@@ -24,12 +25,16 @@ import java.awt.Color;
 import java.rmi.RemoteException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JSeparator;
+
 import java.awt.Component;
+import java.io.Serializable;
+
 import javax.swing.Box;
 import javax.swing.border.EmptyBorder;
 
-public class Login extends JPanel {
+public class Login extends JPanel implements Serializable{
 	private JTextField textFieldLogin;
 	private JPasswordField passwordField;
 	private JButton Enter = null;
@@ -56,34 +61,49 @@ public class Login extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				String user =textFieldLogin.getText();
 				String pass=passwordField.getText();
+				ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
 				try {
-					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
-					Client j=facades.verifyLogin(user,pass);
-					if(j==null){
-						searchResult.setForeground(Color.RED);
-						searchResult.setText("Ez da existitzen erabiltzailea");
-					}else if(j!=null){ 	
-						System.out.println("j izena: "+j.getName());
+					System.out.println("try");
+					Boolean dago= facades.verifyAdmin(user, pass);
+					if(dago){
+						System.out.println("dentra");
 						searchResult.setForeground(Color.GREEN);
-						searchResult.setText("erabiltzailea DB-an gordeta dago");
-						if(j.getIsOwner()==false){
-							searchResult.setForeground(Color.GREEN);
-							searchResult.setText("client");
-							StartWindow.setLogedPanel(j);
-						}else{
-							searchResult.setForeground(Color.GREEN);
-							searchResult.setText("owner");
-							System.out.println();
-							StartWindow.setLogedPanel(j);
-						}
-					}else{
-						JOptionPane.showMessageDialog(null, "Log error", "alert", JOptionPane.CANCEL_OPTION); 	
+						searchResult.setText("administratzailea");
+						Admin adm= facades.getAdmin(user, pass);
+						StartWindow.setAdminPanel(adm);
+					}else {
+							Client j=facades.verifyLogin(user,pass);
+							if(j==null){
+								searchResult.setForeground(Color.RED);
+								searchResult.setText("Ez da existitzen erabiltzailea");
+							}else{ 	
+								System.out.println("j izena: "+j.getName());
+								searchResult.setForeground(Color.GREEN);
+								searchResult.setText("erabiltzailea DB-an gordeta dago");
+								if(j.getIsOwner()==false){
+									searchResult.setForeground(Color.GREEN);
+									searchResult.setText("client");
+									StartWindow.setLogedPanel(j);
+								}else{
+									searchResult.setForeground(Color.GREEN);
+									searchResult.setText("owner");
+									System.out.println();
+									StartWindow.setLogedPanel(j);
+								}
+							}
 					}
-				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
-			}
+				
+					catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
+				}
+		
 		});
 		btnEnter.setBounds(122, 124, 93, 36);
 		add(btnEnter);

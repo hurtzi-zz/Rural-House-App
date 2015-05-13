@@ -3,6 +3,7 @@ package dataAccess;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.io.File;
+import java.io.Serializable;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -22,7 +23,7 @@ import domain.Owner;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DB4oManagerServer extends JDialog {
+public class DB4oManagerServer extends JDialog implements Serializable{
 
 	/**
 	 * 
