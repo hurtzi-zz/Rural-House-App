@@ -13,6 +13,7 @@ import java.util.Vector;
 
 import javax.swing.JRadioButton;
 
+import domain.Admin;
 import domain.Owner;
 import domain.RuralHouse;
 
@@ -32,7 +33,7 @@ public class FoundOwners extends JPanel implements Serializable{
 	public int page;
 	public Vector<Owner> houses;
 
-	public FoundOwners(final Vector<Owner> h, int pag) {
+	public FoundOwners(final Vector<Owner> h, int pag, final Admin ad) {
 
 		this.page = pag;
 		this.houses = h;
@@ -50,37 +51,37 @@ public class FoundOwners extends JPanel implements Serializable{
 
 		if (orriKopu == 0) {
 			if (lekuak == 1) {
-				JPanel panel1 = new FoundOwnerPanel(h, pag);
+				JPanel panel1 = new FoundOwnerPanel(h, pag, ad);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(27, 11, 542, 131);
 				add(panel1);
 				panel1.setLayout(null);
 			} else if (lekuak == 2) {
-				JPanel panel1 = new FoundOwnerPanel(h, pag);
+				JPanel panel1 = new FoundOwnerPanel(h, pag, ad);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(27, 11, 542, 131);
 				add(panel1);
 				panel1.setLayout(null);
 
-				JPanel panel2 = new FoundOwnerPanel(h, pag + 1);
+				JPanel panel2 = new FoundOwnerPanel(h, pag + 1, ad);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
 				panel2.setBounds(27, 153, 542, 131);
 				add(panel2);
 			} else if (lekuak == 3) {
-				JPanel panel1 = new FoundOwnerPanel(h, pag);
+				JPanel panel1 = new FoundOwnerPanel(h, pag, ad);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(27, 11, 542, 131);
 				add(panel1);
 				panel1.setLayout(null);
 
-				JPanel panel2 = new FoundOwnerPanel(h, pag + 1);
+				JPanel panel2 = new FoundOwnerPanel(h, pag + 1, ad);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
 				panel2.setBounds(27, 153, 542, 131);
 				add(panel2);
 
-				JPanel panel3 = new FoundOwnerPanel(h, pag + 2);
+				JPanel panel3 = new FoundOwnerPanel(h, pag + 2, ad);
 				panel3.setLayout(null);
 				panel3.setBackground(Color.WHITE);
 				panel3.setBounds(27, 295, 542, 131);
@@ -97,7 +98,7 @@ public class FoundOwners extends JPanel implements Serializable{
 				btnPrevious.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						page--;
-						StartWindow.setFoundOwnersPanel(h, (page - 2));
+						StartWindow.setFoundOwnersPanel(h, (page - 2),ad);
 					}
 				});
 			}
@@ -113,7 +114,7 @@ public class FoundOwners extends JPanel implements Serializable{
 				btnNext.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						page++;
-						StartWindow.setFoundOwnersPanel(h, (page + 2));
+						StartWindow.setFoundOwnersPanel(h, (page + 2), ad);
 					}
 
 				});
@@ -131,37 +132,37 @@ public class FoundOwners extends JPanel implements Serializable{
 			pagNext.setText("Page " + (pag / 3 + 2));
 
 			if (lekuak == 1) {
-				JPanel panel1 = new FoundOwnerPanel(h, pag);
+				JPanel panel1 = new FoundOwnerPanel(h, pag, ad);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(27, 11, 542, 131);
 				add(panel1);
 				panel1.setLayout(null);
 			} else if (lekuak == 2) {
-				JPanel panel1 = new FoundOwnerPanel(h, pag);
+				JPanel panel1 = new FoundOwnerPanel(h, pag, ad);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(27, 11, 542, 131);
 				add(panel1);
 				panel1.setLayout(null);
 
-				JPanel panel2 = new FoundOwnerPanel(h, pag + 1);
+				JPanel panel2 = new FoundOwnerPanel(h, pag + 1, ad);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
 				panel2.setBounds(27, 153, 542, 131);
 				add(panel2);
 			} else if (lekuak == 3) {
-				JPanel panel1 = new FoundOwnerPanel(h, pag);
+				JPanel panel1 = new FoundOwnerPanel(h, pag, ad);
 				panel1.setBackground(Color.WHITE);
 				panel1.setBounds(27, 11, 542, 131);
 				add(panel1);
 				panel1.setLayout(null);
 
-				JPanel panel2 = new FoundOwnerPanel(h, pag + 1);
+				JPanel panel2 = new FoundOwnerPanel(h, pag + 1, ad);
 				panel2.setLayout(null);
 				panel2.setBackground(Color.WHITE);
 				panel2.setBounds(27, 153, 542, 131);
 				add(panel2);
 
-				JPanel panel3 = new FoundOwnerPanel(h, pag + 2);
+				JPanel panel3 = new FoundOwnerPanel(h, pag + 2, ad);
 				panel3.setLayout(null);
 				panel3.setBackground(Color.WHITE);
 				panel3.setBounds(27, 295, 542, 131);
@@ -169,19 +170,19 @@ public class FoundOwners extends JPanel implements Serializable{
 			}
 		} else {
 
-			JPanel panel1 = new FoundOwnerPanel(h, pag);
+			JPanel panel1 = new FoundOwnerPanel(h, pag, ad);
 			panel1.setBackground(Color.WHITE);
 			panel1.setBounds(27, 11, 542, 131);
 			add(panel1);
 			panel1.setLayout(null);
 
-			JPanel panel2 = new FoundOwnerPanel(h, pag + 1);
+			JPanel panel2 = new FoundOwnerPanel(h, pag + 1, ad);
 			panel2.setLayout(null);
 			panel2.setBackground(Color.WHITE);
 			panel2.setBounds(27, 153, 542, 131);
 			add(panel2);
 
-			JPanel panel3 = new FoundOwnerPanel(h, pag + 2);
+			JPanel panel3 = new FoundOwnerPanel(h, pag + 2, ad);
 			panel3.setLayout(null);
 			panel3.setBackground(Color.WHITE);
 			panel3.setBounds(27, 295, 542, 131);
@@ -197,7 +198,7 @@ public class FoundOwners extends JPanel implements Serializable{
 				btnPrevious.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						page--;
-						StartWindow.setFoundOwnersPanel(h, (page - 2));
+						StartWindow.setFoundOwnersPanel(h, (page - 2),ad);
 					}
 				});
 			}
@@ -213,7 +214,7 @@ public class FoundOwners extends JPanel implements Serializable{
 				btnNext.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						page++;
-						StartWindow.setFoundOwnersPanel(h, (page + 2));
+						StartWindow.setFoundOwnersPanel(h, (page + 2),ad);
 					}
 
 				});

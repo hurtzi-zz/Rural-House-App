@@ -3,6 +3,9 @@ package gui;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import businessLogic.ApplicationFacadeInterface;
 import domain.Admin;
@@ -11,6 +14,7 @@ import domain.Owner;
 import domain.RuralHouse;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
@@ -24,14 +28,13 @@ public class LogedAdmin extends JPanel implements Serializable{
 	private JLabel searchown = new JLabel("");
 	//private static Owner owner = null;
 
-	private ApplicationFacadeInterface facade = StartWindow.getBusinessLogic();
 
 	/**
 	 * Create the panel.
 	 */
 	// web
 
-	public LogedAdmin(Admin ad) {
+	public LogedAdmin(final Admin ad) {
 		this.admin = ad;
 		
 		setLayout(null);
@@ -59,12 +62,13 @@ public class LogedAdmin extends JPanel implements Serializable{
 //				Vector<Client> vc= new Vector<Client>();
 				try {
 					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
-					vo=facades.getOwners();
+					vo=facades.getOwnerss();
+
 					if(vo.size()==0){
 						searchown.setForeground(Color.RED);
 						searchown.setText("Ez daude Owner-ak ");
 					}else{
-						StartWindow.setFoundOwnersPanel(vo,0);
+						StartWindow.setFoundOwnersPanel(vo,0,ad);
 					}
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
@@ -80,17 +84,20 @@ public class LogedAdmin extends JPanel implements Serializable{
 		JButton btnClients = new JButton("Clients");
 		btnClients.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Vector<Client> vo= new Vector<Client>();
-//				Vector<Client> vc= new Vector<Client>();
+				System.out.println("BOTOOIAA");
 				try {
+					System.out.println("111111111");
+
 					ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
-					vo=facades.getClients();
-					System.out.println(vo.size());
+					System.out.println("222222");
+
+					Vector<Client> vo=facades.getClient();
+					System.out.println("sizeeeee: "+vo.size());
 					if(vo.size()==0){
 						searchown.setForeground(Color.RED);
 						searchown.setText("Ez daude Owner-ak ");
 					}else{
-						StartWindow.setFoundClientsPanel(vo,0);
+						StartWindow.setFoundClientsPanel(vo,0,ad);
 					}
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
@@ -103,6 +110,16 @@ public class LogedAdmin extends JPanel implements Serializable{
 		btnClients.setBounds(14, 178, 124, 46);
 		add(btnClients);
 		
-		
+		JButton btnOut = new JButton("out");
+		btnOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				StartWindow.ini2();
+			}
+		});
+		btnOut.setBounds(63, 11, 89, 23);
+		add(btnOut);
 	}
+	
+	
+
 }

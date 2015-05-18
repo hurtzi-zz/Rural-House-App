@@ -341,20 +341,24 @@ public class StartWindow extends JFrame implements Serializable{
 		contentPane.add(lblRuralHouses);	
 
 	}
-	public static void setFoundOwnersPanel(Vector<Owner> bek,int ind){
+	public static void setFoundOwnersPanel(Vector<Owner> bek,int ind,Admin ad){
 		contentPane.setVisible(false);
 		contentPane.removeAll();
-		ini();
-		JPanel FoundPanel = new FoundOwners(bek,ind);
+		
+		setAdminPanel(ad);
+		
+		JPanel FoundPanel = new FoundOwners(bek,ind,ad);
 		FoundPanel.setBounds(331, 148, 636, 546);
 		contentPane.add(FoundPanel);
 		contentPane.setVisible(true);
 	}
-	public static void setFoundClientsPanel(Vector<Client> bek,int ind){
+	public static void setFoundClientsPanel(Vector<Client> bek,int ind,Admin ad){
 		contentPane.setVisible(false);
 		contentPane.removeAll();
-		ini();
-		JPanel FoundPanel = new FoundClients(bek,ind);
+		
+		setAdminPanel(ad);
+		
+		JPanel FoundPanel = new FoundClients(bek,ind,ad);
 		FoundPanel.setBounds(331, 148, 636, 546);
 		contentPane.add(FoundPanel);
 		contentPane.setVisible(true);

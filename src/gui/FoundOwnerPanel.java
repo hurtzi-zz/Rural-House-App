@@ -19,6 +19,7 @@ import java.util.Vector;
 import javax.swing.JRadioButton;
 
 import businessLogic.ApplicationFacadeInterface;
+import domain.Admin;
 import domain.Client;
 import domain.Offer;
 import domain.Owner;
@@ -39,7 +40,9 @@ public class FoundOwnerPanel extends JPanel implements Serializable{
 	
 	private ApplicationFacadeInterface facade = StartWindow.getBusinessLogic();
 	private JLabel lblNewLabel = new JLabel("");
-	public FoundOwnerPanel( final Vector<Owner> h, final int ind) {
+	private JLabel lblDeleteOk = new JLabel("");
+
+	public FoundOwnerPanel( final Vector<Owner> h, final int ind, final Admin ad) {
 
 		setLayout(null);
 
@@ -49,11 +52,11 @@ public class FoundOwnerPanel extends JPanel implements Serializable{
 		izena.setText(h.get(ind).getName());
 
 		JLabel lblRural = new JLabel("Izena:");
-		lblRural.setBounds(10, 11, 110, 14);
+		lblRural.setBounds(10, 11, 36, 14);
 		add(lblRural);
 
 		JLabel abizen = new JLabel("");
-		abizen.setBounds(92, 11, 29, 14);
+		abizen.setBounds(88, 41, 55, 14);
 		add(abizen);
 		abizen.setText(h.get(ind).getAbizena());
 
@@ -61,12 +64,8 @@ public class FoundOwnerPanel extends JPanel implements Serializable{
 		label.setBounds(10, 36, 93, 14);
 		add(label);
 
-		JLabel lblPrice = new JLabel("Login:");
-		lblPrice.setBounds(10, 86, 85, 14);
-		add(lblPrice);
-
 		JLabel searchPrice = new JLabel("");
-		searchPrice.setBounds(233, 57, 68, 23);
+		searchPrice.setBounds(88, 7, 68, 23);
 		add(searchPrice);
 		searchPrice.setBackground(Color.WHITE);
 		searchPrice.setText(h.get(ind).getLogin());
@@ -80,50 +79,39 @@ public class FoundOwnerPanel extends JPanel implements Serializable{
 		add(lblFD);
 		
 		JLabel lblfir = new JLabel("");
-		lblfir.setBounds(179, 129, 119, 14);
+		lblfir.setBounds(88, 111, 119, 14);
 		add(lblfir);
 		lblfir.setBackground(Color.WHITE);
 		lblfir.setText(h.get(ind).getBankAccount());
         
-        
-        
-       // JLabel lblla = new JLabel("");
-       // lblla.setBounds(92, 154, 46, 14);
-       // add(lblla);
+		lblDeleteOk.setBounds(398, 11, 46, 14);
+		add(lblDeleteOk);
         
 		
 		JButton btnDelete = new JButton("Delete");
-		btnDelete.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				if (lblNewLabel.getText().compareTo("Ziur?")==0) {
-					System.out.println("Ezabatzen...");
-					try {
-						Owner o = h.get(ind);
-						System.out.println(o.getLogin());
-					
-						Boolean ondo = facade.deleteOwner(o);
-						if (ondo==true) {
-							lblNewLabel.setText("Owner ezabatu da.");
-							lblNewLabel.setForeground(Color.GREEN);
-							lblNewLabel.setVisible(true);
-							//GTFO();
-						}
-					} catch (RemoteException e) {
-						e.printStackTrace();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}					
-				} else {
-					lblNewLabel.setText("Ziur?");
-					lblNewLabel.setForeground(Color.RED);
-					lblNewLabel.setVisible(true);
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ApplicationFacadeInterface facades = StartWindow.getBusinessLogic();
+				try {
+					Boolean rhUpdate = facades.deleteClient(h.get(ind));
+					if(rhUpdate){
+						lblDeleteOk.setForeground(Color.GREEN);
+						lblDeleteOk.setText("Delete OK");
+						StartWindow.setAdminPanel(ad);
+					}else{
+						lblDeleteOk.setForeground(Color.RED);
+						lblDeleteOk.setText("gaizki");
+					}
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
+				
 			}
 		});
-		btnDelete.setBounds(301, 23, 89, 23);
+		btnDelete.setBounds(299, 7, 89, 23);
 		add(btnDelete);
+		
 		
 		
 		

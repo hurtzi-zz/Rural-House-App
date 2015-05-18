@@ -295,4 +295,12 @@ public class FacadeImplementation extends UnicastRemoteObject implements Applica
 	 public Boolean deleteClient(Client o)throws RemoteException{
 		 return DataAccessCommon.getInstance().deleteClient(o);
 	 }
+	 
+	public Vector<Client> getClient() throws RemoteException {
+		return DataAccessCommon.getInstance().getClient();
+	}
+	 
+	 public Vector<Owner> getOwnerss() throws RemoteException {
+			return DataAccessCommon.getInstance().getOwnerss();
+		}
 }

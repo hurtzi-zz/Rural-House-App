@@ -68,13 +68,11 @@ public class DataAccessCommon implements DataAccessInterface, Serializable {
 
 	public void initializeDB() {
 
-		Client cl0 = new Client("clientName", "clientSurname", "nickName",
+		Client cl0 = new Client("clientName", "clientSurname", "nickNameC",
 				"pass", false, new Vector<RuralHouse>());
 		
 		Client cl1 = new Client("Erabiltzailea", "Diaz", "client", "000", false,
 				new Vector<RuralHouse>());
-
-		Owner ow22 = new Owner(666666666, "bankCount0000",new Vector<RuralHouse>(), "OwnerName", "OwnerSurname", "a", "a", true, new Vector<RuralHouse>());
 
 
 		Owner ow0 = new Owner(666666666, "bankCount0000",new Vector<RuralHouse>(), "OwnerName", "OwnerSurname", "nickName", "pass", true, new Vector<RuralHouse>());
@@ -106,22 +104,21 @@ public class DataAccessCommon implements DataAccessInterface, Serializable {
 
 
 		RuralHouse rh1 = ow1.addRuralHouse(5, "Etxetxikia", "Donosti");
+		rh1.addComent(co2);
+		rh1.addComent(co3);
 
 
 
 		RuralHouse rh2 = ow1.addRuralHouse(6, "Ezkioko etxea", "Donosti");
-		rh2.addComent(co4);
-		rh2.addComent(co5);
-		rh2.addComent(co6);
+		
 		
 		rh2.appendActivity(a1);
 
 
 		RuralHouse rh3 = ow1.addRuralHouse(7, "Maitenea", "Donosti");
-		rh3.addComent(co1);
-		rh3.addComent(co2);
-		rh3.addComent(co3);
+		rh3.addComent(co4);
 		rh3.addComent(co5);
+		rh3.addComent(co6);
 		
 		
 
@@ -129,8 +126,6 @@ public class DataAccessCommon implements DataAccessInterface, Serializable {
 		ow1.appendActivity(a1);
 		ow1.appendActivity(a2);
 		
-		//db.store(a2);
-		//db.store(a1);
 
 		db.store(cl0);
 		db.store(cl1);
@@ -138,7 +133,6 @@ public class DataAccessCommon implements DataAccessInterface, Serializable {
 
 		db.store(ow0);
 		db.store(ow1);
-		db.store(ow22);
 		
 		db.store(admin);
 
@@ -1130,5 +1124,39 @@ public class DataAccessCommon implements DataAccessInterface, Serializable {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public Vector<Client> getClient() {
+
+		try {
+			Client proto = new Client(null, null, null, null, false, null);
+			ObjectSet<Client> result = db.queryByExample(proto);
+			Vector<Client> clients = new Vector<Client>();
+			while (result.hasNext())
+				clients.add(result.next());
+			System.out.println("dadadadada--------->"+clients.size());
+			return clients;
+		} finally {
+			// db.close();
+		}
+	}
+
+	public Vector<Owner> getOwnerss() {
+
+
+		try {
+			Owner proto = new Owner(null, null, null, null, null, null, null,
+					true, null);
+			ObjectSet<Owner> result = db.queryByExample(proto);
+			Vector<Owner> owners = new Vector<Owner>();
+			while (result.hasNext()){
+				owners.add(result.next());
+			}
+			System.out.println("dadada: "+owners.size());
+			return owners;
+		} finally {
+			// db.close();
+		}
+	}
+
 
 }

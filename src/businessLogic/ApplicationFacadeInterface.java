@@ -173,5 +173,10 @@ public interface ApplicationFacadeInterface extends Remote, Serializable {
 	public Boolean deleteOwner(Owner o) throws RemoteException;
 
 	public Boolean deleteClient(Client o) throws RemoteException;
+	
+	
+	public Vector<Client>  getClient() throws RemoteException;
+	
+	public Vector<Owner>  getOwnerss() throws RemoteException;
 
 }
